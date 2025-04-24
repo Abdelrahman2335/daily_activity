@@ -4,7 +4,7 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   static const headingLarge = TextStyle(
-    fontSize: 29,
+    fontSize: 26,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
@@ -25,5 +25,6 @@ class AppTextStyles {
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
+
   );
 }

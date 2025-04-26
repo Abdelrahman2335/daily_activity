@@ -18,12 +18,17 @@ class AppTextStyles {
   static const body = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
-    color: AppColors.textSecondary,
+    color: AppColors.card,
   );
 
   static const small = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
+    color: AppColors.textSecondary,
+
+  ); static const smallBold = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
     color: AppColors.textSecondary,
 
   );

@@ -15,10 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter TODO App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.background,
         fontFamily: GoogleFonts.poppins().fontFamily,
         useMaterial3: true,
+
       ),
       home: WelcomePage(),
     );

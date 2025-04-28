@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class AppColors {
-  static const primary = Color(0xFF6A53FF); /// That nice purple (buttons, active tabs)
+  static const primary = Color(0xFF5F33E1); /// That nice purple (buttons, active tabs)
   static const secondary = Color(0xFFFFC542); /// Yellow/orange (tags, accents)
   static const background = Color(0xFFF5F6FA); /// App background
   static const card = Color(0xFFFFFFFF); /// For cards

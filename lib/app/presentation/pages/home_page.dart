@@ -1,6 +1,8 @@
 import 'package:daily_activity/app/core/constants/app_text_styles.dart';
 import 'package:daily_activity/app/presentation/widgets/app_background.dart';
+import 'package:daily_activity/app/presentation/widgets/in_progress_todo.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/constants/app_colors.dart';
@@ -53,62 +55,106 @@ class _HomePageState extends State<HomePage> {
         children: [
           CustomScrollView(
             slivers: [
-              SliverAppBar(
-                backgroundColor: Colors.transparent,
-                pinned: true,
-                stretch: true,
-                clipBehavior: Clip.antiAlias,
-                automaticallyImplyLeading: false,
+              SliverPadding(
+                padding: EdgeInsets.symmetric(vertical: 26),
+                sliver: SliverAppBar(
+                  backgroundColor: Colors.transparent,
+                  pinned: true,
+                  stretch: true,
+                  clipBehavior: Clip.antiAlias,
+                  automaticallyImplyLeading: false,
 
-                // clipBehavior: Clip.hardEdge,
+                  // clipBehavior: Clip.hardEdge,
 
-                expandedHeight: MediaQuery.of(context).size.height * 0.24,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.24,
 
-                flexibleSpace: FlexibleSpaceBar(
-                    background: ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(31),
-                    top: Radius.circular(31),
-                  ),
-                  child: Container(
-                    color: AppColors.primary,
-                    child: Stack(children: [
-                      Positioned(
-                        top: 26,
-                        left: 26,
-                        child: Text(
-                          "Your today's task\nalmost done!",
-                          style: AppTextStyles.body,
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 40,
-                        left: 26,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.background),
-                          child: Text("View Task"),
-                        ),
-                      ),
-                      Positioned(
+                  flexibleSpace: FlexibleSpaceBar(
+                      background: ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(39),
+                      top: Radius.circular(39),
+                    ),
+                    child: Container(
+                      color: AppColors.primary,
+                      child: Stack(children: [
+                        Positioned(
                           top: 26,
-                          right: 24,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(11),
-                              color: AppColors.card.withAlpha(70),
-
+                          left: 19,
+                          child: Text(
+                            "Your today's task\nalmost done!",
+                            style: AppTextStyles.body,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 36,
+                          left: 19,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                backgroundColor: AppColors.background),
+                            child: Text(
+                              "View Task",
+                              style: AppTextStyles.bodyBold,
                             ),
-                            width: 36,
-                            height: 36,
-                            child: Icon(PhosphorIcons.dotsThreeOutline(
-                                PhosphorIconsStyle.fill),color: AppColors.card,),
-                          ))
-                    ]),
+                          ),
+                        ),
+                        Positioned(
+                            top: 19,
+                            right: 21,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(9),
+                                color: AppColors.card.withAlpha(70),
+                              ),
+                              width: 29,
+                              height: 29,
+                              child: Icon(
+                                PhosphorIcons.dotsThreeOutline(
+                                    PhosphorIconsStyle.fill),
+                                color: AppColors.card,
+                              ),
+                            )),
+                        Positioned(
+                            top: 49,
+                            right: 76,
+                            child: CircularPercentIndicator(
+                              startAngle: 70,
+                              radius: 46.0,
+                              lineWidth: 9.0,
+                              percent: 0.85,
+                              center: const Text(
+                                "85%",
+                                style: AppTextStyles.body,
+                              ),
+                              progressColor: AppColors.card,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              animation: true,
+                              animationDuration: 1700,
+                            )),
+                      ]),
+                    ),
+                  )),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 14,
                   ),
-                )),
-              )
+                  child: Text(
+                    "In Progress",
+                    style: AppTextStyles.headingMedium,
+                  ),
+                ),
+              ),
+              SliverGrid(
+                delegate: (SliverChildBuilderDelegate(
+                    (context, index) => InProgressTodo(),
+                    childCount: 2)), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              ),
             ],
           ),
         ],

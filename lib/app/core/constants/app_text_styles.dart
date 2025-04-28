@@ -10,15 +10,19 @@ class AppTextStyles {
   );
 
   static const headingMedium = TextStyle(
-    fontSize: 24,
+    fontSize: 19,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
 
   static const body = TextStyle(
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.normal,
     color: AppColors.card,
+  ); static const bodyBold = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primary,
   );
 
   static const small = TextStyle(

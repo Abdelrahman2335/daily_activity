@@ -1,11 +1,14 @@
 import 'package:daily_activity/app/core/constants/app_text_styles.dart';
 import 'package:daily_activity/app/presentation/widgets/app_background.dart';
-import 'package:daily_activity/app/presentation/widgets/in_progress_todo.dart';
+import 'package:daily_activity/app/presentation/widgets/task_card.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/constants/app_colors.dart';
+import '../../data/data_sources/dummy_data.dart';
+import '../widgets/in_progress_todo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,6 +25,7 @@ class _HomePageState extends State<HomePage> {
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             Text(
               "Hello!",
               style: AppTextStyles.small,
@@ -45,21 +49,23 @@ class _HomePageState extends State<HomePage> {
           InkWell(
               onTap: () {},
               child: Icon(
-                PhosphorIcons.bellSimple(PhosphorIconsStyle.fill),
+                Iconsax.notification,
                 size: 26,
               ))
         ],
         actionsPadding: EdgeInsets.only(right: 24, top: 8),
       ),
       body: AppBackground(
+        addPadding: false,
         children: [
           CustomScrollView(
+
             slivers: [
+
               SliverPadding(
-                padding: EdgeInsets.symmetric(vertical: 26),
+                padding: EdgeInsets.symmetric(vertical: 26, horizontal: 19),
                 sliver: SliverAppBar(
                   backgroundColor: Colors.transparent,
-                  pinned: true,
                   stretch: true,
                   clipBehavior: Clip.antiAlias,
                   automaticallyImplyLeading: false,
@@ -112,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                               width: 29,
                               height: 29,
                               child: Icon(
+
                                 PhosphorIcons.dotsThreeOutline(
                                     PhosphorIconsStyle.fill),
                                 color: AppColors.card,
@@ -139,10 +146,11 @@ class _HomePageState extends State<HomePage> {
                   )),
                 ),
               ),
-              const SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 14,
+                  padding: const EdgeInsets.only(
+                    left: 19,
+                    bottom: 11,
                   ),
                   child: Text(
                     "In Progress",
@@ -150,10 +158,51 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SliverGrid(
-                delegate: (SliverChildBuilderDelegate(
-                    (context, index) => InProgressTodo(),
-                    childCount: 2)), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.21,
+                  width: double.infinity,
+                  child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          mainAxisSpacing: 14,
+                          crossAxisSpacing: 9,
+                          childAspectRatio: 0.8),
+                      itemCount: dummyTasks.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InProgressTodo(
+                          data: dummyTasks[index],
+                        );
+                      }),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 19, bottom: 11, top: 11),
+                  child: Text(
+                    "Tasks",
+                    style: AppTextStyles.headingMedium,
+                  ),
+                ),
+              ),
+              SliverList(
+
+                delegate: SliverChildBuilderDelegate(
+
+                  childCount: dummyTasks.length,
+
+                  (ctx, index) => SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.13,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 19,vertical: 8),
+                      child: TaskCard(
+                        data: dummyTasks[index],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

@@ -32,7 +32,7 @@ class AppBackground extends StatelessWidget {
               top: 226,
               left: 19,
               child: BlurredCircle(
-                color: AppColors.backgroundEffect.withAlpha(39),
+                color: AppColors.accentGreen.withAlpha(39),
                 size: 19,
               ),
             ),

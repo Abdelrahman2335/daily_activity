@@ -19,12 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.background,
         fontFamily: GoogleFonts.poppins().fontFamily,
-        useMaterial3: true,
 
+        // Disabled state still visible),
+        useMaterial3: true,
       ),
       home: WelcomePage(),
     );
   }
 }
-
-

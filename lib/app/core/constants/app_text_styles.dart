@@ -19,7 +19,9 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.normal,
     color: AppColors.card,
-  ); static const bodyBold = TextStyle(
+  );
+
+  static const bodyBold = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
     color: AppColors.primary,
@@ -33,7 +35,7 @@ class AppTextStyles {
   ); static const smallBold = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.bold,
-    color: AppColors.textSecondary,
+    color: AppColors.textPrimary,
 
   );
 }

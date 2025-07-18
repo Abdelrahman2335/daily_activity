@@ -1,4 +1,4 @@
-import 'package:daily_activity/app/data/models/task_category.dart';
+import 'package:daily_activity/features/home/data/models/task_category.dart';
 
 class TaskModel {
   final String id;

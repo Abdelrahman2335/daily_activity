@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/app_colors.dart';
-import 'blurred_circle.dart';
+import '../utils/app_colors.dart';
+import '../../features/home/presentation/widgets/blurred_circle.dart';
 
 class AppBackground extends StatelessWidget {
   const AppBackground({super.key, required this.children, this.addPadding = true});

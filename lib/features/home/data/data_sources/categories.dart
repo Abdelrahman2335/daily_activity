@@ -1,7 +1,7 @@
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../../core/constants/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../models/task_category.dart';
 
 Map<TaskCategory, TaskCategoryModel> categories = {

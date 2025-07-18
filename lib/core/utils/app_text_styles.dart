@@ -3,39 +3,32 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  static const headingLarge = TextStyle(
+  static const textStyle26 = TextStyle(
     fontSize: 26,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
 
-  static const headingMedium = TextStyle(
+  static const textStyle19 = TextStyle(
     fontSize: 19,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
 
-  static const body = TextStyle(
+  static const textStyle14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
     color: AppColors.card,
   );
 
-  static const bodyBold = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
-    color: AppColors.primary,
-  );
-
-  static const small = TextStyle(
+  static const textStyle12 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
-
-  ); static const smallBold = TextStyle(
+  );
+  static const smallBold = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
-
   );
 }

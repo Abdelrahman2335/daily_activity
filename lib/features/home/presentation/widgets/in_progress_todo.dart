@@ -1,8 +1,8 @@
-import 'package:daily_activity/app/core/constants/app_colors.dart';
-import 'package:daily_activity/app/data/models/task_model.dart';
+import 'package:daily_activity/core/utils/app_colors.dart';
+import 'package:daily_activity/features/home/data/models/task_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants/app_text_styles.dart';
+import '../../../../core/utils/app_text_styles.dart';
 
 class InProgressTodo extends StatelessWidget {
   const InProgressTodo({super.key, required this.data});
@@ -25,7 +25,7 @@ class InProgressTodo extends StatelessWidget {
                   Expanded(
                     child: Text(
                       data.title,
-                      style: AppTextStyles.small,
+                      style: AppTextStyles.textStyle12,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -48,7 +48,6 @@ class InProgressTodo extends StatelessWidget {
             ),
             SliderTheme(
               data: SliderThemeData().copyWith(
-
                 activeTrackColor: AppColors.primary,
                 // Matches primary color (main brand color)
                 inactiveTrackColor: AppColors.primary.withAlpha(76),
@@ -61,8 +60,8 @@ class InProgressTodo extends StatelessWidget {
                 // Adjust track thickness
                 thumbShape: SliderComponentShape.noThumb,
                 // Remove thumb if needed
-                disabledActiveTrackColor: data.category.color,),
-
+                disabledActiveTrackColor: data.category.color,
+              ),
               child: Slider(
                 value: data.progress,
                 onChanged: null,

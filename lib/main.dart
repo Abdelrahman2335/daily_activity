@@ -1,5 +1,5 @@
-import 'package:daily_activity/app/core/constants/app_colors.dart';
-import 'package:daily_activity/app/presentation/pages/welcome_page.dart';
+import 'package:daily_activity/core/utils/app_colors.dart';
+import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,17 +13,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       title: 'Flutter TODO App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.background,
-        fontFamily: GoogleFonts.poppins().fontFamily,
+        textTheme: GoogleFonts.latoTextTheme(),
 
-        // Disabled state still visible),
-        useMaterial3: true,
+        
       ),
-      home: WelcomePage(),
     );
   }
 }

@@ -6,29 +6,29 @@ class AppTextStyles {
   static const textStyle26 = TextStyle(
     fontSize: 26,
     fontWeight: FontWeight.bold,
-    color: AppColors.textPrimary,
+    color: AppColor.textPrimary,
   );
 
   static const textStyle19 = TextStyle(
     fontSize: 19,
     fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
+    color: AppColor.textPrimary,
   );
 
   static const textStyle14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: AppColors.card,
+    color: AppColor.card,
   );
 
   static const textStyle12 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    color: AppColors.textSecondary,
+    color: AppColor.textSecondary,
   );
   static const smallBold = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.bold,
-    color: AppColors.textPrimary,
+    color: AppColor.textPrimary,
   );
 }

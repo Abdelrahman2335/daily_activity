@@ -4,7 +4,8 @@ import '../utils/app_colors.dart';
 import '../../features/home/presentation/widgets/blurred_circle.dart';
 
 class AppBackground extends StatelessWidget {
-  const AppBackground({super.key, required this.children, this.addPadding = true});
+  const AppBackground(
+      {super.key, required this.children, this.addPadding = true});
 
   final List<Widget> children;
   final bool addPadding;
@@ -12,9 +13,10 @@ class AppBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
-
-      child:  Padding(
-        padding: addPadding == true? const EdgeInsets.symmetric(horizontal: 19): EdgeInsets.zero,
+      child: Padding(
+        padding: addPadding == true
+            ? const EdgeInsets.symmetric(horizontal: 19)
+            : EdgeInsets.zero,
         child: Stack(
           children: [
             // Top blur circle
@@ -22,7 +24,7 @@ class AppBackground extends StatelessWidget {
               top: 70,
               right: 60,
               child: BlurredCircle(
-                color: AppColors.secondary.withAlpha(46),
+                color: AppColor.secondary.withAlpha(46),
                 size: 24,
               ),
             ),
@@ -32,7 +34,7 @@ class AppBackground extends StatelessWidget {
               top: 226,
               left: 19,
               child: BlurredCircle(
-                color: AppColors.accentGreen.withAlpha(39),
+                color: AppColor.accentGreen.withAlpha(39),
                 size: 19,
               ),
             ),
@@ -40,7 +42,7 @@ class AppBackground extends StatelessWidget {
               top: 500,
               left: 150,
               child: BlurredCircle(
-                color: AppColors.primary.withAlpha(36),
+                color: AppColor.primary.withAlpha(36),
                 size: 19,
               ),
             ),
@@ -48,7 +50,7 @@ class AppBackground extends StatelessWidget {
               top: 300,
               right: 40,
               child: BlurredCircle(
-                color: AppColors.primary.withAlpha(30),
+                color: AppColor.primary.withAlpha(30),
                 size: 19,
               ),
             ),

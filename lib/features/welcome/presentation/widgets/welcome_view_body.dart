@@ -37,7 +37,7 @@ class WelcomeViewBody extends StatelessWidget {
           ),
           CustomButton(
             onPressed: () {
-              GoRouter.of(context).go(AppRouter.kHomePage);
+              GoRouter.of(context).go(AppRouter.kMainNavigationBar);
             },
             text: "Let's Start",
             icon: FontAwesomeIcons.arrowRight,

@@ -28,7 +28,7 @@ class OverviewSection extends StatelessWidget {
             top: Radius.circular(39),
           ),
           child: Container(
-            color: AppColors.primary,
+            color: AppColor.primary,
             child: Stack(children: [
               Positioned(
                 top: 26,
@@ -47,11 +47,11 @@ class OverviewSection extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      backgroundColor: AppColors.background),
+                      backgroundColor: AppColor.background),
                   child: Text(
                     "View Task",
                     style: AppTextStyles.textStyle14.copyWith(
-                        color: AppColors.primary, fontWeight: FontWeight.bold),
+                        color: AppColor.primary, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -61,13 +61,13 @@ class OverviewSection extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(9),
-                      color: AppColors.card.withAlpha(70),
+                      color: AppColor.card.withAlpha(70),
                     ),
                     width: 29,
                     height: 29,
                     child: Icon(
                       PhosphorIcons.dotsThreeOutline(PhosphorIconsStyle.fill),
-                      color: AppColors.card,
+                      color: AppColor.card,
                     ),
                   )),
               Positioned(
@@ -82,7 +82,7 @@ class OverviewSection extends StatelessWidget {
                       "85%",
                       style: AppTextStyles.textStyle14,
                     ),
-                    progressColor: AppColors.card,
+                    progressColor: AppColor.card,
                     circularStrokeCap: CircularStrokeCap.round,
                     animation: true,
                     animationDuration: 1700,

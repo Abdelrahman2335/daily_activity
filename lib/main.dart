@@ -18,10 +18,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter TODO App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.background,
+        scaffoldBackgroundColor: AppColor.background,
         textTheme: GoogleFonts.latoTextTheme(),
-
-        
       ),
     );
   }

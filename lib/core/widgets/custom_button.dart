@@ -1,4 +1,3 @@
-
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,7 @@ class CustomButton extends StatelessWidget {
       height: 54,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary, // Purple background
+            backgroundColor: AppColor.primary, // Purple background
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(19), // pill shape
             ),

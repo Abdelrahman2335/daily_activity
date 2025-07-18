@@ -24,7 +24,7 @@ PreferredSizeWidget customAppBar() {
       child: CircleAvatar(
         child: Icon(
           PhosphorIcons.user(),
-          color: AppColors.accentPink,
+          color: AppColor.accentPink,
         ),
       ),
     ),

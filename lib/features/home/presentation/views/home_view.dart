@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
       body: AppBackground(
         addPadding: false,
         children: [
-         const HomeViewBody(),
+          const HomeViewBody(),
         ],
       ),
     );

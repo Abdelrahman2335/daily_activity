@@ -48,13 +48,13 @@ class InProgressTodo extends StatelessWidget {
             ),
             SliderTheme(
               data: SliderThemeData().copyWith(
-                activeTrackColor: AppColors.primary,
+                activeTrackColor: AppColor.primary,
                 // Matches primary color (main brand color)
-                inactiveTrackColor: AppColors.primary.withAlpha(76),
+                inactiveTrackColor: AppColor.primary.withAlpha(76),
                 // Lighter version for inactive track
-                thumbColor: AppColors.primary,
+                thumbColor: AppColor.primary,
                 // Thumb matches primary color
-                overlayColor: AppColors.primary.withAlpha(90),
+                overlayColor: AppColor.primary.withAlpha(90),
                 // Subtle glow effect when sliding
                 trackHeight: 6.0,
                 // Adjust track thickness

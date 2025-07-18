@@ -1,11 +1,9 @@
-import 'package:daily_activity/features/home/data/data_sources/dummy_data.dart';
 import 'package:daily_activity/features/home/presentation/widgets/in_progress_section.dart';
 import 'package:daily_activity/features/home/presentation/widgets/overview_section.dart';
 import 'package:daily_activity/features/home/presentation/widgets/tasks_section.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
-import 'task_card.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({

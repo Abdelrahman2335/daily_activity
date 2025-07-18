@@ -1,3 +1,4 @@
+import 'package:daily_activity/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/in_progress_section.dart';
 import 'package:daily_activity/features/home/presentation/widgets/overview_section.dart';
 import 'package:daily_activity/features/home/presentation/widgets/tasks_section.dart';
@@ -14,6 +15,7 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
+        const CustomAppBar(),
         const OverviewSection(),
         SliverToBoxAdapter(
           child: Padding(

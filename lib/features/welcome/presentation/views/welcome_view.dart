@@ -7,12 +7,11 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppBackground(
-        children: [
-          const WelcomeViewBody(),
-        ],
-      ),
+    return AppBackground(
+      addPadding: true,
+      children: [
+        const WelcomeViewBody(),
+      ],
     );
   }
 }

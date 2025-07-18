@@ -1,24 +1,26 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class SecondaryButton extends StatelessWidget {
+  const SecondaryButton({
     super.key,
     required this.onPressed,
     required this.text,
     this.icon,
     this.addIcon = false,
+    this.height = 54,
   });
   final VoidCallback onPressed;
   final String text;
   final IconData? icon;
   final bool addIcon;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 54,
+      height: height,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColor.primary, // Purple background

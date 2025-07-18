@@ -2,7 +2,7 @@ import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/utils/assets.dart';
 import 'package:daily_activity/core/utils/constants.dart';
-import 'package:daily_activity/core/widgets/custom_button.dart';
+import 'package:daily_activity/core/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -32,12 +32,13 @@ class WelcomeViewBody extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTextStyles.textStyle12,
           ),
-          const SizedBox(
-            height: 64,
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.09,
           ),
-          CustomButton(
+          SecondaryButton(
+            height: 60,
             onPressed: () {
-              GoRouter.of(context).go(AppRouter.kMainNavigationBar);
+              GoRouter.of(context).go(AppRouter.kLayOut);
             },
             text: "Let's Start",
             icon: FontAwesomeIcons.arrowRight,

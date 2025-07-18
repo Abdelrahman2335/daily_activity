@@ -1,6 +1,9 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
+import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
+import 'package:daily_activity/core/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -14,7 +17,7 @@ class OverviewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(vertical: 26, horizontal: 19),
+      padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 19),
       sliver: SliverAppBar(
         backgroundColor: Colors.transparent,
         stretch: true,
@@ -23,14 +26,14 @@ class OverviewSection extends StatelessWidget {
         expandedHeight: MediaQuery.of(context).size.height * 0.24,
         flexibleSpace: FlexibleSpaceBar(
             background: ClipRRect(
-          borderRadius: BorderRadius.vertical(
+          borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(39),
             top: Radius.circular(39),
           ),
           child: Container(
             color: AppColor.primary,
             child: Stack(children: [
-              Positioned(
+              const Positioned(
                 top: 26,
                 left: 19,
                 child: Text(
@@ -41,19 +44,11 @@ class OverviewSection extends StatelessWidget {
               Positioned(
                 bottom: 36,
                 left: 19,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      backgroundColor: AppColor.background),
-                  child: Text(
-                    "View Task",
-                    style: AppTextStyles.textStyle14.copyWith(
-                        color: AppColor.primary, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                child: PrimaryButton(
+                    text: "View Task",
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.kHomePage);
+                    }),
               ),
               Positioned(
                   top: 19,
@@ -71,11 +66,11 @@ class OverviewSection extends StatelessWidget {
                     ),
                   )),
               Positioned(
-                  top: 49,
-                  right: 76,
+                  top: 59,
+                  right: 66,
                   child: CircularPercentIndicator(
                     startAngle: 70,
-                    radius: 46.0,
+                    radius: 54.0,
                     lineWidth: 9.0,
                     percent: 0.85,
                     center: const Text(

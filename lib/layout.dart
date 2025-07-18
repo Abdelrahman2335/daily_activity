@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/features/home/presentation/views/home_view.dart';
+import 'package:daily_activity/core/widgets/app_background.dart';
+import 'package:daily_activity/features/home/presentation/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -22,35 +23,41 @@ class _LayOutState extends State<LayOut> {
       size: 26,
     ),
     Icon(
-      Iconsax.calendar_14,
+      Iconsax.calendar5,
       size: 26,
     ),
     Icon(
-      Iconsax.shopping_bag,
+      Iconsax.document_text_14,
+      size: 26,
+    ),
+    Icon(
+      Iconsax.profile_2user,
       size: 26,
     ),
   ];
 
   final List<Widget> selectedScreen = [
-    const HomeView(),
-    const HomeView(),
-    const HomeView(),
+    const HomeViewBody(),
+    const HomeViewBody(),
+    const HomeViewBody(),
+    const HomeViewBody(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: selectedScreen[currentIndex],
-        bottomNavigationBar: CurvedNavigationBar(
-            height: 64,
-            animationDuration: const Duration(milliseconds: 300),
-            onTap: (value) {
-              setState(() {
-                currentIndex = value;
-              });
-            },
-            backgroundColor: AppColor.background,
-            buttonBackgroundColor: AppColor.primary,
-            items: curvedIcons));
+    return AppBackground(
+      bottomNavigationBar: CurvedNavigationBar(
+          height: 64,
+          animationDuration: const Duration(milliseconds: 300),
+          onTap: (value) {
+            setState(() {
+              currentIndex = value;
+            });
+          },
+          backgroundColor: AppColor.background,
+          buttonBackgroundColor: AppColor.primary,
+          items: curvedIcons),
+      children: [selectedScreen[currentIndex]],
+    );
   }
 }

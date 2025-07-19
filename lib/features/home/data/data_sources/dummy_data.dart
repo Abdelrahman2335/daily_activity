@@ -10,7 +10,7 @@ final List<TaskModel> dummyTasks = [
         'Weekly sync-up with the project team to review progress and blockers.',
     category: categories[TaskCategory.work]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.inProgress,
     progress: 0.6,
   ),
   TaskModel(
@@ -18,7 +18,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Catch up and share updates about the week.',
     category: categories[TaskCategory.personal]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.completed,
     progress: 0.3,
   ),
   TaskModel(
@@ -26,7 +26,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Study state management techniques in Flutter for 1 hour.',
     category: categories[TaskCategory.dailyStudy]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.inProgress,
     progress: 0.75,
   ),
   TaskModel(
@@ -34,7 +34,7 @@ final List<TaskModel> dummyTasks = [
     description: '45-minute strength and cardio session at the gym.',
     category: categories[TaskCategory.healthFitness]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.notStarted,
     progress: 0.4,
   ),
   TaskModel(
@@ -42,7 +42,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Go over expenses and update the spreadsheet.',
     category: categories[TaskCategory.finance]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.completed,
     progress: 0.5,
   ),
   TaskModel(
@@ -50,7 +50,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Milk, eggs, chicken, oats, and fruits for the week.',
     category: categories[TaskCategory.shopping]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.inProgress,
     progress: 0.2,
   ),
   TaskModel(
@@ -58,7 +58,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Compare prices and finalize the 3-night booking.',
     category: categories[TaskCategory.travel]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.notStarted,
     progress: 0.1,
   ),
   TaskModel(
@@ -66,7 +66,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Complete the settings screen and submit to GitHub.',
     category: categories[TaskCategory.sideProjects]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.inProgress,
     progress: 0.85,
   ),
   TaskModel(
@@ -74,7 +74,7 @@ final List<TaskModel> dummyTasks = [
     description: 'Gift ready. Party at 7 PM at his place.',
     category: categories[TaskCategory.socialEvents]!,
     date: DateTime.now(),
-    isCompleted: false,
+    status: TaskStatus.completed,
     progress: 0.0,
   ),
 ];

@@ -1,5 +1,5 @@
-
 import 'package:daily_activity/core/widgets/primary_button.dart';
+import 'package:daily_activity/features/home/data/models/task_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomStatusBar extends StatefulWidget {
@@ -14,26 +14,26 @@ class _CustomStatusBarState extends State<CustomStatusBar> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> buttonLabels = ['All', 'In Progress', 'Completed'];
-
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(buttonLabels.length, (index) {
-          final isSelected = selectedIndex == index;
-          return Padding(
-            padding: const EdgeInsets.only(right: 14),
-            child: PrimaryButton(
-              isSelected: isSelected,
-              onPressed: () {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              text: buttonLabels[index],
-            ),
-          );
-        }),
+    return SliverToBoxAdapter(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(TaskStatus.values.length, (index) {
+            final isSelected = selectedIndex == index;
+            return Padding(
+              padding: const EdgeInsets.only(left: 14),
+              child: PrimaryButton(
+                isSelected: isSelected,
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                text: TaskStatus.values[index].displayName,
+              ),
+            );
+          }),
+        ),
       ),
     );
   }

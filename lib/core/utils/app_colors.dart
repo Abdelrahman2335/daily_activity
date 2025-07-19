@@ -31,5 +31,7 @@ abstract class AppColor {
 
   /// For progress indicators / alerts
   static const accentRed = Color(0xFFFF0000);
-// Add more as you extract!
+
+  static const accentLightPurple =
+      Color(0xFFB9A7F9); // Light purple for time text
 }

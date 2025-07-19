@@ -2,7 +2,6 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/primary_button.dart';
-import 'package:daily_activity/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -24,7 +23,7 @@ class OverviewSection extends StatelessWidget {
         stretch: true,
         clipBehavior: Clip.antiAlias,
         automaticallyImplyLeading: false,
-        expandedHeight: MediaQuery.of(context).size.height * 0.24,
+        expandedHeight: 180,
         flexibleSpace: FlexibleSpaceBar(
             background: ClipRRect(
           borderRadius: const BorderRadius.vertical(

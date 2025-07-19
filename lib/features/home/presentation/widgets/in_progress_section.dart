@@ -12,7 +12,7 @@ class InProgressSection extends StatelessWidget {
     // SliverList does not support horizontal scrolling directly,
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.21,
+        height: 170,
         width: double.infinity,
         child: GridView.builder(
             scrollDirection: Axis.horizontal,

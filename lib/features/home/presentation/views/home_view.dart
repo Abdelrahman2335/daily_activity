@@ -12,7 +12,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return AppBackground(
+    return BackgroundLayout(
       addPadding: false,
       children: [
         const HomeViewBody(),

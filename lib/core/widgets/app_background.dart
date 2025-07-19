@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import '../../features/home/presentation/widgets/blurred_circle.dart';
 
-class AppBackground extends StatelessWidget {
-  const AppBackground({
+class BackgroundLayout extends StatelessWidget {
+  const BackgroundLayout({
     super.key,
     required this.children,
     this.addPadding = false,

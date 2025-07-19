@@ -7,9 +7,8 @@ class TodayTasksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: AppBackground(children: [
+      body: BackgroundLayout(children: [
         TodayTaskViewBody(),
       ]),
     );

@@ -7,7 +7,7 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBackground(
+    return BackgroundLayout(
       addPadding: true,
       children: [
         const WelcomeViewBody(),

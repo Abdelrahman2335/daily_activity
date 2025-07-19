@@ -13,7 +13,7 @@ class TodayTaskViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const TodayTasksAppBar(),
+        SliverToBoxAdapter(child: const TodayTasksAppBar()),
         const CustomCalenderList(),
         const SliverToBoxAdapter(child: SizedBox(height: 20)),
         const CustomStatusBar(),

@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/widgets/app_background.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_view_body.dart';
+import 'package:daily_activity/features/home/presentation/widgets/today_task_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -9,13 +10,15 @@ class LayOut extends StatefulWidget {
   const LayOut({
     super.key,
   });
-
   @override
   State<LayOut> createState() => _LayOutState();
 }
 
 class _LayOutState extends State<LayOut> {
-  int currentIndex = 0;
+  
+
+  int currentScreen = 0;
+
 
   final List<Widget> curvedIcons = [
     Icon(
@@ -23,7 +26,11 @@ class _LayOutState extends State<LayOut> {
       size: 26,
     ),
     Icon(
-      Iconsax.calendar5,
+      Iconsax.calendar_1,
+      size: 26,
+    ),
+    Icon(
+      Iconsax.add_square,
       size: 26,
     ),
     Icon(
@@ -38,6 +45,7 @@ class _LayOutState extends State<LayOut> {
 
   final List<Widget> selectedScreen = [
     const HomeViewBody(),
+    const TodayTaskViewBody(),
     const HomeViewBody(),
     const HomeViewBody(),
     const HomeViewBody(),
@@ -51,13 +59,13 @@ class _LayOutState extends State<LayOut> {
           animationDuration: const Duration(milliseconds: 300),
           onTap: (value) {
             setState(() {
-              currentIndex = value;
+              currentScreen = value;
             });
           },
-          backgroundColor: AppColor.background,
+          backgroundColor: Colors.transparent,
           buttonBackgroundColor: AppColor.primary,
           items: curvedIcons),
-      children: [selectedScreen[currentIndex]],
+      children: [selectedScreen[currentScreen]],
     );
   }
 }

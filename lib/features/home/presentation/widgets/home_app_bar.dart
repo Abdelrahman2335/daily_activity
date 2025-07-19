@@ -1,11 +1,11 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +34,22 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   Text(
                     "Abdelrahman",
-                    style: AppTextStyles.smallBold,
+                    style: AppTextStyles.textStyleBold12,
                   ),
                 ],
               ),
               Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 14,
+              IconButton(
+                padding: EdgeInsets.only(right: 14),
+                onPressed: () {
+                  // Add notification action here
+                },
+                icon: Icon(
+                  Iconsax.notification,
+                  size: 24,
+                  color: AppColor.textPrimary, // Add explicit color
                 ),
-                child: InkWell(
-                    onTap: () {},
-                    child: Icon(
-                      Iconsax.notification,
-                      size: 26,
-                    )),
-              )
+              ),
             ],
           ),
         ),

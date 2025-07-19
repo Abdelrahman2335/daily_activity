@@ -2,6 +2,7 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/primary_button.dart';
+import 'package:daily_activity/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -33,12 +34,13 @@ class OverviewSection extends StatelessWidget {
           child: Container(
             color: AppColor.primary,
             child: Stack(children: [
-              const Positioned(
+              Positioned(
                 top: 26,
                 left: 19,
                 child: Text(
                   "Your today's task\nalmost done!",
-                  style: AppTextStyles.textStyle14,
+                  style:
+                      AppTextStyles.textStyle14.copyWith(color: AppColor.card),
                 ),
               ),
               Positioned(
@@ -47,7 +49,7 @@ class OverviewSection extends StatelessWidget {
                 child: PrimaryButton(
                     text: "View Task",
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kHomePage);
+                      GoRouter.of(context).push(AppRouter.kTodayTasks);
                     }),
               ),
               Positioned(
@@ -73,9 +75,10 @@ class OverviewSection extends StatelessWidget {
                     radius: 54.0,
                     lineWidth: 9.0,
                     percent: 0.85,
-                    center: const Text(
+                    center: Text(
                       "85%",
-                      style: AppTextStyles.textStyle14,
+                      style: AppTextStyles.textStyle14
+                          .copyWith(color: AppColor.card),
                     ),
                     progressColor: AppColor.card,
                     circularStrokeCap: CircularStrokeCap.round,

@@ -10,16 +10,22 @@ class AppBackground extends StatelessWidget {
     this.addPadding = false,
     this.appBar,
     this.bottomNavigationBar,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
   });
 
   final List<Widget> children;
   final bool addPadding;
   final PreferredSizeWidget? appBar;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
       appBar: appBar,
       bottomNavigationBar: bottomNavigationBar,
       body: SizedBox.expand(

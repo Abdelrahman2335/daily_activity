@@ -1,4 +1,4 @@
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../../core/utils/app_colors.dart';
@@ -8,12 +8,12 @@ Map<TaskCategory, TaskCategoryModel> categories = {
   TaskCategory.work: TaskCategoryModel(
     title: 'Work',
     color: AppColor.primary,
-    icon: Iconsax.briefcase_copy,
+    icon: Iconsax.briefcase,
   ),
   TaskCategory.personal: TaskCategoryModel(
     title: 'Personal',
     color: AppColor.accentPink,
-    icon: Iconsax.user_copy,
+    icon: Iconsax.user,
   ),
   TaskCategory.dailyStudy: TaskCategoryModel(
     title: 'Daily Study',
@@ -33,7 +33,7 @@ Map<TaskCategory, TaskCategoryModel> categories = {
   TaskCategory.shopping: TaskCategoryModel(
     title: 'Shopping',
     color: AppColor.accentOrange,
-    icon: Iconsax.shopping_cart_copy,
+    icon: Iconsax.shopping_cart,
   ),
   TaskCategory.travel: TaskCategoryModel(
     title: 'Travel',

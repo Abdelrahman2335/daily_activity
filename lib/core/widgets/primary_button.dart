@@ -8,23 +8,28 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.textColor,
     required this.text,
+    this.isSelected = false,
   });
+
   final VoidCallback onPressed;
   final Color? textColor;
   final String text;
+  final bool isSelected;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          backgroundColor: AppColor.background),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        backgroundColor: isSelected ? AppColor.primary : AppColor.card,
+      ),
       child: Text(
         text,
         style: AppTextStyles.textStyle14.copyWith(
-            color: textColor ?? AppColor.primary, fontWeight: FontWeight.bold),
+            color: isSelected ? AppColor.card : AppColor.primary,
+            fontWeight: FontWeight.bold),
       ),
     );
   }

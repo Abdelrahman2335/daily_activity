@@ -37,7 +37,7 @@ class TaskCard extends StatelessWidget {
             left: 64,
             child: Text(
               data.category.title,
-              style: AppTextStyles.smallBold,
+              style: AppTextStyles.textStyleBold12,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -64,7 +64,7 @@ class TaskCard extends StatelessWidget {
               progressColor: data.category.color,
               center: Text(
                 "${(data.progress * 100).toInt()}%",
-                style: AppTextStyles.smallBold,
+                style: AppTextStyles.textStyleBold12,
               ),
             ),
           ),

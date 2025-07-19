@@ -6,6 +6,7 @@ import 'package:daily_activity/core/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 
 class WelcomeViewBody extends StatelessWidget {
   const WelcomeViewBody({
@@ -41,7 +42,7 @@ class WelcomeViewBody extends StatelessWidget {
               GoRouter.of(context).go(AppRouter.kLayOut);
             },
             text: "Let's Start",
-            icon: FontAwesomeIcons.arrowRight,
+            icon: Iconsax.arrow_right_1,
             addIcon: true,
           ),
         ],

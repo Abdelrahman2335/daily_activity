@@ -37,7 +37,6 @@ dependencies:
   google_fonts: ^6.2.1
   hive: ^2.2.3
   iconsax: ^0.0.8
-  iconsax_flutter: ^1.0.0
   percent_indicator: ^4.2.5
   phosphor_flutter: ^2.1.0
 

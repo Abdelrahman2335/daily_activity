@@ -3,9 +3,11 @@ import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
 import 'package:daily_activity/features/add_task/presentation/widgets/add_task.dart';
+import 'package:daily_activity/features/add_task/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/add_task/presentation/widgets/custom_drop_down_button.dart';
 import 'package:daily_activity/features/home/presentation/widgets/task_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class AddProjectViewBody extends StatefulWidget {
   const AddProjectViewBody({super.key});
@@ -15,8 +17,6 @@ class AddProjectViewBody extends StatefulWidget {
 }
 
 class _AddProjectViewBodyState extends State<AddProjectViewBody> {
- 
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -67,6 +67,14 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                 height: 50,
               ),
               const SizedBox(height: 30),
+              CustomDateTimeButton(
+                title: "Start Date",
+              ),
+              const SizedBox(height: 30),
+              CustomDateTimeButton(
+                title: "End Date",
+              ),
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -74,3 +82,4 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
     );
   }
 }
+

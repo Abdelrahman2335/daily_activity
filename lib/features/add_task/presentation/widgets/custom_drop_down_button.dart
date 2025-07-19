@@ -13,7 +13,7 @@ class CustomDropDownButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       icon: const Icon(Iconsax.arrow_down_1),
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(19),
       menuMaxHeight: 400,
       onChanged: (value) {},
       decoration: InputDecoration(
@@ -23,7 +23,7 @@ class CustomDropDownButton extends StatelessWidget {
 
         hintText: 'Task Group',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(19),
           borderSide: BorderSide.none, // No visible border
         ),
         // Removes the border

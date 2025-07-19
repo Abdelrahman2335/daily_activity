@@ -40,9 +40,14 @@ class WelcomeViewBody extends StatelessWidget {
             onPressed: () {
               GoRouter.of(context).go(AppRouter.kLayOut);
             },
-            text: "Let's Start",
+            buttonLabel: Text(
+              "Let's Start",
+              style: AppTextStyles.textStyle19.copyWith(
+                fontWeight: FontWeight.w500,
+                color: Colors.white, // White text color
+              ),
+            ),
             icon: Iconsax.arrow_right_3,
-            
             addIcon: true,
           ),
         ],

@@ -8,9 +8,13 @@ class TaskAppBar extends StatelessWidget {
   const TaskAppBar({
     super.key,
     required this.title,
+    required this.actionButton,
+    required this.onActionButtonPressed,
   });
 
   final String title;
+  final Widget actionButton;
+  final VoidCallback onActionButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +40,11 @@ class TaskAppBar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              // Add notification action here
-            },
-            icon: Icon(
-              Iconsax.notification,
-              size: 24,
-              color: AppColor.textPrimary, // Add explicit color
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: TextButton(
+              onPressed: onActionButtonPressed,
+              child: actionButton,
             ),
           ),
         ],

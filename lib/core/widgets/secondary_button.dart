@@ -1,12 +1,11 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
   const SecondaryButton({
     super.key,
     required this.onPressed,
-    required this.text,
+    required this.buttonLabel,
     this.icon,
     this.addIcon = false,
     this.height = 54,
@@ -15,7 +14,7 @@ class SecondaryButton extends StatelessWidget {
     this.textColor = Colors.white,
   });
   final VoidCallback onPressed;
-  final String text;
+  final Widget buttonLabel;
   final IconData? icon;
   final bool addIcon;
   final double height;
@@ -35,20 +34,13 @@ class SecondaryButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(19),
             ),
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 6),
-            elevation: 4,
           ),
           onPressed: onPressed,
           child: Row(
             children: [
               Expanded(
                 child: Center(
-                  child: Text(
-                    text,
-                    style: AppTextStyles.textStyle19.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: textColor, // White text color
-                    ),
-                  ),
+                  child: buttonLabel,
                 ),
               ),
               if (addIcon)

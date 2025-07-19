@@ -40,7 +40,6 @@ class HomeAppBar extends StatelessWidget {
               ),
               Spacer(),
               IconButton(
-                padding: EdgeInsets.only(right: 14),
                 onPressed: () {
                   // Add notification action here
                 },

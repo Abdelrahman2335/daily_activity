@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
-class TodayTasksAppBar extends StatelessWidget {
-  const TodayTasksAppBar({
+class TaskAppBar extends StatelessWidget {
+  const TaskAppBar({
     super.key,
+    required this.title,
   });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.only(top: 22, left: 19, right: 12, bottom: 24),
+      minimum: const EdgeInsets.only(top: 22, bottom: 24),
       child: Row(
         children: [
           IconButton(
@@ -27,8 +30,8 @@ class TodayTasksAppBar extends StatelessWidget {
           ),
           Expanded(
             child: Center(
-              child: const Text(
-                "Today Tasks",
+              child: Text(
+                title,
                 style: AppTextStyles.textStyle19,
               ),
             ),

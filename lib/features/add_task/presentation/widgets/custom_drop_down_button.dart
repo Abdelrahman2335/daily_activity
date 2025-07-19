@@ -11,47 +11,43 @@ class CustomDropDownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: DropdownButtonFormField(
-          icon: const Icon(Iconsax.arrow_down_1),
-          borderRadius: BorderRadius.circular(12),
-          menuMaxHeight: 400,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-            constraints: const BoxConstraints(
-                maxHeight: 300, maxWidth: 400, minWidth: 100, minHeight: 200),
-            contentPadding: EdgeInsets.symmetric(vertical: 19, horizontal: 19),
-            fillColor: Colors.white,
-            filled: true,
+    return DropdownButtonFormField(
+      icon: const Icon(Iconsax.arrow_down_1),
+      borderRadius: BorderRadius.circular(12),
+      menuMaxHeight: 400,
+      onChanged: (value) {},
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 19, horizontal: 19),
+        fillColor: Colors.white,
+        filled: true,
 
-            hintText: 'Task Group',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none, // No visible border
-            ),
-            // Removes the border
-          ),
-          items: [
-            ...List.generate(categories.length, (index) {
-              return DropdownMenuItem(
-                value: categories[TaskCategory.values[index]]!.title,
-                child: Row(
-                  children: [
-                    Icon(
-                      categories[TaskCategory.values[index]]!.icon,
-                      color: categories[TaskCategory.values[index]]!.color,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      categories[TaskCategory.values[index]]!.title,
-                      style: AppTextStyles.textStyle14,
-                    ),
-                  ],
+        hintText: 'Task Group',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none, // No visible border
+        ),
+        // Removes the border
+      ),
+      items: [
+        ...List.generate(categories.length, (index) {
+          return DropdownMenuItem(
+            value: categories[TaskCategory.values[index]]!.title,
+            child: Row(
+              children: [
+                Icon(
+                  categories[TaskCategory.values[index]]!.icon,
+                  color: categories[TaskCategory.values[index]]!.color,
                 ),
-              );
-            }),
-          ]),
+                const SizedBox(width: 10),
+                Text(
+                  categories[TaskCategory.values[index]]!.title,
+                  style: AppTextStyles.textStyle14,
+                ),
+              ],
+            ),
+          );
+        }),
+      ],
     );
   }
 }

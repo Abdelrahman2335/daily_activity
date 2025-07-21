@@ -2,7 +2,7 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/features/home/presentation/widgets/custom_calender_list.dart';
 import 'package:daily_activity/features/home/presentation/widgets/custom_status_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/task_list.dart';
-import 'package:daily_activity/features/home/presentation/widgets/task_app_bar.dart';
+import 'package:daily_activity/core/widgets/task_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

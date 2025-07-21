@@ -2,8 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/widgets/app_background.dart';
-import 'package:daily_activity/features/add_task/presentation/views/add_project_view.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_view_body.dart';
+import 'package:daily_activity/features/settings/presentation/widgets/settings_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
@@ -21,7 +21,7 @@ class _LayOutState extends State<LayOut> {
 
   final List<Widget> selectedScreen = [
     const HomeViewBody(),
-    const HomeViewBody(),
+    const SettingsViewBody(),
   ];
 
   @override
@@ -33,12 +33,13 @@ class _LayOutState extends State<LayOut> {
         color: currentScreen == 0 ? Colors.white : AppColor.primary,
       ),
       Icon(
-        Iconsax.profile_2user,
+        Iconsax.user,
         size: 26,
         color: currentScreen == 1 ? Colors.white : AppColor.primary,
       ),
     ];
     return BackgroundLayout(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         onPressed: () {

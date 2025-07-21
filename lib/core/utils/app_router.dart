@@ -1,5 +1,6 @@
 import 'package:daily_activity/features/add_task/presentation/views/add_project_view.dart';
 import 'package:daily_activity/features/home/presentation/views/today_task_view.dart';
+import 'package:daily_activity/features/settings/presentation/views/settings_view.dart';
 import 'package:daily_activity/layout.dart';
 import 'package:daily_activity/features/home/presentation/views/home_view.dart';
 import 'package:daily_activity/features/welcome/presentation/views/welcome_view.dart';
@@ -10,6 +11,7 @@ abstract class AppRouter {
   static const String kLayOut = "/layOut";
   static const String kTodayTasks = "/todayTasks";
   static const String kAddProject = "/addTask";
+  static const String kSettings = "/settings";
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
       path: "/",
@@ -30,6 +32,10 @@ abstract class AppRouter {
     GoRoute(
       path: kAddProject,
       builder: (context, state) => const AddProjectView(),
+    ),
+    GoRoute(
+      path: kSettings,
+      builder: (context, state) => const SettingsView(),
     ),
   ]);
 }

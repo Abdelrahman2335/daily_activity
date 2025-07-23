@@ -1,5 +1,5 @@
 import 'package:daily_activity/core/widgets/primary_button.dart';
-import 'package:daily_activity/features/home/data/models/task_model.dart';
+import 'package:daily_activity/features/home/data/models/task_status.dart';
 import 'package:flutter/material.dart';
 
 class CustomStatusBar extends StatefulWidget {

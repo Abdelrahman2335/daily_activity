@@ -4,7 +4,6 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     this.controller,
-    required this.onChanged,
     required this.hintText,
     required this.maxLines,
     this.maxLength,
@@ -13,9 +12,10 @@ class CustomTextFormField extends StatefulWidget {
     this.icon,
     this.suffixIcon,
     this.enableField,
+    this.onSaved,
+    this.validator,
+    this.onSecondPress,
   });
-
-  final VoidCallback onChanged;
   final Widget? icon;
   final bool? enableField;
   final Widget? suffixIcon;
@@ -25,6 +25,9 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final TextEditingController? controller;
   final Color? backgroundColor;
+  final Function(String?)? onSaved;
+  final String? Function(String?)? validator;
+  final Function()? onSecondPress;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -54,25 +57,39 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      enabled: widget.enableField,
-      controller: _controller,
-      minLines: widget.minLines,
-      maxLines: widget.maxLines,
-      maxLength: widget.maxLength,
-      decoration: InputDecoration(
-        suffixIcon: widget.suffixIcon,
-        icon: widget.icon,
-        counterText: "", // Hides the character counter
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        fillColor: widget.backgroundColor ?? Colors.white,
-        filled: true,
-        hintText: widget.hintText,
+    return GestureDetector(
+      onTap: widget.onSecondPress,
+      child: TextFormField(
+        onTapUpOutside: (event) {
+          FocusScope.of(context).unfocus();
+        },
+        validator: widget.validator ??
+            (value) {
+              if (value?.isEmpty ?? true) {
+                return "Field is required";
+              }
+              return null;
+            },
+        onSaved: widget.onSaved,
+        enabled: widget.enableField,
+        controller: _controller,
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
+        maxLength: widget.maxLength,
+        decoration: InputDecoration(
+          suffixIcon: widget.suffixIcon,
+          icon: widget.icon,
+          counterText: "", // Hides the character counter
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          fillColor: widget.backgroundColor ?? Colors.white,
+          filled: true,
+          hintText: widget.hintText,
 
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );

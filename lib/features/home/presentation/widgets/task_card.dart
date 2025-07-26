@@ -60,10 +60,10 @@ class TaskCard extends StatelessWidget {
               startAngle: 70,
               radius: 26,
               lineWidth: 3,
-              percent: data.progress,
+              percent: data.progress.toDouble() / 100,
               progressColor: data.category.color,
               center: Text(
-                "${(data.progress * 100).toInt()}%",
+                "${data.progress}%",
                 style: AppTextStyles.textStyleBold12,
               ),
             ),

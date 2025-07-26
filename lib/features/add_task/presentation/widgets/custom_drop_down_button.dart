@@ -7,11 +7,15 @@ import 'package:iconsax/iconsax.dart';
 class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton({
     super.key,
+    this.validator,
   });
+
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      validator: validator,
       icon: const Icon(Iconsax.arrow_down_1),
       borderRadius: BorderRadius.circular(19),
       menuMaxHeight: 400,

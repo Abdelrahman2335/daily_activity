@@ -1,4 +1,3 @@
-import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/features/add_task/presentation/widgets/build_task_field.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +11,11 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
-  List<CustomTextFormField> taskList = [];
+  List taskList = [];
 
   @override
   void initState() {
-    taskList = List.generate(6, (index) => buildTaskField());
+    taskList = List.generate(6, (index) => BuildTaskField());
     super.initState();
   }
 
@@ -26,13 +25,14 @@ class _AddTaskState extends State<AddTask> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       onReorder: (oldIndex, newIndex) {
-
         // Working only if the Field is disabled (you will need to create the logic)
-        // setState(() {
-        //   final task = taskList.removeAt(oldIndex);
+        setState(() {
+          final task = taskList.removeAt(oldIndex);
 
-        //   taskList.insert(newIndex, task);
-        // });
+          taskList.insert(newIndex, task);
+
+          
+        });
       },
       children: [
         ...taskList.map((element) {

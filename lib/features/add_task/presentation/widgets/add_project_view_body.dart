@@ -16,10 +16,16 @@ class AddProjectViewBody extends StatefulWidget {
 }
 
 class _AddProjectViewBodyState extends State<AddProjectViewBody> {
+  final _formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  String? taskTitle, description;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
+        key: _formKey,
+        autovalidateMode: autovalidateMode,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -34,19 +40,37 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     color: AppColor.primary,
                   ),
                 ),
-                onActionButtonPressed: () {},
+                onActionButtonPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
               ),
-              const CustomDropDownButton(),
+             CustomDropDownButton(
+                validator: (value) {
+                  if (value == null) {
+                    return "Field is required";
+                  }
+                  return null;
+                },
+              ),
               const SizedBox(height: 30),
               CustomTextFormField(
-                onChanged: () {},
+                onSaved: (value) {
+                  taskTitle = value;
+                },
                 maxLines: 1,
                 maxLength: 50,
                 hintText: 'Task Name',
               ),
               const SizedBox(height: 30),
               CustomTextFormField(
-                onChanged: () {},
+                onSaved: (value) {
+                  description = value;
+                },
                 minLines: 5,
                 maxLines: 6,
                 hintText: 'Description',
@@ -81,4 +105,3 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
     );
   }
 }
-

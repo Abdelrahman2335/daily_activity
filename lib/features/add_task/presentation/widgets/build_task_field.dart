@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BuildTaskField extends StatefulWidget {
-  const BuildTaskField({super.key});
-
+  const BuildTaskField({super.key, required this.onPressed});
+  final VoidCallback onPressed;
   @override
   State<BuildTaskField> createState() => _BuildTaskFieldState();
 }
@@ -21,7 +21,9 @@ class _BuildTaskFieldState extends State<BuildTaskField> {
         });
       },
       icon: IconButton(
-          style: IconButton.styleFrom(padding: EdgeInsets.zero),
+          style: IconButton.styleFrom(
+            padding: EdgeInsets.zero,
+          ),
           onLongPress: () {
             setState(() {
               _enableField = !_enableField;
@@ -33,7 +35,7 @@ class _BuildTaskFieldState extends State<BuildTaskField> {
       hintText: 'Task Name',
       suffixIcon: IconButton(
         icon: Icon(Icons.close),
-        onPressed: () {},
+        onPressed: widget.onPressed,
       ),
     );
   }

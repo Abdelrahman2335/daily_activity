@@ -77,18 +77,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
               ),
               const SizedBox(height: 30),
               const AddTask(),
-              const SizedBox(height: 20),
-              SecondaryButton(
-                onPressed: () {},
-                buttonLabel: Text("Add Task",
-                    style: AppTextStyles.textStyle14.copyWith(
-                      color: AppColor.accentOrange,
-                    )),
-                backgroundColor: AppColor.card,
-                textColor: AppColor.accentOrange,
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: 50,
-              ),
+            
               const SizedBox(height: 30),
               CustomDateTimeButton(
                 title: "Start Date",

@@ -12,7 +12,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 60,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Call Mom',
@@ -21,7 +21,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.completed,
     progress: 30,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Read Flutter Documentation',
@@ -30,7 +30,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 75,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Morning Workout',
@@ -39,7 +39,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.notStarted,
     progress: 40,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Review Monthly Budget',
@@ -48,7 +48,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.completed,
     progress: 50,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Buy Groceries',
@@ -57,7 +57,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 20,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Book Hotel in Cairo',
@@ -66,7 +66,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.notStarted,
     progress: 10,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Finish Portfolio App',
@@ -75,7 +75,7 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 85,
-    tasks: '',
+    tasks: [],
   ),
   ProjectModel(
     title: 'Attend Ahmed’s Birthday',
@@ -84,6 +84,6 @@ final List<ProjectModel> dummyTasks = [
     date: DateTime.now().toString(),
     status: TaskStatus.completed,
     progress: 0,
-    tasks: '',
+    tasks: [],
   ),
 ];

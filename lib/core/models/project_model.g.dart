@@ -21,7 +21,7 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       description: fields[2] as String,
       category: fields[3] as ProjectCategoryModel,
       date: fields[4] as String,
-      tasks: fields[7] as String,
+      tasks: (fields[7] as List).cast<String>(),
       progress: fields[5] as int,
       status: fields[6] as TaskStatus,
     );

@@ -2,16 +2,17 @@ import 'dart:developer';
 
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/utils/constants.dart';
-import 'package:daily_activity/features/add_project/data/repository/project_repo.dart';
+import 'package:daily_activity/features/project/data/repository/project_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
   final Box box = Hive.box(Constants.kMainBox);
   @override
-  Either<String, void> addProject({required ProjectModel project}) {
+  Future<Either<String, void>> addProject(
+      {required ProjectModel project}) async {
     try {
-      box.put(project.id, project);
+      await box.put(project.id, project);
       return Right(null);
     } catch (error) {
       log("$error");
@@ -21,9 +22,10 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Either<String, void> editProject({required ProjectModel updatedProject}) {
+  Future<Either<String, void>> editProject(
+      {required ProjectModel updatedProject}) async {
     try {
-      box.put(updatedProject.id, updatedProject);
+      await box.put(updatedProject.id, updatedProject);
       updatedProject.save();
       return Right(null);
     } catch (error) {

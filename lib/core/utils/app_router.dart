@@ -1,4 +1,4 @@
-import 'package:daily_activity/features/add_project/presentation/views/add_project_view.dart';
+import 'package:daily_activity/features/project/presentation/views/add_project_view.dart';
 import 'package:daily_activity/features/home/presentation/views/today_task_view.dart';
 import 'package:daily_activity/features/settings/presentation/views/settings_view.dart';
 import 'package:daily_activity/layout.dart';

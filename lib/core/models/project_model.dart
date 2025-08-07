@@ -22,7 +22,7 @@ class ProjectModel extends HiveObject {
   @HiveField(6)
   final TaskStatus status;
   @HiveField(7)
-  final String tasks;
+  final List<String> tasks;
 
   ProjectModel({
     required this.title,

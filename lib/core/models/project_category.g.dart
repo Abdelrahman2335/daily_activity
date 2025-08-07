@@ -1,69 +1,69 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_category.dart';
+part of 'project_category.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskCategoryAdapter extends TypeAdapter<TaskCategory> {
+class ProjectCategoryAdapter extends TypeAdapter<ProjectCategory> {
   @override
   final int typeId = 1;
 
   @override
-  TaskCategory read(BinaryReader reader) {
+  ProjectCategory read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return TaskCategory.work;
+        return ProjectCategory.work;
       case 1:
-        return TaskCategory.personal;
+        return ProjectCategory.personal;
       case 2:
-        return TaskCategory.dailyStudy;
+        return ProjectCategory.dailyStudy;
       case 3:
-        return TaskCategory.healthFitness;
+        return ProjectCategory.healthFitness;
       case 4:
-        return TaskCategory.finance;
+        return ProjectCategory.finance;
       case 5:
-        return TaskCategory.shopping;
+        return ProjectCategory.shopping;
       case 6:
-        return TaskCategory.travel;
+        return ProjectCategory.travel;
       case 7:
-        return TaskCategory.sideProjects;
+        return ProjectCategory.sideProjects;
       case 8:
-        return TaskCategory.socialEvents;
+        return ProjectCategory.socialEvents;
       default:
-        return TaskCategory.work;
+        return ProjectCategory.work;
     }
   }
 
   @override
-  void write(BinaryWriter writer, TaskCategory obj) {
+  void write(BinaryWriter writer, ProjectCategory obj) {
     switch (obj) {
-      case TaskCategory.work:
+      case ProjectCategory.work:
         writer.writeByte(0);
         break;
-      case TaskCategory.personal:
+      case ProjectCategory.personal:
         writer.writeByte(1);
         break;
-      case TaskCategory.dailyStudy:
+      case ProjectCategory.dailyStudy:
         writer.writeByte(2);
         break;
-      case TaskCategory.healthFitness:
+      case ProjectCategory.healthFitness:
         writer.writeByte(3);
         break;
-      case TaskCategory.finance:
+      case ProjectCategory.finance:
         writer.writeByte(4);
         break;
-      case TaskCategory.shopping:
+      case ProjectCategory.shopping:
         writer.writeByte(5);
         break;
-      case TaskCategory.travel:
+      case ProjectCategory.travel:
         writer.writeByte(6);
         break;
-      case TaskCategory.sideProjects:
+      case ProjectCategory.sideProjects:
         writer.writeByte(7);
         break;
-      case TaskCategory.socialEvents:
+      case ProjectCategory.socialEvents:
         writer.writeByte(8);
         break;
     }
@@ -75,7 +75,7 @@ class TaskCategoryAdapter extends TypeAdapter<TaskCategory> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskCategoryAdapter &&
+      other is ProjectCategoryAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

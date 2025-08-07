@@ -1,81 +1,89 @@
-import 'package:daily_activity/features/home/data/models/task_model.dart';
-import 'package:daily_activity/features/home/data/models/task_status.dart';
-
-import '../models/task_category.dart';
+import '../../../../core/models/project_category.dart';
+import '../../../../core/models/project_model.dart';
+import '../../../../core/models/project_status.dart';
 import 'categories.dart';
 
-final List<TaskModel> dummyTasks = [
-  TaskModel(
+final List<ProjectModel> dummyTasks = [
+  ProjectModel(
     title: 'Team Meeting',
     description:
         'Weekly sync-up with the project team to review progress and blockers.',
-    category: categories[TaskCategory.work]!,
+    category: categories[ProjectCategory.work]!,
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 60,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Call Mom',
     description: 'Catch up and share updates about the week.',
-    category: categories[TaskCategory.personal]!,
+    category: categories[ProjectCategory.personal]!,
     date: DateTime.now().toString(),
     status: TaskStatus.completed,
     progress: 30,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Read Flutter Documentation',
     description: 'Study state management techniques in Flutter for 1 hour.',
-    category: categories[TaskCategory.dailyStudy]!,
+    category: categories[ProjectCategory.dailyStudy]!,
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 75,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Morning Workout',
     description: '45-minute strength and cardio session at the gym.',
-    category: categories[TaskCategory.healthFitness]!,
+    category: categories[ProjectCategory.healthFitness]!,
     date: DateTime.now().toString(),
     status: TaskStatus.notStarted,
-    progress:40,
+    progress: 40,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Review Monthly Budget',
     description: 'Go over expenses and update the spreadsheet.',
-    category: categories[TaskCategory.finance]!,
+    category: categories[ProjectCategory.finance]!,
     date: DateTime.now().toString(),
     status: TaskStatus.completed,
     progress: 50,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Buy Groceries',
     description: 'Milk, eggs, chicken, oats, and fruits for the week.',
-    category: categories[TaskCategory.shopping]!,
+    category: categories[ProjectCategory.shopping]!,
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 20,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Book Hotel in Cairo',
     description: 'Compare prices and finalize the 3-night booking.',
-    category: categories[TaskCategory.travel]!,
+    category: categories[ProjectCategory.travel]!,
     date: DateTime.now().toString(),
     status: TaskStatus.notStarted,
     progress: 10,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Finish Portfolio App',
     description: 'Complete the settings screen and submit to GitHub.',
-    category: categories[TaskCategory.sideProjects]!,
+    category: categories[ProjectCategory.sideProjects]!,
     date: DateTime.now().toString(),
     status: TaskStatus.inProgress,
     progress: 85,
+    tasks: '',
   ),
-  TaskModel(
+  ProjectModel(
     title: 'Attend Ahmed’s Birthday',
     description: 'Gift ready. Party at 7 PM at his place.',
-    category: categories[TaskCategory.socialEvents]!,
+    category: categories[ProjectCategory.socialEvents]!,
     date: DateTime.now().toString(),
     status: TaskStatus.completed,
     progress: 0,
+    tasks: '',
   ),
 ];

@@ -1,7 +1,8 @@
+import 'package:daily_activity/core/models/data_time_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
-import 'package:daily_activity/features/home/data/models/data_time_model.dart';
 import 'package:flutter/material.dart';
+
 
 class CustomCalenderCard extends StatelessWidget {
   const CustomCalenderCard({

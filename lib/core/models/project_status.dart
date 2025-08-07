@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:hive/hive.dart';
-part 'task_status.g.dart';
+part 'project_status.g.dart';
 @HiveType(typeId: 2)
 enum TaskStatus {
   @HiveField(0)

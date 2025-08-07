@@ -1,7 +1,7 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
-import 'package:daily_activity/features/add_task/presentation/widgets/build_task_field.dart';
+import 'package:daily_activity/features/add_project/presentation/widgets/build_task_field.dart';
 import 'package:flutter/material.dart';
 
 class AddTask extends StatefulWidget {

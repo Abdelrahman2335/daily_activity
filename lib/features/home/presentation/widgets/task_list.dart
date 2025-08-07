@@ -1,10 +1,8 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/features/home/data/data_sources/dummy_data.dart';
-import 'package:daily_activity/features/home/data/models/task_model.dart';
 import 'package:daily_activity/features/home/presentation/widgets/custom_today_task.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+
+import '../../../../core/models/project_model.dart';
 
 class TaskList extends StatelessWidget {
   const TaskList({
@@ -13,7 +11,7 @@ class TaskList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<TaskModel> taskModel = dummyTasks;
+    List<ProjectModel> taskModel = dummyTasks;
 
     return SliverList.builder(
         itemCount: taskModel.length,

@@ -1,8 +1,9 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
-import 'package:daily_activity/features/home/data/models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../core/models/project_model.dart';
 
 class CustomTodayTaskCard extends StatelessWidget {
   const CustomTodayTaskCard({
@@ -11,7 +12,7 @@ class CustomTodayTaskCard extends StatelessWidget {
     required this.index,
   });
 
-  final List<TaskModel> taskModel;
+  final List<ProjectModel> taskModel;
   final int index;
 
   @override

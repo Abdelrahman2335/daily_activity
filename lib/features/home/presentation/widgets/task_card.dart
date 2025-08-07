@@ -1,14 +1,14 @@
-import 'package:daily_activity/features/home/data/models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import '../../../../core/models/project_model.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({super.key, required this.data});
 
-  final TaskModel data;
+  final ProjectModel data;
 
   @override
   Widget build(BuildContext context) {

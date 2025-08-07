@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-part 'task_category.g.dart';
+part 'project_category.g.dart';
 
 @HiveType(typeId: 1)
-enum TaskCategory {
+enum ProjectCategory {
   @HiveField(0)
   work,
   @HiveField(1)
@@ -25,11 +25,11 @@ enum TaskCategory {
   socialEvents,
 }
 
-class TaskCategoryModel {
+class ProjectCategoryModel {
   final String title;
   final Color color;
   final IconData icon;
 
-  TaskCategoryModel(
+  ProjectCategoryModel(
       {required this.title, required this.color, required this.icon});
 }

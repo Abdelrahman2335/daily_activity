@@ -1,51 +1,51 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../../../core/models/project_category.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../models/task_category.dart';
 
-Map<TaskCategory, TaskCategoryModel> categories = {
-  TaskCategory.work: TaskCategoryModel(
+Map<ProjectCategory, ProjectCategoryModel> categories = {
+  ProjectCategory.work: ProjectCategoryModel(
     title: 'Work',
     color: AppColor.primary,
     icon: Iconsax.briefcase,
   ),
-  TaskCategory.personal: TaskCategoryModel(
+  ProjectCategory.personal: ProjectCategoryModel(
     title: 'Personal',
     color: AppColor.accentPink,
     icon: Iconsax.user,
   ),
-  TaskCategory.dailyStudy: TaskCategoryModel(
+  ProjectCategory.dailyStudy: ProjectCategoryModel(
     title: 'Daily Study',
     color: AppColor.primary.withAlpha(70),
     icon: Iconsax.book,
   ),
-  TaskCategory.healthFitness: TaskCategoryModel(
+  ProjectCategory.healthFitness: ProjectCategoryModel(
     title: 'Health & Fitness',
     color: AppColor.accentGreen,
     icon: PhosphorIcons.barbell(),
   ),
-  TaskCategory.finance: TaskCategoryModel(
+  ProjectCategory.finance: ProjectCategoryModel(
     title: 'Finance',
     color: AppColor.secondary,
     icon: PhosphorIcons.chartBar(),
   ),
-  TaskCategory.shopping: TaskCategoryModel(
+  ProjectCategory.shopping: ProjectCategoryModel(
     title: 'Shopping',
     color: AppColor.accentOrange,
     icon: Iconsax.shopping_cart,
   ),
-  TaskCategory.travel: TaskCategoryModel(
+  ProjectCategory.travel: ProjectCategoryModel(
     title: 'Travel',
     color: AppColor.accentPurple,
     icon: PhosphorIcons.airplaneTilt(),
   ),
-  TaskCategory.sideProjects: TaskCategoryModel(
+  ProjectCategory.sideProjects: ProjectCategoryModel(
     title: 'Side Projects',
     color: AppColor.accentRed,
     icon: PhosphorIcons.code(),
   ),
-  TaskCategory.socialEvents: TaskCategoryModel(
+  ProjectCategory.socialEvents: ProjectCategoryModel(
     title: 'Social Events',
     color: AppColor.accentTeal,
     icon: PhosphorIcons.users(),

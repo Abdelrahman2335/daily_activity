@@ -1,8 +1,9 @@
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/features/home/data/data_sources/categories.dart';
-import 'package:daily_activity/features/home/data/models/task_category.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../core/models/project_category.dart';
 
 class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton({
@@ -35,16 +36,16 @@ class CustomDropDownButton extends StatelessWidget {
       items: [
         ...List.generate(categories.length, (index) {
           return DropdownMenuItem(
-            value: categories[TaskCategory.values[index]]!.title,
+            value: categories[ProjectCategory.values[index]]!.title,
             child: Row(
               children: [
                 Icon(
-                  categories[TaskCategory.values[index]]!.icon,
-                  color: categories[TaskCategory.values[index]]!.color,
+                  categories[ProjectCategory.values[index]]!.icon,
+                  color: categories[ProjectCategory.values[index]]!.color,
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  categories[TaskCategory.values[index]]!.title,
+                  categories[ProjectCategory.values[index]]!.title,
                   style: AppTextStyles.textStyle14,
                 ),
               ],

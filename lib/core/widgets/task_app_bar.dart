@@ -14,7 +14,7 @@ class TaskAppBar extends StatelessWidget {
 
   final String title;
   final Widget actionButton;
-  final VoidCallback onActionButtonPressed;
+  final VoidCallback? onActionButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,7 @@ class TaskAppBar extends StatelessWidget {
               child: Text(
                 title,
                 style: AppTextStyles.textStyle19,
+                
               ),
             ),
           ),

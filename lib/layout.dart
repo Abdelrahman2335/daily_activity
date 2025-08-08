@@ -11,13 +11,20 @@ import 'package:iconsax/iconsax.dart';
 class LayOut extends StatefulWidget {
   const LayOut({
     super.key,
+    this.currentScreen,
   });
   @override
   State<LayOut> createState() => _LayOutState();
+
+  final int? currentScreen;
 }
 
 class _LayOutState extends State<LayOut> {
-  int currentScreen = 0;
+  int currentScreen({int screen = 0}) {
+    int currentScreen = widget.currentScreen ?? screen;
+
+    return currentScreen;
+  }
 
   final List<Widget> selectedScreen = [
     const HomeViewBody(),
@@ -30,12 +37,12 @@ class _LayOutState extends State<LayOut> {
       Icon(
         Iconsax.home,
         size: 26,
-        color: currentScreen == 0 ? Colors.white : AppColor.primary,
+        color: currentScreen() == 0 ? Colors.white : AppColor.primary,
       ),
       Icon(
         Iconsax.user,
         size: 26,
-        color: currentScreen == 1 ? Colors.white : AppColor.primary,
+        color: currentScreen() == 1 ? Colors.white : AppColor.primary,
       ),
     ];
     return BackgroundLayout(
@@ -58,13 +65,13 @@ class _LayOutState extends State<LayOut> {
           animationDuration: const Duration(milliseconds: 300),
           onTap: (value) {
             setState(() {
-              currentScreen = value;
+              currentScreen(screen: value);
             });
           },
           backgroundColor: Colors.transparent,
           buttonBackgroundColor: AppColor.primary,
           items: curvedIcons),
-      children: [selectedScreen[currentScreen]],
+      children: [selectedScreen[currentScreen()]],
     );
   }
 }

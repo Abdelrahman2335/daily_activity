@@ -12,7 +12,7 @@ class CustomTextFormField extends StatefulWidget {
     this.icon,
     this.suffixIcon,
     this.enableField,
-    this.onSaved,
+    this.onChange,
     this.validator,
     this.onSecondPress,
   });
@@ -25,7 +25,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final TextEditingController? controller;
   final Color? backgroundColor;
-  final Function(String?)? onSaved;
+  final Function(String)? onChange;
   final String? Function(String?)? validator;
   final Function()? onSecondPress;
 
@@ -70,7 +70,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               }
               return null;
             },
-        onSaved: widget.onSaved,
+        onChanged: widget.onChange,
         enabled: widget.enableField,
         controller: _controller,
         minLines: widget.minLines,

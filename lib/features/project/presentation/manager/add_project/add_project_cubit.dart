@@ -5,6 +5,7 @@ import 'package:daily_activity/core/models/project_status.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/features/home/data/data_sources/categories.dart';
 import 'package:daily_activity/features/project/data/repository/project_repo.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 part 'add_project_state.dart';
@@ -85,7 +86,7 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   }
 
   void categoryChange(ProjectCategoryModel category) {
-    DebugLogger.log("descriptionChange called with description: $category",
+    DebugLogger.log("categoryChange called with category: $category",
         tag: "AddProjectCubit");
     final updateProject =
         _currentFormState.project.copyWith(category: category);
@@ -97,15 +98,17 @@ class AddProjectCubit extends Cubit<AddProjectState> {
     );
 
     emit(formState);
-    DebugLogger.log("emit new state with title: ${formState.category}",
+    DebugLogger.log("emit new state with category: ${formState.category.title}",
         tag: "AddProjectCubit");
   }
 
-  void startDateChange(String startDate) {
+  void startDateChange(DateTime startDate) {
+    String? formattedDate = DateFormat('dd MMM, yyyy').format(startDate);
+
     DebugLogger.log("startDateChange called with startDate: $startDate",
         tag: "AddProjectCubit");
     final updateProject =
-        _currentFormState.project.copyWith(startDate: startDate);
+        _currentFormState.project.copyWith(startDate: formattedDate);
     final formState = _currentFormState.copyWith(
       project: updateProject,
       isValid: _validForm(
@@ -118,10 +121,13 @@ class AddProjectCubit extends Cubit<AddProjectState> {
         tag: "AddProjectCubit");
   }
 
-  void endDateChange(String endDate) {
+  void endDateChange(DateTime endDate) {
+    String? formattedDate = DateFormat('dd MMM, yyyy').format(endDate);
+
     DebugLogger.log("endDateChange called with endDate: $endDate",
         tag: "AddProjectCubit");
-    final updateProject = _currentFormState.project.copyWith(endDate: endDate);
+    final updateProject =
+        _currentFormState.project.copyWith(endDate: formattedDate);
     final formState = _currentFormState.copyWith(
       project: updateProject,
       isValid: _validForm(

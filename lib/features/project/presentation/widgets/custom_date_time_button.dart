@@ -1,4 +1,3 @@
-
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +7,11 @@ class CustomDateTimeButton extends StatelessWidget {
   const CustomDateTimeButton({
     super.key,
     required this.title,
+    this.onTap,
   });
 
   final String title;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -43,14 +44,7 @@ class CustomDateTimeButton extends StatelessWidget {
         ),
       ),
       trailing: Icon(Iconsax.arrow_down_1),
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(const Duration(days: 365)),
-        );
-      },
+      onTap: onTap,
     );
   }
 }

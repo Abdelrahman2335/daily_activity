@@ -8,8 +8,7 @@ final class AddProjectInitial extends AddProjectState {}
 final class AddProjectLoading extends AddProjectState {}
 
 final class AddProjectSuccess extends AddProjectState {
-  AddProjectSuccess(this.project);
-  final ProjectModel project;
+
 }
 
 final class AddProjectError extends AddProjectState {
@@ -31,7 +30,9 @@ final class AddProjectFormState extends AddProjectState {
   String get title => project.title;
   String get description => project.description;
   ProjectCategoryModel get category => project.category;
-  String get date => project.date;
+  String get startDate => project.startDate;
+  String get endDate => project.endDate;
+  String get date => project.startDate;
   int get progress => project.progress;
   TaskStatus get status => project.status;
   List<String> get tasks => project.tasks;

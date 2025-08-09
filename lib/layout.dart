@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
+import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/core/widgets/app_background.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_view_body.dart';
 import 'package:daily_activity/features/settings/presentation/widgets/settings_view_body.dart';
@@ -20,11 +21,7 @@ class LayOut extends StatefulWidget {
 }
 
 class _LayOutState extends State<LayOut> {
-  int currentScreen({int screen = 0}) {
-    int currentScreen = widget.currentScreen ?? screen;
-
-    return currentScreen;
-  }
+  int currentScreen = 0;
 
   final List<Widget> selectedScreen = [
     const HomeViewBody(),
@@ -37,12 +34,12 @@ class _LayOutState extends State<LayOut> {
       Icon(
         Iconsax.home,
         size: 26,
-        color: currentScreen() == 0 ? Colors.white : AppColor.primary,
+        color: currentScreen == 0 ? Colors.white : AppColor.primary,
       ),
       Icon(
         Iconsax.user,
         size: 26,
-        color: currentScreen() == 1 ? Colors.white : AppColor.primary,
+        color: currentScreen == 1 ? Colors.white : AppColor.primary,
       ),
     ];
     return BackgroundLayout(
@@ -65,13 +62,14 @@ class _LayOutState extends State<LayOut> {
           animationDuration: const Duration(milliseconds: 300),
           onTap: (value) {
             setState(() {
-              currentScreen(screen: value);
+              currentScreen = value;
+              DebugLogger.log("$value");
             });
           },
           backgroundColor: Colors.transparent,
           buttonBackgroundColor: AppColor.primary,
           items: curvedIcons),
-      children: [selectedScreen[currentScreen()]],
+      children: [selectedScreen[widget.currentScreen ?? currentScreen]],
     );
   }
 }

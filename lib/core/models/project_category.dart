@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 part 'project_category.g.dart';
@@ -25,11 +24,20 @@ enum ProjectCategory {
   socialEvents,
 }
 
-class ProjectCategoryModel {
+@HiveType(typeId: 4) // Add HiveType with unique typeId
+class ProjectCategoryModel extends HiveObject {
+  @HiveField(0)
   final String title;
-  final Color color;
-  final IconData icon;
 
-  ProjectCategoryModel(
-      {required this.title, required this.color, required this.icon});
+  @HiveField(1)
+  final int colorValue; // Store color as int
+
+  @HiveField(2)
+  final IconData icon; 
+
+  ProjectCategoryModel({
+    required this.title,
+    required this.colorValue,
+    required this.icon,
+  });
 }

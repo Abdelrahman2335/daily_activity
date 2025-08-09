@@ -24,10 +24,10 @@ class TaskCard extends StatelessWidget {
             bottom: 19,
             left: 14,
             child: CircleAvatar(
-              backgroundColor: data.category.color.withAlpha(37),
+              backgroundColor: Color(data.category.colorValue).withAlpha(37),
               child: Icon(
                 data.category.icon,
-                color: data.category.color,
+                color: Color(data.category.colorValue),
                 size: 24,
               ),
             ),
@@ -61,7 +61,7 @@ class TaskCard extends StatelessWidget {
               radius: 26,
               lineWidth: 3,
               percent: data.progress.toDouble() / 100,
-              progressColor: data.category.color,
+              progressColor: Color(data.category.colorValue),
               center: Text(
                 "${data.progress}%",
                 style: AppTextStyles.textStyleBold12,

@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:daily_activity/core/adapters/date_time_adapter.dart';
+import 'package:daily_activity/core/adapters/icon_adapter.dart';
 import 'package:daily_activity/core/models/project_category.dart';
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
+import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/bloc_observer.dart';
@@ -16,8 +19,13 @@ void main() async {
   Bloc.observer = AppBlocObserver();
   Hive.registerAdapter(ProjectModelAdapter());
   Hive.registerAdapter(ProjectCategoryAdapter());
+  Hive.registerAdapter(ProjectCategoryModelAdapter());
   Hive.registerAdapter(TaskStatusAdapter());
-  await Hive.openBox(Constants.kMainBox);
+  Hive.registerAdapter(TaskModelAdapter());
+  Hive.registerAdapter(DateTimeAdapter());
+  Hive.registerAdapter(IconAdapter());
+
+  await Hive.openBox<ProjectModel>(Constants.kMainBox);
 
   runApp(const MyApp());
 }

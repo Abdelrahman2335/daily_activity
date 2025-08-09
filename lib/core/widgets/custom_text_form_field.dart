@@ -12,8 +12,7 @@ class CustomTextFormField extends StatefulWidget {
     this.icon,
     this.suffixIcon,
     this.enableField,
-    this.onChange,
-    this.validator,
+    this.onSaved,
     this.onSecondPress,
   });
   final Widget? icon;
@@ -25,8 +24,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final TextEditingController? controller;
   final Color? backgroundColor;
-  final Function(String)? onChange;
-  final String? Function(String?)? validator;
+  final void Function(String?)? onSaved;
   final Function()? onSecondPress;
 
   @override
@@ -63,14 +61,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         onTapUpOutside: (event) {
           FocusScope.of(context).unfocus();
         },
-        validator: widget.validator ??
-            (value) {
-              if (value?.isEmpty ?? true) {
-                return "Field is required";
-              }
-              return null;
-            },
-        onChanged: widget.onChange,
+        validator: (value) {
+          if (value != null && value.isNotEmpty) {
+            return null;
+          }
+          AutovalidateMode.always;
+          return "Field is required";
+        },
+        onSaved: widget.onSaved,
         enabled: widget.enableField,
         controller: _controller,
         minLines: widget.minLines,

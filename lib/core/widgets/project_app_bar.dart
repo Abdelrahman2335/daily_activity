@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
-class TaskAppBar extends StatelessWidget {
-  const TaskAppBar({
+class ProjectAppBar extends StatelessWidget {
+  const ProjectAppBar({
     super.key,
     required this.title,
     required this.actionButton,
@@ -37,7 +37,6 @@ class TaskAppBar extends StatelessWidget {
               child: Text(
                 title,
                 style: AppTextStyles.textStyle19,
-                
               ),
             ),
           ),

@@ -5,13 +5,13 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
-import 'package:daily_activity/features/home/data/data_sources/categories.dart';
+import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/features/project/data/repository/project_repo_impl.dart';
 import 'package:daily_activity/features/project/presentation/manager/add_project/add_project_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/add_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
-import 'package:daily_activity/core/widgets/task_app_bar.dart';
+import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -60,8 +60,8 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                         title: "",
                         description: "",
                         category: categories[ProjectCategory.dailyStudy]!,
-                        startDate: "",
-                        endDate: "",
+                        startDate: DateTime.now(),
+                        endDate: DateTime.now(),
                         tasks: [],
                         status: TaskStatus.notStarted));
             return Form(
@@ -73,26 +73,31 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                 ),
                 child: Column(
                   children: [
-                    TaskAppBar(
-                      title: "Add Project",
-                      actionButton: Text(
-                        "Done",
-                        style: AppTextStyles.textStyle16.copyWith(
-                          color: formState.isValid
-                              ? AppColor.primary
-                              : AppColor.textSecondary,
+                    ProjectAppBar(
+                        title: "Add Project",
+                        actionButton: Text(
+                          "Done",
+                          style: AppTextStyles.textStyle16.copyWith(
+                            color: AppColor.primary,
+                          ),
                         ),
-                      ),
-                      onActionButtonPressed: formState.isValid
-                          ? () => context.read<AddProjectCubit>().submitForm()
-                          : null,
-                    ),
-                    CustomDropDownButton(
-                    ),
+                        onActionButtonPressed: () {
+                         
+                          final form = _formKey.currentState!;
+
+                          if (form.validate()) {
+                            form.save();
+                            context.read<AddProjectCubit>().submitForm();
+                          }
+                        }),
+                    const CustomDropDownButton(),
                     const SizedBox(height: 30),
                     CustomTextFormField(
-                      onChange: (value) {
-                        context.read<AddProjectCubit>().titleChange(value);
+                      onSaved: (value) {
+                        DebugLogger.log("Title in the view is $value");
+                        context
+                            .read<AddProjectCubit>()
+                            .titleChange(value ?? "");
                       },
                       maxLines: 1,
                       maxLength: 50,
@@ -100,17 +105,19 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     ),
                     const SizedBox(height: 30),
                     CustomTextFormField(
-                      onChange: (value) {
+                      onSaved: (value) {
                         context
                             .read<AddProjectCubit>()
-                            .descriptionChange(value);
+                            .descriptionChange(value ?? "");
                       },
                       minLines: 5,
                       maxLines: 6,
                       hintText: 'Description',
                     ),
                     const SizedBox(height: 30),
-                    const AddTask(),
+                    AddTask(
+                      formKey: _formKey,
+                    ),
                     const SizedBox(height: 30),
                     CustomDateTimeButton(
                       title: "Start Date",
@@ -128,6 +135,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                             .read<AddProjectCubit>()
                             .startDateChange(pickedDate!);
                       },
+                      selectedDate: formState.startDate,
                     ),
                     const SizedBox(height: 30),
                     CustomDateTimeButton(
@@ -146,6 +154,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                             .read<AddProjectCubit>()
                             .endDateChange(pickedDate!);
                       },
+                      selectedDate: formState.endDate,
                     ),
                     const SizedBox(height: 30),
                   ],

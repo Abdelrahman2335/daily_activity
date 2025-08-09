@@ -45,6 +45,7 @@ dependencies:
   meta: ^1.16.0
   percent_indicator: ^4.2.5
   phosphor_flutter: ^2.1.0
+  uuid: ^4.5.1
 
 dev_dependencies:
   build_runner: ^2.4.6

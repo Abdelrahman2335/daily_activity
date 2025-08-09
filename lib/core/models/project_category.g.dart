@@ -6,6 +6,46 @@ part of 'project_category.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
+class ProjectCategoryModelAdapter extends TypeAdapter<ProjectCategoryModel> {
+  @override
+  final int typeId = 4;
+
+  @override
+  ProjectCategoryModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ProjectCategoryModel(
+      title: fields[0] as String,
+      colorValue: fields[1] as int,
+      icon: fields[2] as IconData,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ProjectCategoryModel obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.colorValue)
+      ..writeByte(2)
+      ..write(obj.icon);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProjectCategoryModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class ProjectCategoryAdapter extends TypeAdapter<ProjectCategory> {
   @override
   final int typeId = 1;

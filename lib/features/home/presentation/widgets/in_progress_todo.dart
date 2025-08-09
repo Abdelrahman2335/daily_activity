@@ -14,7 +14,7 @@ class InProgressTodo extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(39),
-          color: data.category.color.withAlpha(16),
+          color: Color(data.category.colorValue).withAlpha(16),
         ),
         child: Column(
           children: [
@@ -32,7 +32,7 @@ class InProgressTodo extends StatelessWidget {
                   ),
                   Icon(
                     data.category.icon,
-                    color: data.category.color,
+                    color: Color(data.category.colorValue),
                   )
                 ],
               ),
@@ -60,7 +60,7 @@ class InProgressTodo extends StatelessWidget {
                 // Adjust track thickness
                 thumbShape: SliderComponentShape.noThumb,
                 // Remove thumb if needed
-                disabledActiveTrackColor: data.category.color,
+                disabledActiveTrackColor: Color(data.category.colorValue),
               ),
               child: Slider(
                 value: data.progress.toDouble() / 100,

@@ -1,22 +1,33 @@
+import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
+import 'package:daily_activity/features/project/presentation/manager/add_project/add_project_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/build_task_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({
     super.key,
+    required this.formKey,
   });
 
   @override
   State<AddTask> createState() => _AddTaskState();
+  final GlobalKey<FormState> formKey;
 }
 
 class _AddTaskState extends State<AddTask> {
-  List taskList = [];
+  List taskList = [BuildTaskField(onPressed: () {})];
   void _removeTask(int index) {
     setState(() {
+      if (taskList.length <= 1) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("At least one task is required.")),
+        );
+        return;
+      }
       taskList.removeAt(index);
     });
   }
@@ -29,11 +40,11 @@ class _AddTaskState extends State<AddTask> {
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           onReorder: (oldIndex, newIndex) {
-            // Working only if the Field is disabled
             setState(() {
-              final task = taskList.removeAt(oldIndex);
+              // do not use insert as the Video shows you will get an error
+              taskList.removeAt(oldIndex);
 
-              taskList.insert(newIndex, task);
+              taskList.add(newIndex);
             });
           },
           children: [
@@ -43,7 +54,12 @@ class _AddTaskState extends State<AddTask> {
                 padding: const EdgeInsets.all(8.0),
                 key: ValueKey(index),
                 child: BuildTaskField(
-                  onPressed: () => _removeTask(index), 
+                  onSaved: (value) {
+                    context.read<AddProjectCubit>().tasksChange(TaskModel(
+                          title: value ?? "",
+                        ));
+                  },
+                  onPressed: () => _removeTask(index),
                 ),
               );
             })

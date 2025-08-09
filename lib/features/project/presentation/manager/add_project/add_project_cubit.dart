@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/core/models/project_category.dart';
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
+import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
-import 'package:daily_activity/features/home/data/data_sources/categories.dart';
 import 'package:daily_activity/features/project/data/repository/project_repo.dart';
-import 'package:intl/intl.dart';
+
 import 'package:meta/meta.dart';
 
 part 'add_project_state.dart';
@@ -18,8 +19,8 @@ class AddProjectCubit extends Cubit<AddProjectState> {
                 title: "",
                 description: "",
                 category: categories[ProjectCategory.dailyStudy]!,
-                startDate: "",
-                endDate: '',
+                startDate: DateTime.now(),
+                endDate: DateTime.now(),
                 tasks: [],
                 status: TaskStatus.notStarted,
               ),
@@ -38,8 +39,8 @@ class AddProjectCubit extends Cubit<AddProjectState> {
           title: "",
           description: "",
           category: categories[ProjectCategory.dailyStudy]!,
-          startDate: "",
-          endDate: '',
+          startDate: DateTime.now(),
+          endDate: DateTime.now(),
           tasks: [],
           status: TaskStatus.notStarted,
         ),
@@ -47,6 +48,23 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   }
 
   bool _validForm(AddProjectFormState state) {
+    DebugLogger.log(
+        "validForm called, startDate is: ${state.project.startDate}",
+        tag: "AddProjectCubit");
+    DebugLogger.log("validForm called, endDate is: ${state.project.endDate}",
+        tag: "AddProjectCubit");
+    DebugLogger.log(
+        "validForm called, category is: ${state.project.category.title}",
+        tag: "AddProjectCubit");
+    DebugLogger.log("validForm called, title is: ${state.project.title}",
+        tag: "AddProjectCubit");
+    DebugLogger.log(
+        "validForm called, description is: ${state.project.description}",
+        tag: "AddProjectCubit");
+    for (var i in state.project.tasks) {
+      DebugLogger.log("validForm called, tasks is: ${i.title}");
+    }
+
     bool isValid = state.description.isNotEmpty &&
         state.title.isNotEmpty &&
         state.tasks.isNotEmpty;
@@ -81,7 +99,7 @@ class AddProjectCubit extends Cubit<AddProjectState> {
       isValid: _validForm(AddProjectFormState(project: updateProject)),
     );
     emit(formState);
-    DebugLogger.log("emit new state with title: ${formState.description}",
+    DebugLogger.log("emit new state with description: ${formState.description}",
         tag: "AddProjectCubit");
   }
 
@@ -103,12 +121,10 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   }
 
   void startDateChange(DateTime startDate) {
-    String? formattedDate = DateFormat('dd MMM, yyyy').format(startDate);
-
     DebugLogger.log("startDateChange called with startDate: $startDate",
         tag: "AddProjectCubit");
     final updateProject =
-        _currentFormState.project.copyWith(startDate: formattedDate);
+        _currentFormState.project.copyWith(startDate: startDate);
     final formState = _currentFormState.copyWith(
       project: updateProject,
       isValid: _validForm(
@@ -122,12 +138,9 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   }
 
   void endDateChange(DateTime endDate) {
-    String? formattedDate = DateFormat('dd MMM, yyyy').format(endDate);
-
     DebugLogger.log("endDateChange called with endDate: $endDate",
         tag: "AddProjectCubit");
-    final updateProject =
-        _currentFormState.project.copyWith(endDate: formattedDate);
+    final updateProject = _currentFormState.project.copyWith(endDate: endDate);
     final formState = _currentFormState.copyWith(
       project: updateProject,
       isValid: _validForm(
@@ -140,10 +153,21 @@ class AddProjectCubit extends Cubit<AddProjectState> {
         tag: "AddProjectCubit");
   }
 
-  void tasksChange(List<String> tasks) {
-    DebugLogger.log("tasksChange called with tasks: $tasks",
+  void tasksChange(TaskModel task) {
+    DebugLogger.log("tasksChange called with tasks: $task",
         tag: "AddProjectCubit");
-    final updateProject = _currentFormState.project.copyWith(tasks: tasks);
+
+    List<TaskModel> updatedTasks = List.from(_currentFormState.project.tasks);
+
+    int existingIndex = updatedTasks.indexWhere((i) => i.id == task.id);
+    if (existingIndex != -1) {
+      updatedTasks[existingIndex] = task;
+    } else {
+      updatedTasks.add(task);
+    }
+
+    final updateProject =
+        _currentFormState.project.copyWith(tasks: updatedTasks);
     final formState = _currentFormState.copyWith(
       project: updateProject,
       isValid: _validForm(
@@ -198,6 +222,6 @@ class AddProjectCubit extends Cubit<AddProjectState> {
     var result = await projectRepo.addProject(project: project);
 
     result.fold((errMessage) => emit(AddProjectError(errMessage)),
-        (value) => AddProjectSuccess());
+        (_) => emit(AddProjectSuccess()));
   }
 }

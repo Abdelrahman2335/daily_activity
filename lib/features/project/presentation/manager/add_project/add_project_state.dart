@@ -30,10 +30,10 @@ final class AddProjectFormState extends AddProjectState {
   String get title => project.title;
   String get description => project.description;
   ProjectCategoryModel get category => project.category;
-  String get startDate => project.startDate;
-  String get endDate => project.endDate;
-  String get date => project.startDate;
+  DateTime get startDate => project.startDate;
+  DateTime get endDate => project.endDate;
+  DateTime get date => project.startDate;
   int get progress => project.progress;
   TaskStatus get status => project.status;
-  List<String> get tasks => project.tasks;
+  List<TaskModel> get tasks => project.tasks;
 }

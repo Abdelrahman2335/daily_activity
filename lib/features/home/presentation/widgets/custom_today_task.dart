@@ -35,11 +35,11 @@ class CustomTodayTaskCard extends StatelessWidget {
               ),
               const Spacer(),
               CircleAvatar(
-                backgroundColor: taskModel[index].category.color.withAlpha(37),
+                backgroundColor: Color(taskModel[index].category.colorValue).withAlpha(37),
                 child: Icon(
                   taskModel[index].category.icon,
                   size: 24,
-                  color: taskModel[index].category.color,
+                  color: Color(taskModel[index].category.colorValue),
                 ),
               ),
             ],

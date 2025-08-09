@@ -1,4 +1,4 @@
-import 'package:daily_activity/features/home/data/data_sources/dummy_data.dart';
+import 'package:daily_activity/core/data/dummy_data.dart';
 import 'package:daily_activity/features/home/presentation/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 

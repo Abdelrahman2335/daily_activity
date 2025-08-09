@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
-  final Box box = Hive.box(Constants.kMainBox);
+  final Box box = Hive.box<ProjectModel>(Constants.kMainBox);
   @override
   Future<Either<String, void>> addProject(
       {required ProjectModel project}) async {

@@ -1,4 +1,6 @@
+import 'package:daily_activity/core/models/task_model.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
 import 'project_category.dart';
 import 'project_status.dart';
@@ -16,15 +18,15 @@ class ProjectModel extends HiveObject {
   @HiveField(3)
   final ProjectCategoryModel category;
   @HiveField(4)
-  final String startDate;
+  final DateTime startDate;
   @HiveField(5)
-  final String endDate;
+  final DateTime endDate;
   @HiveField(6)
   final int progress;
   @HiveField(7)
   final TaskStatus status;
   @HiveField(8)
-  final List<String> tasks;
+  final List<TaskModel> tasks;
 
   ProjectModel({
     required this.title,
@@ -37,19 +39,20 @@ class ProjectModel extends HiveObject {
     required this.status,
   }) : id = DateTime.now().millisecondsSinceEpoch.toString();
 
+  String get formattedStartDate => DateFormat('dd MMM, yyyy').format(startDate);
+  String get formattedEndDate => DateFormat('dd MMM, yyyy').format(endDate);
+
   ProjectModel copyWith({
     String? id,
     String? title,
     String? description,
     ProjectCategoryModel? category,
-    String? startDate,
-    String? endDate,
+    DateTime? startDate,
+    DateTime? endDate,
     int? progress,
     TaskStatus? status,
-    List<String>? tasks,
-  }) 
-  
-  {
+    List<TaskModel>? tasks,
+  }) {
     return ProjectModel(
         title: title ?? this.title,
         description: description ?? this.description,

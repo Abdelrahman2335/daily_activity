@@ -14,43 +14,47 @@ class WelcomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 29),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            Assets.welcomePhoto,
-          ),
-          Text("Task Management &\n To-Do List",
-              textAlign: TextAlign.center, style: AppTextStyles.textStyle26),
-          SizedBox(
-            height: 24,
-          ),
-          Text(
-            Constants.appDescription,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.textStyle12,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.09,
-          ),
-          SecondaryButton(
-            height: 60,
-            onPressed: () {
-              GoRouter.of(context).go(AppRouter.kLayOut);
-            },
-            buttonLabel: Text(
-              "Let's Start",
-              style: AppTextStyles.textStyle19.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.white, // White text color
+    return Center(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 29),
+          child: Column(
+            children: [
+              Image.asset(
+                Assets.welcomePhoto,
               ),
-            ),
-            icon: Iconsax.arrow_right_3,
-            addIcon: true,
+              Text("Task Management &\n To-Do List",
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.textStyle26),
+              SizedBox(
+                height: 24,
+              ),
+              Text(
+                Constants.appDescription,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.textStyle12,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.09,
+              ),
+              SecondaryButton(
+                height: 60,
+                onPressed: () {
+                  GoRouter.of(context).go(AppRouter.kLayOut);
+                },
+                buttonLabel: Text(
+                  "Let's Start",
+                  style: AppTextStyles.textStyle19.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white, // White text color
+                  ),
+                ),
+                icon: Iconsax.arrow_right_3,
+                addIcon: true,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

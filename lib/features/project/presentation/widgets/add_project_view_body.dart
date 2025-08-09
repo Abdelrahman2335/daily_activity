@@ -1,15 +1,15 @@
 import 'package:daily_activity/core/models/project_category.dart';
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
-import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
-import 'package:daily_activity/core/utils/constants.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/features/project/data/project_repository/project_repo_impl.dart';
+import 'package:daily_activity/features/project/data/task_repository/task_repo_impl.dart';
 import 'package:daily_activity/features/project/presentation/manager/add_project_cubit/add_project_cubit.dart';
+import 'package:daily_activity/features/project/presentation/manager/task_cubit/task_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/add_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
@@ -17,7 +17,6 @@ import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/adapters.dart';
 
 import '../../../../core/utils/debug_logger.dart';
 
@@ -29,6 +28,7 @@ class AddProjectViewBody extends StatefulWidget {
 }
 
 class _AddProjectViewBodyState extends State<AddProjectViewBody> {
+  
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
@@ -85,13 +85,6 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                           ),
                         ),
                         onActionButtonPressed: () {
-                          //TODO
-                          final box =
-                              Hive.box<ProjectModel>(Constants.kMainBox);
-                          List<TaskModel> tasks = box.values.last.tasks;
-                          for (var i in tasks) {
-                            DebugLogger.log(i.title);
-                          }
                           final form = _formKey.currentState!;
 
                           if (form.validate()) {
@@ -124,7 +117,9 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                       hintText: 'Description',
                     ),
                     const SizedBox(height: 30),
-                    AddTask(
+                    BlocProvider(
+                      create: (context) => TaskCubit(TaskRepoImpl()),
+                      child: AddTask(),
                     ),
                     const SizedBox(height: 30),
                     CustomDateTimeButton(

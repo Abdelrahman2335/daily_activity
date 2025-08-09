@@ -1,9 +1,10 @@
-import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
+import 'package:daily_activity/features/project/presentation/manager/task_cubit/task_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/build_task_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({
@@ -15,34 +16,23 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
-  List<TaskModel> taskList = [];
-  void _removeTask(int index) {
-    setState(() {
-      if (taskList.length <= 1) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("At least one task is required.")),
-        );
-        return;
-      }
-      taskList.removeAt(index);
-    });
+  @override
+  void initState() {
+    super.initState();
+    context.read<TaskCubit>().initializeForNewProject();
   }
 
   @override
   Widget build(BuildContext context) {
+    final taskList = context.watch<TaskCubit>().currentTaskList;
+
     return Column(
       children: [
         ReorderableListView(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           onReorder: (oldIndex, newIndex) {
-            setState(() {
-              final item = taskList.removeAt(oldIndex);
-              if (newIndex > oldIndex) {
-                newIndex -= 1; // Adjust for removal
-              }
-              taskList.insert(newIndex, item);
-            });
+            context.read<TaskCubit>().reorderTasks(oldIndex, newIndex);
           },
           children: [
             ...taskList.asMap().entries.map((entry) {
@@ -51,7 +41,7 @@ class _AddTaskState extends State<AddTask> {
                 padding: const EdgeInsets.all(8.0),
                 key: ValueKey(index),
                 child: BuildTaskField(
-                  onPressed: () => _removeTask(index),
+                  index: index,
                 ),
               );
             })
@@ -60,15 +50,7 @@ class _AddTaskState extends State<AddTask> {
         const SizedBox(height: 20),
         SecondaryButton(
           onPressed: () {
-            setState(() {
-              taskList.add(BuildTaskField(
-                onPressed: () {
-                  setState(() {
-                    _removeTask(taskList.length);
-                  });
-                },
-              ) as TaskModel);
-            });
+            context.read<TaskCubit>().addEmptyTask();
           },
           buttonLabel: Text("Add Task",
               style: AppTextStyles.textStyle14.copyWith(

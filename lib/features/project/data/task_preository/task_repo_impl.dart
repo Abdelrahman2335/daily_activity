@@ -8,8 +8,8 @@ class TaskRepoImpl implements TaskRepo {
   List<TaskModel> get currentTaskList => List.unmodifiable(taskList);
 
   @override
-  void addEmptyTask() {
-    taskList.add(TaskModel(title: ""));
+  void addTaskToList(TaskModel newTask) {
+    taskList.add(newTask);
   }
 
   @override
@@ -27,5 +27,10 @@ class TaskRepoImpl implements TaskRepo {
       if (newIndex > oldIndex) newIndex -= 1;
       taskList.insert(newIndex, item);
     }
+  }
+
+  @override
+  void addEmptyTask() {
+    taskList.add(TaskModel(title: ""));
   }
 }

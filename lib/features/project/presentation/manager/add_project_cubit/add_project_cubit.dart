@@ -5,7 +5,7 @@ import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
 import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
-import 'package:daily_activity/features/project/data/repository/project_repo.dart';
+import 'package:daily_activity/features/project/data/project_repository/project_repo.dart';
 
 import 'package:meta/meta.dart';
 

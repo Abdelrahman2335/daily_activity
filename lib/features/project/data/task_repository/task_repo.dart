@@ -5,5 +5,4 @@ abstract class TaskRepo {
 
   void addEmptyTask();
   void removeTask(int index);
-  void reorderTaskList(int oldIndex, int newIndex);
 }

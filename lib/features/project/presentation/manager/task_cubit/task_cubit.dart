@@ -21,7 +21,8 @@ class TaskCubit extends Cubit<TaskState> {
       // Initialize new task as enabled
       _enabledFields[currentTaskList.length - 1] = true;
       emit(TaskSuccess(
-          tasks: currentTaskList, enabledFields: Map.from(_enabledFields)));
+        tasks: currentTaskList,
+      ));
     } catch (e) {
       emit(TaskError(e.toString()));
     }
@@ -48,47 +49,8 @@ class TaskCubit extends Cubit<TaskState> {
       _enabledFields = newEnabledFields;
 
       emit(TaskSuccess(
-          tasks: currentTaskList, enabledFields: Map.from(_enabledFields)));
-    } catch (e) {
-      emit(TaskError(e.toString()));
-    }
-  }
-
-  // Reorder tasks in the list
-  void reorderTasks(int oldIndex, int newIndex) {
-    try {
-      taskRepo.reorderTaskList(oldIndex, newIndex);
-
-      // Update enabled fields mapping for reordered tasks
-      bool? oldEnabledState = _enabledFields[oldIndex];
-      Map<int, bool> newEnabledFields = Map.from(_enabledFields);
-
-      // Remove old state
-      newEnabledFields.remove(oldIndex);
-
-      // Shift other states
-      if (oldIndex < newIndex) {
-        for (int i = oldIndex + 1; i <= newIndex; i++) {
-          if (_enabledFields.containsKey(i)) {
-            newEnabledFields[i - 1] = _enabledFields[i]!;
-          }
-        }
-      } else {
-        for (int i = newIndex; i < oldIndex; i++) {
-          if (_enabledFields.containsKey(i)) {
-            newEnabledFields[i + 1] = _enabledFields[i]!;
-          }
-        }
-      }
-
-      // Set the moved item's state
-      if (oldEnabledState != null) {
-        newEnabledFields[newIndex] = oldEnabledState;
-      }
-
-      _enabledFields = newEnabledFields;
-      emit(TaskSuccess(
-          tasks: currentTaskList, enabledFields: Map.from(_enabledFields)));
+        tasks: currentTaskList,
+      ));
     } catch (e) {
       emit(TaskError(e.toString()));
     }
@@ -98,7 +60,8 @@ class TaskCubit extends Cubit<TaskState> {
   void toggleTaskFieldEnabled(int index) {
     _enabledFields[index] = !(_enabledFields[index] ?? true);
     emit(TaskSuccess(
-        tasks: currentTaskList, enabledFields: Map.from(_enabledFields)));
+      tasks: currentTaskList,
+    ));
   }
 
   // Get enabled state for a specific task field
@@ -110,7 +73,8 @@ class TaskCubit extends Cubit<TaskState> {
   void setTaskFieldEnabled(int index, bool enabled) {
     _enabledFields[index] = enabled;
     emit(TaskSuccess(
-        tasks: currentTaskList, enabledFields: Map.from(_enabledFields)));
+      tasks: currentTaskList,
+    ));
   }
 
   // Initialize with one empty task for new project
@@ -121,7 +85,8 @@ class TaskCubit extends Cubit<TaskState> {
       // Initialize first task as enabled
       _enabledFields[0] = true;
       emit(TaskSuccess(
-          tasks: currentTaskList, enabledFields: Map.from(_enabledFields)));
+        tasks: currentTaskList,
+      ));
     } catch (e) {
       emit(TaskError(e.toString()));
     }

@@ -1,7 +1,7 @@
 import 'package:daily_activity/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/in_progress_section.dart';
 import 'package:daily_activity/features/home/presentation/widgets/overview_section.dart';
-import 'package:daily_activity/features/home/presentation/widgets/tasks_section.dart';
+import 'package:daily_activity/features/home/presentation/widgets/project_section.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
@@ -39,7 +39,7 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
         ),
-        const TasksSection(),
+        const ProjectSection(),
       ],
     );
   }

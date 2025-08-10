@@ -9,7 +9,10 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/bloc_observer.dart';
 import 'package:daily_activity/core/utils/constants.dart';
+import 'package:daily_activity/features/home/data/repository/home_repo_impl.dart';
+import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -36,13 +39,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppRouter.router,
-      title: 'Flutter TODO App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColor.background,
-        textTheme: GoogleFonts.latoTextTheme(),
+    return BlocProvider(
+      create: (context) => HomeCubit(HomeRepoImpl()),
+      child: MaterialApp.router(
+        routerConfig: AppRouter.router,
+        title: 'Daily Activity',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColor.background,
+          textTheme: GoogleFonts.latoTextTheme(),
+        ),
       ),
     );
   }

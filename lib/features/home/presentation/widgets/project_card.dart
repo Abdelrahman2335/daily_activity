@@ -5,8 +5,8 @@ import '../../../../core/models/project_model.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 
-class TaskCard extends StatelessWidget {
-  const TaskCard({super.key, required this.data});
+class ProjectCard extends StatelessWidget {
+  const ProjectCard({super.key, required this.data});
 
   final ProjectModel data;
 

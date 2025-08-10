@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-// This is the to part of the Home Screen that shows the overview of today's tasks
+// This is the top part of the Home Screen that shows the overview of today's tasks
 // It includes a progress indicator and a button to view tasks.
 class OverviewSection extends StatelessWidget {
   const OverviewSection({

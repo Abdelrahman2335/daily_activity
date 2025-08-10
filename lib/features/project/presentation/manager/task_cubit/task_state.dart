@@ -9,10 +9,8 @@ final class TaskLoading extends TaskState {}
 
 final class TaskSuccess extends TaskState {
   final List<TaskModel>? tasks;
-  final Map<int, bool>?
-      enabledFields; // Track enabled state for each task by index
 
-  TaskSuccess({this.tasks, this.enabledFields});
+  TaskSuccess({this.tasks});
 }
 
 final class TaskError extends TaskState {

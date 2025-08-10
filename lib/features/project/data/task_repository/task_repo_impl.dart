@@ -17,15 +17,4 @@ class TaskRepoImpl implements TaskRepo {
     taskList.removeAt(index);
   }
 
-  @override
-  void reorderTaskList(int oldIndex, int newIndex) {
-    if (oldIndex >= 0 &&
-        oldIndex < taskList.length &&
-        newIndex >= 0 &&
-        newIndex < taskList.length) {
-      final item = taskList.removeAt(oldIndex);
-      if (newIndex > oldIndex) newIndex -= 1;
-      taskList.insert(newIndex, item);
-    }
-  }
 }

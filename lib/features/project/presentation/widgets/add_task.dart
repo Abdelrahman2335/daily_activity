@@ -1,3 +1,4 @@
+import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
@@ -28,25 +29,17 @@ class _AddTaskState extends State<AddTask> {
 
     return Column(
       children: [
-        ReorderableListView(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          onReorder: (oldIndex, newIndex) {
-            context.read<TaskCubit>().reorderTasks(oldIndex, newIndex);
-          },
-          children: [
-            ...taskList.asMap().entries.map((entry) {
-              int index = entry.key;
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                key: ValueKey(index),
-                child: BuildTaskField(
-                  index: index,
-                ),
-              );
-            })
-          ],
-        ),
+        ...taskList.asMap().entries.map((entry) {
+          int index = entry.key;
+          TaskModel task = entry.value;
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            key: ValueKey(task.id),
+            child: BuildTaskField(
+              index: index,
+            ),
+          );
+        }),
         const SizedBox(height: 20),
         SecondaryButton(
           onPressed: () {

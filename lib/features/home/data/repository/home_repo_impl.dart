@@ -13,7 +13,9 @@ class HomeRepoImpl implements HomeRepo {
       final projects =
           Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
 
-      return Right(projects);
+      final sortedProjects = projects
+        ..sort((a, b) => a.startDate.compareTo(b.startDate));
+      return Right(sortedProjects);
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
       return Left(e.toString());
@@ -34,8 +36,9 @@ class HomeRepoImpl implements HomeRepo {
             isSameDate(p.startDate, currentDate) ||
             isSameDate(p.endDate, currentDate);
       }).toList();
-
-      return Right(filteredProjects);
+      final sortedProjects = filteredProjects
+        ..sort((a, b) => a.startDate.compareTo(b.startDate));
+      return Right(sortedProjects);
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
       return Left(e.toString());
@@ -48,8 +51,9 @@ class HomeRepoImpl implements HomeRepo {
     try {
       final filteredProjects =
           projects.where((p) => p.status == status).toList();
-
-      return Right(filteredProjects);
+      final sortedProjects = filteredProjects
+        ..sort((a, b) => a.startDate.compareTo(b.startDate));
+      return Right(sortedProjects);
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
       return Left(e.toString());

@@ -22,10 +22,8 @@ class ProjectModel extends HiveObject {
   @HiveField(5)
   final DateTime endDate;
   @HiveField(6)
-  final int progress;
-  @HiveField(7)
   final TaskStatus status;
-  @HiveField(8)
+  @HiveField(7)
   final List<TaskModel> tasks;
 
   ProjectModel({
@@ -35,12 +33,16 @@ class ProjectModel extends HiveObject {
     required this.startDate,
     required this.endDate,
     required this.tasks,
-    this.progress = 0,
     required this.status,
   }) : id = DateTime.now().millisecondsSinceEpoch.toString();
 
   String get formattedStartDate => DateFormat('dd MMM, yyyy').format(startDate);
   String get formattedEndDate => DateFormat('dd MMM, yyyy').format(endDate);
+  double get progress {
+    if (tasks.isEmpty) return 0.0;
+    final completedTasks = tasks.where((t) => t.isCompleted ?? false).toList().length;
+    return completedTasks / tasks.length; // 0.0 → 1.0
+  }
 
   ProjectModel copyWith({
     String? id,
@@ -49,7 +51,6 @@ class ProjectModel extends HiveObject {
     ProjectCategoryModel? category,
     DateTime? startDate,
     DateTime? endDate,
-    int? progress,
     TaskStatus? status,
     List<TaskModel>? tasks,
   }) {
@@ -59,7 +60,6 @@ class ProjectModel extends HiveObject {
         category: category ?? this.category,
         startDate: startDate ?? this.startDate,
         endDate: endDate ?? this.endDate,
-        progress: progress ?? this.progress,
         tasks: tasks ?? this.tasks,
         status: status ?? this.status);
   }

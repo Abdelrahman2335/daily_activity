@@ -63,7 +63,7 @@ class InProgressTodo extends StatelessWidget {
                 disabledActiveTrackColor: Color(data.category.colorValue),
               ),
               child: Slider(
-                value: data.progress.toDouble() / 100,
+                value: data.progress / 100,
                 onChanged: null,
               ),
             ),

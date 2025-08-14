@@ -60,7 +60,7 @@ class ProjectCard extends StatelessWidget {
               startAngle: 70,
               radius: 26,
               lineWidth: 3,
-              percent: data.progress.toDouble() / 100,
+              percent: data.progress / 100,
               progressColor: Color(data.category.colorValue),
               center: Text(
                 "${data.progress}%",

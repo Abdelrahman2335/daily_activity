@@ -23,12 +23,13 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
+  bool isSameDate(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  @override
   Either<String, List<ProjectModel>> dateFilter(
       DateTime currentDate, List<ProjectModel> projects) {
-    bool isSameDate(DateTime a, DateTime b) {
-      return a.year == b.year && a.month == b.month && a.day == b.day;
-    }
-
     try {
       final filteredProjects = projects.where((p) {
         return (p.startDate.isBefore(currentDate) &&

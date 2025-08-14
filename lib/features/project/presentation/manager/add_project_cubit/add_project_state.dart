@@ -33,7 +33,7 @@ final class AddProjectFormState extends AddProjectState {
   DateTime get startDate => project.startDate;
   DateTime get endDate => project.endDate;
   DateTime get date => project.startDate;
-  int get progress => project.progress;
+  double get progress => project.progress;
   TaskStatus get status => project.status;
   List<TaskModel> get tasks => project.tasks;
 }

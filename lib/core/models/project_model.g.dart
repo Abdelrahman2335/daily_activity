@@ -22,16 +22,15 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       category: fields[3] as ProjectCategoryModel,
       startDate: fields[4] as DateTime,
       endDate: fields[5] as DateTime,
-      tasks: (fields[8] as List).cast<TaskModel>(),
-      progress: fields[6] as int,
-      status: fields[7] as TaskStatus,
+      tasks: (fields[7] as List).cast<TaskModel>(),
+      status: fields[6] as TaskStatus,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProjectModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -45,10 +44,8 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       ..writeByte(5)
       ..write(obj.endDate)
       ..writeByte(6)
-      ..write(obj.progress)
-      ..writeByte(7)
       ..write(obj.status)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.tasks);
   }
 

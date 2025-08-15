@@ -5,8 +5,7 @@ import 'package:dartz/dartz.dart';
 abstract class HomeRepo {
   bool isSameDate(DateTime a, DateTime b);
   Either<String, List<ProjectModel>> getProjects();
-  Either<String, List<ProjectModel>> statusFilter(
-      TaskStatus status, List<ProjectModel> projects);
+  Either<String, List<ProjectModel>> statusFilter(TaskStatus status);
   Either<String, List<ProjectModel>> dateFilter(
       DateTime currentDate, List<ProjectModel> projects);
 }

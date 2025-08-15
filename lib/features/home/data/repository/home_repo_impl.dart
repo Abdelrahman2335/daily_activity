@@ -47,14 +47,18 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Either<String, List<ProjectModel>> statusFilter(
-      TaskStatus status, List<ProjectModel> projects) {
+  Either<String, List<ProjectModel>> statusFilter(TaskStatus status) {
     try {
-      final filteredProjects =
-          projects.where((p) => p.status == status).toList();
-      final sortedProjects = filteredProjects
+      final projects =
+          Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
+
+      final sortedProjects = projects
         ..sort((a, b) => a.startDate.compareTo(b.startDate));
-      return Right(sortedProjects);
+
+      final filteredProjects =
+          sortedProjects.where((p) => p.status == status).toList();
+
+      return Right(filteredProjects);
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
       return Left(e.toString());

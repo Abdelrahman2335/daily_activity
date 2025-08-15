@@ -200,6 +200,7 @@ class AddProjectCubit extends Cubit<AddProjectState> {
     DebugLogger.log('submitForm called', tag: 'AddCustomerCubit');
 
     final formState = _currentFormState;
+
     if (!formState.isValid) {
       DebugLogger.logError("Form is not valid, cannot submit",
           context: "AddProjectCubit");
@@ -207,13 +208,14 @@ class AddProjectCubit extends Cubit<AddProjectState> {
     }
 
     final project = ProjectModel(
-        title: formState.title,
-        description: formState.description,
-        category: formState.category,
-        startDate: formState.startDate,
-        endDate: formState.endDate,
-        tasks: formState.tasks,
-        status: formState.status);
+      title: formState.title,
+      description: formState.description,
+      category: formState.category,
+      startDate: formState.startDate,
+      endDate: formState.endDate,
+      tasks: formState.tasks,
+      status: TaskStatus.notStarted,
+    );
 
     addProject(project: project);
   }

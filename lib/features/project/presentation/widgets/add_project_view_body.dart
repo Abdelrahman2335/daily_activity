@@ -28,7 +28,6 @@ class AddProjectViewBody extends StatefulWidget {
 }
 
 class _AddProjectViewBodyState extends State<AddProjectViewBody> {
-  
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
@@ -87,10 +86,11 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                         onActionButtonPressed: () {
                           final form = _formKey.currentState!;
 
-                          if (form.validate()) {
-                            form.save();
-                            context.read<AddProjectCubit>().submitForm();
-                          }
+                        
+                           if (form.validate()) {
+                          form.save();
+                          context.read<AddProjectCubit>().submitForm();
+                           }
                         }),
                     const CustomDropDownButton(),
                     const SizedBox(height: 30),

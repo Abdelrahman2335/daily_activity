@@ -27,7 +27,7 @@ void main() async {
   Hive.registerAdapter(TaskModelAdapter());
   Hive.registerAdapter(DateTimeAdapter());
   Hive.registerAdapter(IconAdapter());
- 
+
   await Hive.openBox<ProjectModel>(Constants.kMainBox);
 
   runApp(const MyApp());

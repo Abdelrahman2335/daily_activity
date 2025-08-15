@@ -16,58 +16,61 @@ class InProgressTodo extends StatelessWidget {
           borderRadius: BorderRadius.circular(39),
           color: Color(data.category.colorValue).withAlpha(16),
         ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(19),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      data.title,
-                      style: AppTextStyles.textStyle12,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+        child: GestureDetector(
+          onTap: () {},
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(19),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        data.title,
+                        style: AppTextStyles.textStyle12,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  Icon(
-                    data.category.icon,
-                    color: Color(data.category.colorValue),
-                  )
-                ],
+                    Icon(
+                      data.category.icon,
+                      color: Color(data.category.colorValue),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 19, right: 19, bottom: 11),
-              child: Text(
-                data.description,
-                style: AppTextStyles.textStyleBold12,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              Padding(
+                padding: const EdgeInsets.only(left: 19, right: 19, bottom: 11),
+                child: Text(
+                  data.description,
+                  style: AppTextStyles.textStyleBold12,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-            SliderTheme(
-              data: SliderThemeData().copyWith(
-                activeTrackColor: AppColor.primary,
-                // Matches primary color (main brand color)
-                inactiveTrackColor: AppColor.primary.withAlpha(76),
-                // Lighter version for inactive track
-                thumbColor: AppColor.primary,
-                // Thumb matches primary color
-                overlayColor: AppColor.primary.withAlpha(90),
-                // Subtle glow effect when sliding
-                trackHeight: 6.0,
-                // Adjust track thickness
-                thumbShape: SliderComponentShape.noThumb,
-                // Remove thumb if needed
-                disabledActiveTrackColor: Color(data.category.colorValue),
+              SliderTheme(
+                data: SliderThemeData().copyWith(
+                  activeTrackColor: AppColor.primary,
+                  // Matches primary color (main brand color)
+                  inactiveTrackColor: AppColor.primary.withAlpha(76),
+                  // Lighter version for inactive track
+                  thumbColor: AppColor.primary,
+                  // Thumb matches primary color
+                  overlayColor: AppColor.primary.withAlpha(90),
+                  // Subtle glow effect when sliding
+                  trackHeight: 6.0,
+                  // Adjust track thickness
+                  thumbShape: SliderComponentShape.noThumb,
+                  // Remove thumb if needed
+                  disabledActiveTrackColor: Color(data.category.colorValue),
+                ),
+                child: Slider(
+                  value: data.progress,
+                  onChanged: null,
+                ),
               ),
-              child: Slider(
-                value: data.progress / 100,
-                onChanged: null,
-              ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

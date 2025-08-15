@@ -7,14 +7,12 @@ import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 
 class HomeRepoImpl implements HomeRepo {
+  final _projects = Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
   @override
   Either<String, List<ProjectModel>> getProjects() {
     try {
-      final projects =
-          Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
-
-      final sortedProjects = projects
-        ..sort((a, b) => a.startDate.compareTo(b.startDate));
+      final sortedProjects = _projects
+        ..sort((a, b) => b.startDate.compareTo(a.startDate));
       return Right(sortedProjects);
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
@@ -29,16 +27,17 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Either<String, List<ProjectModel>> dateFilter(
-      DateTime currentDate, List<ProjectModel> projects) {
+    DateTime currentDate,
+  ) {
     try {
-      final filteredProjects = projects.where((p) {
+      final filteredProjects = _projects.where((p) {
         return (p.startDate.isBefore(currentDate) &&
                 p.endDate.isAfter(currentDate)) ||
             isSameDate(p.startDate, currentDate) ||
             isSameDate(p.endDate, currentDate);
       }).toList();
       final sortedProjects = filteredProjects
-        ..sort((a, b) => a.startDate.compareTo(b.startDate));
+        ..sort((a, b) => b.startDate.compareTo(a.startDate));
       return Right(sortedProjects);
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
@@ -53,7 +52,7 @@ class HomeRepoImpl implements HomeRepo {
           Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
 
       final sortedProjects = projects
-        ..sort((a, b) => a.startDate.compareTo(b.startDate));
+        ..sort((a, b) => b.startDate.compareTo(a.startDate));
 
       final filteredProjects =
           sortedProjects.where((p) => p.status == status).toList();
@@ -62,6 +61,37 @@ class HomeRepoImpl implements HomeRepo {
     } catch (e) {
       DebugLogger.log("Error Cached in the HomeRepoImpl");
       return Left(e.toString());
+    }
+  }
+
+  @override
+  String getOverallProgress() {
+    final totalTasks = _projects.fold<int>(0, (sum, t) => sum + t.tasks.length);
+    if (totalTasks == 0) return '0';
+
+    final completedTasks = _projects.fold<int>(
+        0,
+        (sum, project) =>
+            sum + project.tasks.where((t) => t.isCompleted ?? false).length);
+    final percentValue = (completedTasks / totalTasks) * 100;
+    if (percentValue == 0) {
+      return '0';
+    } else if (percentValue == percentValue.roundToDouble()) {
+      return percentValue.toInt().toString();
+    } else {
+      return percentValue.toStringAsFixed(1);
+    }
+  }
+
+  @override
+  String progressValue(ProjectModel project) {
+    final percentValue = project.progress * 100;
+    if (percentValue == 0) {
+      return '0%';
+    } else if (percentValue == percentValue.roundToDouble()) {
+      return '${percentValue.toInt()}%';
+    } else {
+      return '${percentValue.toStringAsFixed(1)}%';
     }
   }
 }

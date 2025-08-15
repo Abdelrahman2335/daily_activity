@@ -10,17 +10,6 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
   final HomeRepo homeRepo;
 
-  String progressValue(ProjectModel data) {
-    final percentValue = data.progress * 100;
-    if (percentValue == 0) {
-      return '0%';
-    } else if (percentValue == percentValue.roundToDouble()) {
-      return '${percentValue.toInt()}%';
-    } else {
-      return '${percentValue.toStringAsFixed(1)}%';
-    }
-  }
-
   void getDate() {
     emit(HomeLoading());
 
@@ -30,10 +19,10 @@ class HomeCubit extends Cubit<HomeState> {
         (projects) => emit(HomeSuccess(projects)));
   }
 
-  void dateFilter(DateTime currentDate, List<ProjectModel> projects) {
+  void dateFilter(DateTime currentDate) {
     emit(HomeLoading());
 
-    var result = homeRepo.dateFilter(currentDate, projects);
+    var result = homeRepo.dateFilter(currentDate);
 
     result.fold((error) => emit(HomeError(error)),
         (projects) => emit(HomeFilter(projects)));
@@ -58,5 +47,13 @@ class HomeCubit extends Cubit<HomeState> {
     });
 
     return projects;
+  }
+
+  String getOverallProgress() {
+    return homeRepo.getOverallProgress();
+  }
+
+  String progressValue(ProjectModel project) {
+    return homeRepo.progressValue(project);
   }
 }

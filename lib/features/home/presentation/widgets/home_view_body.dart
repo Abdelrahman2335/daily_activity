@@ -17,7 +17,7 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool inProgress =
+    bool hasProgress =
         context.read<HomeCubit>().inProgressProjects().length == 0;
     List<ProjectModel>? projects;
     return BlocBuilder<HomeCubit, HomeState>(
@@ -42,25 +42,23 @@ class HomeViewBody extends StatelessWidget {
             slivers: [
               const HomeAppBar(),
               const OverviewSection(),
-              inProgress
-                  ? SliverToBoxAdapter()
-                  : SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 19,
-                          bottom: 11,
-                        ),
-                        child: Text(
-                          "In Progress",
-                          style: AppTextStyles.textStyle19,
-                        ),
-                      ),
+              if (!hasProgress)
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 19,
+                      bottom: 11,
                     ),
-              inProgress
-                  ? SliverToBoxAdapter()
-                  : InProgressSection(
-                      projects: projects ?? [],
+                    child: Text(
+                      "In Progress",
+                      style: AppTextStyles.textStyle19,
                     ),
+                  ),
+                ),
+              if (!hasProgress)
+                InProgressSection(
+                  projects: projects ?? [],
+                ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 19, bottom: 11, top: 11),

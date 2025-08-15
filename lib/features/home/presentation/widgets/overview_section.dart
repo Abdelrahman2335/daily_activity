@@ -2,10 +2,11 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/primary_button.dart';
+import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // This is the top part of the Home Screen that shows the overview of today's tasks
 // It includes a progress indicator and a button to view tasks.
@@ -16,6 +17,9 @@ class OverviewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double percent =
+        double.tryParse(context.read<HomeCubit>().getOverallProgress()) ?? 0;
+
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 19),
       sliver: SliverAppBar(
@@ -37,7 +41,7 @@ class OverviewSection extends StatelessWidget {
                 top: 26,
                 left: 19,
                 child: Text(
-                  "Your today's task\nalmost done!",
+                  "Today's progress!",
                   style:
                       AppTextStyles.textStyle14.copyWith(color: AppColor.card),
                 ),
@@ -52,30 +56,15 @@ class OverviewSection extends StatelessWidget {
                     }),
               ),
               Positioned(
-                  top: 19,
-                  right: 21,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(9),
-                      color: AppColor.card.withAlpha(70),
-                    ),
-                    width: 29,
-                    height: 29,
-                    child: Icon(
-                      PhosphorIcons.dotsThreeOutline(PhosphorIconsStyle.fill),
-                      color: AppColor.card,
-                    ),
-                  )),
-              Positioned(
                   top: 59,
                   right: 66,
                   child: CircularPercentIndicator(
                     startAngle: 70,
                     radius: 54.0,
                     lineWidth: 9.0,
-                    percent: 0.85,
+                    percent: percent / 100,
                     center: Text(
-                      "85%",
+                      "$percent%",
                       style: AppTextStyles.textStyle14
                           .copyWith(color: AppColor.card),
                     ),

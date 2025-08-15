@@ -3,7 +3,6 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomCalenderCard extends StatelessWidget {
   const CustomCalenderCard({
     super.key,
@@ -33,12 +32,12 @@ class CustomCalenderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           spacing: 8,
           children: [
-            Text(dataTimeModel.month,
+            Text(dataTimeModel.monthName,
                 style: AppTextStyles.textStyle14.copyWith(color: textColor)),
-            Text(dataTimeModel.day,
+            Text("${dataTimeModel.day}",
                 style: AppTextStyles.textStyle19
                     .copyWith(color: textColor, fontWeight: FontWeight.bold)),
-            Text(dataTimeModel.weekday,
+            Text(dataTimeModel.weekDayName,
                 style: AppTextStyles.textStyle14.copyWith(color: textColor)),
           ],
         ),

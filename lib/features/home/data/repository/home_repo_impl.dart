@@ -46,6 +46,30 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
+  List<DateTime> dateTimeList() {
+    try {
+      final sortedProjects = List.of(_projects)
+        ..sort((a, b) => b.startDate.compareTo(a.startDate));
+
+      final startDate = sortedProjects.first.startDate;
+      final endDate = sortedProjects.last.endDate;
+
+      List<DateTime> totalDuration = [];
+      DateTime currentDate = startDate;
+
+      while (!currentDate.isAfter(endDate)) {
+        totalDuration.add(currentDate);
+        currentDate = currentDate.add(const Duration(days: 1));
+      }
+      
+      return totalDuration;
+    } catch (e) {
+      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
+      return [];
+    }
+  }
+
+  @override
   Either<String, List<ProjectModel>> statusFilter(TaskStatus status) {
     try {
       final projects =
@@ -59,39 +83,50 @@ class HomeRepoImpl implements HomeRepo {
 
       return Right(filteredProjects);
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl");
+      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
       return Left(e.toString());
     }
   }
 
   @override
   String getOverallProgress() {
-    final totalTasks = _projects.fold<int>(0, (sum, t) => sum + t.tasks.length);
-    if (totalTasks == 0) return '0';
+    try {
+      final totalTasks =
+          _projects.fold<int>(0, (sum, t) => sum + t.tasks.length);
+      if (totalTasks == 0) return '0';
 
-    final completedTasks = _projects.fold<int>(
-        0,
-        (sum, project) =>
-            sum + project.tasks.where((t) => t.isCompleted ?? false).length);
-    final percentValue = (completedTasks / totalTasks) * 100;
-    if (percentValue == 0) {
-      return '0';
-    } else if (percentValue == percentValue.roundToDouble()) {
-      return percentValue.toInt().toString();
-    } else {
-      return percentValue.toStringAsFixed(1);
+      final completedTasks = _projects.fold<int>(
+          0,
+          (sum, project) =>
+              sum + project.tasks.where((t) => t.isCompleted ?? false).length);
+      final percentValue = (completedTasks / totalTasks) * 100;
+      if (percentValue == 0) {
+        return '0';
+      } else if (percentValue == percentValue.roundToDouble()) {
+        return percentValue.toInt().toString();
+      } else {
+        return percentValue.toStringAsFixed(1);
+      }
+    } catch (e) {
+      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
+      return "";
     }
   }
 
   @override
   String progressValue(ProjectModel project) {
-    final percentValue = project.progress * 100;
-    if (percentValue == 0) {
-      return '0%';
-    } else if (percentValue == percentValue.roundToDouble()) {
-      return '${percentValue.toInt()}%';
-    } else {
-      return '${percentValue.toStringAsFixed(1)}%';
+    try {
+      final percentValue = project.progress * 100;
+      if (percentValue == 0) {
+        return '0%';
+      } else if (percentValue == percentValue.roundToDouble()) {
+        return '${percentValue.toInt()}%';
+      } else {
+        return '${percentValue.toStringAsFixed(1)}%';
+      }
+    } catch (e) {
+      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
+      return "";
     }
   }
 }

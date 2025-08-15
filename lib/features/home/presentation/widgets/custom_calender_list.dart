@@ -11,16 +11,17 @@ class CustomCalenderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int selectedIndex = 0;
-    final list = context.read<HomeCubit>().dateTimeList();
 
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) {
-        return SliverAppBar(
-          backgroundColor: Colors.transparent,
-          stretch: true,
-          automaticallyImplyLeading: false,
-          expandedHeight: 100,
-          flexibleSpace: FlexibleSpaceBar(
+    final dateTimeList = context.read<HomeCubit>().dateTimeList();
+
+    return SliverAppBar(
+      backgroundColor: Colors.transparent,
+      stretch: true,
+      automaticallyImplyLeading: false,
+      expandedHeight: 100,
+      flexibleSpace: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          return FlexibleSpaceBar(
               background: SizedBox(
             height: 150,
             width: double.infinity,
@@ -31,7 +32,7 @@ class CustomCalenderList extends StatelessWidget {
                     mainAxisSpacing: 14,
                     crossAxisSpacing: 9,
                     childAspectRatio: 1.4),
-                itemCount: list.length,
+                itemCount: dateTimeList.length,
                 itemBuilder: (BuildContext context, int index) {
                   final isSelected = selectedIndex == index;
                   return CustomCalenderCard(
@@ -39,13 +40,16 @@ class CustomCalenderList extends StatelessWidget {
                     dataTimeModel:
                         context.read<HomeCubit>().getCustomDateList[index],
                     onTap: () {
-                      context.read<HomeCubit>().dateFilter(list[index]);
+                      selectedIndex = index;
+                      context
+                          .read<HomeCubit>()
+                          .dateFilter(dateTimeList[selectedIndex]);
                     },
                   );
                 }),
-          )),
-        );
-      },
+          ));
+        },
+      ),
     );
   }
 }

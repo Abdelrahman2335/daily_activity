@@ -8,12 +8,10 @@ import '../../../../core/models/project_status.dart';
 class CustomStatusBar extends StatelessWidget {
   const CustomStatusBar({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-  int selectedIndex = 0;
-    return BlocConsumer<HomeCubit, HomeState>(
-      listener: (context, state) {},
+    int selectedIndex = 0;
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return SliverToBoxAdapter(
           child: SingleChildScrollView(

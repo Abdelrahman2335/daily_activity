@@ -41,7 +41,7 @@ class OverviewSection extends StatelessWidget {
                 top: 26,
                 left: 19,
                 child: Text(
-                  "Today's progress!",
+                  "Overall progress \nKeep it up!",
                   style:
                       AppTextStyles.textStyle14.copyWith(color: AppColor.card),
                 ),
@@ -50,7 +50,7 @@ class OverviewSection extends StatelessWidget {
                 bottom: 36,
                 left: 19,
                 child: PrimaryButton(
-                    text: "View Task",
+                    text: "View Project",
                     onPressed: () {
                       GoRouter.of(context).push(AppRouter.kTodayTasks);
                     }),

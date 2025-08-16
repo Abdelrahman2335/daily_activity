@@ -18,7 +18,7 @@ class OverviewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double percent =
-        double.tryParse(context.read<HomeCubit>().getOverallProgress()) ?? 0;
+        double.tryParse(context.read<HomeCubit>().overallProgress) ?? 0;
 
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 19),

@@ -11,68 +11,71 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
   final HomeRepo homeRepo;
 
-  void getDate() {
+  List<ProjectModel> _allProjects = [];
+
+  void loadProjects() {
     emit(HomeLoading());
-
-    var result = homeRepo.getProjects();
-
-    result.fold((error) => emit(HomeError(error)),
-        (projects) => emit(HomeSuccess(projects)));
+    final result = homeRepo.getProjects();
+    result.fold(
+      (error) => emit(HomeError(error)),
+      (projects) {
+        _allProjects = projects;
+        emit(HomeSuccess(projects));
+      },
+    );
   }
 
-  List<DateTime> dateTimeList() {
-    List<DateTime> dateTimeList = homeRepo.dateTimeList();
+  void applyDateFilter(DateTime currentDate) {
+    if (_allProjects.isEmpty) {
+      loadProjects();
+      return;
+    }
 
-    return dateTimeList;
+    emit(HomeLoading());
+    final result = homeRepo.dateFilter(currentDate);
+    result.fold(
+      (error) => emit(HomeError(error)),
+      (projects) => emit(HomeFiltered(projects, FilterType.date)),
+    );
   }
 
-  List<DataTimeModel> get getCustomDateList {
-    List<DataTimeModel> dailyDataTimes = [];
-    dateTimeList()
-        .map(
-          (d) => dailyDataTimes.add(
-            DataTimeModel(month: d.month, day: d.day, weekday: d.weekday),
-          ),
-        )
+  void applyStatusFilter(TaskStatus status) {
+    if (_allProjects.isEmpty) {
+      loadProjects();
+      return;
+    }
+
+    emit(HomeLoading());
+    final result = homeRepo.statusFilter(status);
+    result.fold(
+      (error) => emit(HomeError(error)),
+      (projects) => emit(HomeFiltered(projects, FilterType.status)),
+    );
+  }
+
+  void clearFilters() {
+    emit(HomeSuccess(_allProjects));
+  }
+
+  bool get hasProjectsInProgress {
+    final result = homeRepo.statusFilter(TaskStatus.inProgress);
+
+    return result.fold((_) => false, (projects) => projects.isNotEmpty);
+  }
+
+  List<DateTime> get dateTimeList => homeRepo.dateTimeList();
+
+  List<DataTimeModel> get customDateList {
+    return dateTimeList
+        .map((d) => DataTimeModel(
+              month: d.month,
+              day: d.day,
+              weekday: d.weekday,
+            ))
         .toList();
-    return dailyDataTimes;
   }
 
-  void dateFilter(DateTime currentDate) {
-    emit(HomeLoading());
+  String get overallProgress => homeRepo.getOverallProgress();
 
-    var result = homeRepo.dateFilter(currentDate);
-
-    result.fold((error) => emit(HomeError(error)),
-        (projects) => emit(HomeFilter(projects)));
-  }
-
-  void statusFilter(TaskStatus status) {
-    emit(HomeLoading());
-
-    var result = homeRepo.statusFilter(status);
-
-    result.fold((error) => emit(HomeError(error)),
-        (projects) => emit(HomeFilter(projects)));
-  }
-
-  List<ProjectModel> inProgressProjects() {
-    List<ProjectModel> projects = [];
-    var result = homeRepo.statusFilter(TaskStatus.inProgress);
-
-    result.fold((error) => emit(HomeError(error)), (list) {
-      projects = list;
-      HomeFilter(list);
-    });
-
-    return projects;
-  }
-
-  String getOverallProgress() {
-    return homeRepo.getOverallProgress();
-  }
-
-  String progressValue(ProjectModel project) {
-    return homeRepo.progressValue(project);
-  }
+  String progressValue(ProjectModel project) => homeRepo.progressValue(project);
 }

@@ -12,7 +12,7 @@ class CustomCalenderList extends StatelessWidget {
   Widget build(BuildContext context) {
     int selectedIndex = 0;
 
-    final dateTimeList = context.read<HomeCubit>().dateTimeList();
+    final dateTimeList = context.read<HomeCubit>().dateTimeList;
 
     return SliverAppBar(
       backgroundColor: Colors.transparent,
@@ -38,12 +38,12 @@ class CustomCalenderList extends StatelessWidget {
                   return CustomCalenderCard(
                     isSelected: isSelected,
                     dataTimeModel:
-                        context.read<HomeCubit>().getCustomDateList[index],
+                        context.read<HomeCubit>().customDateList[index],
                     onTap: () {
                       selectedIndex = index;
                       context
                           .read<HomeCubit>()
-                          .dateFilter(dateTimeList[selectedIndex]);
+                          .applyDateFilter(dateTimeList[selectedIndex]);
                     },
                   );
                 }),

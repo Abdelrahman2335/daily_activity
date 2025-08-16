@@ -19,7 +19,7 @@ class TaskList extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         final isLoading = state is HomeLoading;
-        if (state is HomeFilter) {
+        if (state is HomeFiltered) {
           taskModel = state.projects;
         }
         if (isLoading) {

@@ -7,16 +7,25 @@ import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 
 class HomeRepoImpl implements HomeRepo {
-  final _projects = Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
+  List<ProjectModel> get _projects =>
+      Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
+
+  List<ProjectModel> _sortProjectsByDate(List<ProjectModel> projects) {
+    return List.from(projects)..sort((a, b) => b.startDate.compareTo(a.startDate));
+  }
+
+  Either<String, T> _handleError<T>(String operation, dynamic error) {
+    DebugLogger.log("Error in HomeRepoImpl.$operation: $error");
+    return Left("Failed to $operation: ${error.toString()}");
+  }
+
   @override
   Either<String, List<ProjectModel>> getProjects() {
     try {
-      final sortedProjects = _projects
-        ..sort((a, b) => b.startDate.compareTo(a.startDate));
+      final sortedProjects = _sortProjectsByDate(_projects);
       return Right(sortedProjects);
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl");
-      return Left(e.toString());
+      return _handleError('get projects', e);
     }
   }
 
@@ -26,45 +35,49 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Either<String, List<ProjectModel>> dateFilter(
-    DateTime currentDate,
-  ) {
+  Either<String, List<ProjectModel>> dateFilter(DateTime currentDate) {
     try {
-      final filteredProjects = _projects.where((p) {
-        return (p.startDate.isBefore(currentDate) &&
-                p.endDate.isAfter(currentDate)) ||
-            isSameDate(p.startDate, currentDate) ||
-            isSameDate(p.endDate, currentDate);
+      final filteredProjects = _projects.where((project) {
+        return (project.startDate.isBefore(currentDate) &&
+                project.endDate.isAfter(currentDate)) ||
+            isSameDate(project.startDate, currentDate) ||
+            isSameDate(project.endDate, currentDate);
       }).toList();
-      final sortedProjects = filteredProjects
-        ..sort((a, b) => b.startDate.compareTo(a.startDate));
+      
+      final sortedProjects = _sortProjectsByDate(filteredProjects);
       return Right(sortedProjects);
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl");
-      return Left(e.toString());
+      return _handleError('filter projects by date', e);
     }
   }
 
   @override
   List<DateTime> dateTimeList() {
     try {
-      final sortedProjects = List.of(_projects)
-        ..sort((a, b) => b.startDate.compareTo(a.startDate));
+      if (_projects.isEmpty) return [];
 
-      final startDate = sortedProjects.first.startDate;
-      final endDate = sortedProjects.last.endDate;
+      final sortedProjects = _sortProjectsByDate(_projects);
+      
+      final startDate = sortedProjects
+          .map((p) => p.startDate)
+          .reduce((a, b) => a.isBefore(b) ? a : b);
+      
+      final endDate = sortedProjects
+          .map((p) => p.endDate)
+          .reduce((a, b) => a.isAfter(b) ? a : b);
 
-      List<DateTime> totalDuration = [];
-      DateTime currentDate = startDate;
+      final dateList = <DateTime>[];
+      DateTime currentDate = DateTime(startDate.year, startDate.month, startDate.day);
+      final finalDate = DateTime(endDate.year, endDate.month, endDate.day);
 
-      while (!currentDate.isAfter(endDate)) {
-        totalDuration.add(currentDate);
+      while (!currentDate.isAfter(finalDate)) {
+        dateList.add(currentDate);
         currentDate = currentDate.add(const Duration(days: 1));
       }
-      
-      return totalDuration;
+
+      return dateList;
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
+      DebugLogger.log("Error in HomeRepoImpl.dateTimeList: $e");
       return [];
     }
   }
@@ -72,61 +85,65 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Either<String, List<ProjectModel>> statusFilter(TaskStatus status) {
     try {
-      final projects =
-          Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
-
-      final sortedProjects = projects
-        ..sort((a, b) => b.startDate.compareTo(a.startDate));
-
-      final filteredProjects =
-          sortedProjects.where((p) => p.status == status).toList();
+      final sortedProjects = _sortProjectsByDate(_projects);
+      final filteredProjects = sortedProjects
+          .where((project) => project.status == status)
+          .toList();
 
       return Right(filteredProjects);
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
-      return Left(e.toString());
+      return _handleError('filter projects by status', e);
     }
   }
 
   @override
   String getOverallProgress() {
     try {
-      final totalTasks =
-          _projects.fold<int>(0, (sum, t) => sum + t.tasks.length);
+      final totalTasks = _projects.fold<int>(
+        0, 
+        (sum, project) => sum + project.tasks.length,
+      );
+      
       if (totalTasks == 0) return '0';
 
       final completedTasks = _projects.fold<int>(
-          0,
-          (sum, project) =>
-              sum + project.tasks.where((t) => t.isCompleted ?? false).length);
-      final percentValue = (completedTasks / totalTasks) * 100;
-      if (percentValue == 0) {
-        return '0';
-      } else if (percentValue == percentValue.roundToDouble()) {
-        return percentValue.toInt().toString();
-      } else {
-        return percentValue.toStringAsFixed(1);
-      }
+        0,
+        (sum, project) => sum + 
+            project.tasks.where((task) => task.isCompleted == true).length,
+      );
+      
+      return _formatPercentage(completedTasks / totalTasks * 100, includePercent: false);
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
-      return "";
+      DebugLogger.log("Error in HomeRepoImpl.getOverallProgress: $e");
+      return "0";
     }
   }
 
   @override
   String progressValue(ProjectModel project) {
     try {
-      final percentValue = project.progress * 100;
-      if (percentValue == 0) {
-        return '0%';
-      } else if (percentValue == percentValue.roundToDouble()) {
-        return '${percentValue.toInt()}%';
-      } else {
-        return '${percentValue.toStringAsFixed(1)}%';
+      if (project.progress < 0 || project.progress > 1) {
+        DebugLogger.log("Invalid progress value: ${project.progress}");
+        return "0%";
       }
+      
+      return _formatPercentage(project.progress * 100, includePercent: true);
     } catch (e) {
-      DebugLogger.log("Error Cached in the HomeRepoImpl: $e");
-      return "";
+      DebugLogger.log("Error in HomeRepoImpl.progressValue: $e");
+      return "0%";
+    }
+  }
+
+  /// Helper method to format percentage values consistently
+  String _formatPercentage(double value, {required bool includePercent}) {
+    final suffix = includePercent ? '%' : '';
+    
+    if (value == 0) {
+      return '0$suffix';
+    } else if (value == value.roundToDouble()) {
+      return '${value.toInt()}$suffix';
+    } else {
+      return '${value.toStringAsFixed(1)}$suffix';
     }
   }
 }

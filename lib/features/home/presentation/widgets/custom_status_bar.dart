@@ -27,7 +27,7 @@ class CustomStatusBar extends StatelessWidget {
                       selectedIndex = index;
                       context
                           .read<HomeCubit>()
-                          .statusFilter(TaskStatus.values[selectedIndex]);
+                          .applyStatusFilter(TaskStatus.values[selectedIndex]);
                     },
                     text: TaskStatus.values[index].displayName,
                   ),

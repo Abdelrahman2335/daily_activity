@@ -1,4 +1,5 @@
 import 'package:daily_activity/core/models/project_model.dart';
+import 'package:daily_activity/core/models/project_status.dart';
 import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/in_progress_section.dart';
@@ -10,15 +11,26 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({
     super.key,
   });
 
   @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().loadProjects();
+    context.read<HomeCubit>().applyStatusFilter(TaskStatus.inProgress);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool hasProgress =
-        context.read<HomeCubit>().inProgressProjects().length == 0;
+    bool hasProgress = context.read<HomeCubit>().hasProjectsInProgress;
     List<ProjectModel>? projects;
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
@@ -26,7 +38,7 @@ class HomeViewBody extends StatelessWidget {
         if (state is HomeError) {
           return Center(
             child: Text(
-              state.errMessage,
+              state.message,
               style: AppTextStyles.textStyle16,
             ),
           );
@@ -55,15 +67,12 @@ class HomeViewBody extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (!hasProgress)
-                InProgressSection(
-                  projects: projects ?? [],
-                ),
+              if (!hasProgress) const InProgressSection(),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 19, bottom: 11, top: 11),
                   child: Text(
-                    "Tasks",
+                    "Projects",
                     style: AppTextStyles.textStyle19,
                   ),
                 ),

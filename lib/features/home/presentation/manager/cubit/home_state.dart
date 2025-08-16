@@ -12,12 +12,15 @@ final class HomeSuccess extends HomeState {
   final List<ProjectModel> projects;
 }
 
-final class HomeFilter extends HomeState {
-  HomeFilter(this.projects);
+class HomeFiltered extends HomeState {
   final List<ProjectModel> projects;
+  final FilterType filterType;
+  HomeFiltered(this.projects, this.filterType);
 }
 
-final class HomeError extends HomeState {
-  HomeError(this.errMessage);
-  final String errMessage;
+class HomeError extends HomeState {
+  final String message;
+  HomeError(this.message);
 }
+
+enum FilterType { date, status }

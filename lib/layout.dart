@@ -47,7 +47,7 @@ class _LayOutState extends State<LayOut> {
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         onPressed: () {
-          GoRouter.of(context).push(AppRouter.kAddProject);
+          GoRouter.of(context).push(AppRouter.kAddProject, extra: false);
         },
         backgroundColor: AppColor.primary,
         child: const Icon(

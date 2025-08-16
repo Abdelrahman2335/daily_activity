@@ -48,26 +48,10 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   }
 
   bool _validForm(AddProjectFormState state) {
-    DebugLogger.log(
-        "validForm called, startDate is: ${state.project.startDate}",
-        tag: "AddProjectCubit");
-    DebugLogger.log("validForm called, endDate is: ${state.project.endDate}",
-        tag: "AddProjectCubit");
-    DebugLogger.log(
-        "validForm called, category is: ${state.project.category.title}",
-        tag: "AddProjectCubit");
-    DebugLogger.log("validForm called, title is: ${state.project.title}",
-        tag: "AddProjectCubit");
-    DebugLogger.log(
-        "validForm called, description is: ${state.project.description}",
-        tag: "AddProjectCubit");
-    for (var i in state.project.tasks) {
-      DebugLogger.log("validForm called, tasks is: ${i.title}");
-    }
-
     bool isValid = state.description.isNotEmpty &&
         state.title.isNotEmpty &&
         state.tasks.isNotEmpty;
+    DebugLogger.log("validForm is: $isValid");
 
     return isValid;
   }

@@ -10,29 +10,44 @@ class CustomStatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
+    int? selectedIndex;
+    bool? isSelected;
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return SliverToBoxAdapter(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(TaskStatus.values.length, (index) {
-                final isSelected = selectedIndex == index;
-                return Padding(
-                  padding: const EdgeInsets.only(left: 14),
-                  child: PrimaryButton(
-                    isSelected: isSelected,
+              spacing: 14,
+              children: [
+                PrimaryButton(
+                  isSelected: isSelected == null,
+                  onPressed: () {
+                    context.read<HomeCubit>().clearFilters();
+                    isSelected = null;
+                    selectedIndex = null;
+                  },
+                  text: "All Projects",
+                ),
+                ...List.generate(TaskStatus.values.length, (index) {
+                  isSelected = selectedIndex == index;
+                  return PrimaryButton(
+                    isSelected: isSelected ?? false,
                     onPressed: () {
-                      selectedIndex = index;
-                      context
-                          .read<HomeCubit>()
-                          .applyStatusFilter(TaskStatus.values[selectedIndex]);
+                      if (selectedIndex == index) {
+                        context.read<HomeCubit>().clearFilters();
+                        isSelected = null;
+                        selectedIndex = null;
+                      } else {
+                        selectedIndex = index;
+                        context.read<HomeCubit>().applyStatusFilter(
+                            TaskStatus.values[selectedIndex!]);
+                      }
                     },
                     text: TaskStatus.values[index].displayName,
-                  ),
-                );
-              }),
+                  );
+                })
+              ],
             ),
           ),
         );

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:daily_activity/core/models/data_time_model.dart';
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
+import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/features/home/data/repository/home_repo.dart';
 import 'package:meta/meta.dart';
 
@@ -53,14 +54,26 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
+  List<ProjectModel> get inProgressProjects {
+    final result = homeRepo.statusFilter(TaskStatus.inProgress);
+    return result.fold(
+      (error) {
+        DebugLogger.log('inProgressProjects error: $error');
+        return const <ProjectModel>[];
+      },
+      (projects) => List.unmodifiable(projects),
+    );
+  }
+
   void clearFilters() {
     emit(HomeSuccess(_allProjects));
   }
 
   bool get hasProjectsInProgress {
     final result = homeRepo.statusFilter(TaskStatus.inProgress);
-
-    return result.fold((_) => false, (projects) => projects.isNotEmpty);
+    var x = result.fold((_) => false, (projects) => projects.isNotEmpty);
+    DebugLogger.log("hasProjectsInProgress is: $x");
+    return x;
   }
 
   List<DateTime> get dateTimeList => homeRepo.dateTimeList();

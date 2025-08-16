@@ -1,5 +1,4 @@
 import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/models/project_status.dart';
 import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/in_progress_section.dart';
@@ -25,7 +24,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     super.initState();
     context.read<HomeCubit>().loadProjects();
-    context.read<HomeCubit>().applyStatusFilter(TaskStatus.inProgress);
   }
 
   @override
@@ -54,7 +52,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             slivers: [
               const HomeAppBar(),
               const OverviewSection(),
-              if (!hasProgress)
+              if (hasProgress)
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -67,7 +65,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     ),
                   ),
                 ),
-              if (!hasProgress) const InProgressSection(),
+              if (hasProgress) const InProgressSection(),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 19, bottom: 11, top: 11),

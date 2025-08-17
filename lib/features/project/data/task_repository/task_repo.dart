@@ -5,4 +5,5 @@ abstract class TaskRepo {
 
   void addEmptyTask();
   void removeTask(int index);
+  void initializeWithTasks(List<TaskModel> tasks);
 }

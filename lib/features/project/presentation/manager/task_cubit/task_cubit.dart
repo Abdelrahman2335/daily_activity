@@ -91,4 +91,20 @@ class TaskCubit extends Cubit<TaskState> {
       emit(TaskError(e.toString()));
     }
   }
+
+  // Initialize with existing tasks for edit project
+  void initializeForEditProject(List<TaskModel> existingTasks) {
+    try {
+      emit(TaskLoading());
+      taskRepo.initializeWithTasks(existingTasks);
+      for (int i = 0; i < existingTasks.length; i++) {
+        _enabledFields[i] = true;
+      }
+      emit(TaskSuccess(
+        tasks: currentTaskList,
+      ));
+    } catch (e) {
+      emit(TaskError(e.toString()));
+    }
+  }
 }

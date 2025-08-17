@@ -19,20 +19,17 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/debug_logger.dart';
 
-class ProjectViewBody extends StatefulWidget {
-  const ProjectViewBody({super.key});
+class AddProjectViewBody extends StatefulWidget {
+  const AddProjectViewBody({super.key});
 
   @override
-  State<ProjectViewBody> createState() => _ProjectViewBodyState();
-
+  State<AddProjectViewBody> createState() => _AddProjectViewBodyState();
 }
 
-class _ProjectViewBodyState extends State<ProjectViewBody> {
+class _AddProjectViewBodyState extends State<AddProjectViewBody> {
   final _formKey = GlobalKey<FormState>();
-  
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  String? taskTitle, description;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -44,9 +41,8 @@ class _ProjectViewBodyState extends State<ProjectViewBody> {
               const SnackBar(content: Text('Project added successfully!')),
             );
           } else if (state is AddProjectError) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.errMessage)));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.errMessage)));
           }
         },
         builder: (context, state) {
@@ -84,7 +80,7 @@ class _ProjectViewBodyState extends State<ProjectViewBody> {
                       ),
                       onActionButtonPressed: () {
                         final form = _formKey.currentState!;
-    
+
                         if (form.validate()) {
                           form.save();
                           context.read<AddProjectCubit>().submitForm();
@@ -95,9 +91,7 @@ class _ProjectViewBodyState extends State<ProjectViewBody> {
                   CustomTextFormField(
                     onSaved: (value) {
                       DebugLogger.log("Title in the view is $value");
-                      context
-                          .read<AddProjectCubit>()
-                          .titleChange(value ?? "");
+                      context.read<AddProjectCubit>().titleChange(value ?? "");
                     },
                     maxLines: 1,
                     maxLength: 50,
@@ -127,14 +121,13 @@ class _ProjectViewBodyState extends State<ProjectViewBody> {
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
-                        lastDate:
-                            DateTime.now().add(const Duration(days: 365)),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
-                      pickedDate ?? DateTime.now();
-    
-                      context
-                          .read<AddProjectCubit>()
-                          .startDateChange(pickedDate!);
+                      if (pickedDate != null) {
+                        context
+                            .read<AddProjectCubit>()
+                            .startDateChange(pickedDate);
+                      }
                     },
                     selectedDate: formState.startDate,
                   ),
@@ -146,14 +139,13 @@ class _ProjectViewBodyState extends State<ProjectViewBody> {
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
-                        lastDate:
-                            DateTime.now().add(const Duration(days: 365)),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
-                      pickedDate ?? DateTime.now();
-    
-                      context
-                          .read<AddProjectCubit>()
-                          .endDateChange(pickedDate!);
+                      if (pickedDate != null) {
+                        context
+                            .read<AddProjectCubit>()
+                            .endDateChange(pickedDate);
+                      }
                     },
                     selectedDate: formState.endDate,
                   ),

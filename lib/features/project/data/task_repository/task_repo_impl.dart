@@ -17,4 +17,8 @@ class TaskRepoImpl implements TaskRepo {
     taskList.removeAt(index);
   }
 
+  @override
+  void initializeWithTasks(List<TaskModel> tasks) {
+    taskList = List.from(tasks);
+  }
 }

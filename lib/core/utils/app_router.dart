@@ -11,8 +11,8 @@ abstract class AppRouter {
   static const String kHomePage = "/home";
   static const String kLayOut = "/layOut";
   static const String kTodayTasks = "/todayTasks";
-  static const String kAddProject = "/addTask";
-  static const String kEditProject = "/addTask";
+  static const String kAddProject = "/addProject";
+  static const String kEditProject = "/editProject";
   static const String kSettings = "/settings";
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
@@ -34,16 +34,15 @@ abstract class AppRouter {
     GoRoute(
       path: kAddProject,
       builder: (context, state) {
-        final isEditMood = state.extra as bool;
         return ProjectView(
-          isEditMood: isEditMood,
+          isEditMood: false,
         );
       },
     ),
     GoRoute(
       path: kEditProject,
       builder: (context, state) {
-        final project = state.extra as ProjectModel;
+        final project = state.extra as ProjectModel?;
         return ProjectView(
           isEditMood: true,
           project: project,

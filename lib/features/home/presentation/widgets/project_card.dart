@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../../core/models/project_model.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -14,12 +13,14 @@ class ProjectCard extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(31),
-          color: AppColor.card,
+          color: colorScheme.surface,
         ),
         child: Stack(
           children: [
@@ -41,7 +42,7 @@ class ProjectCard extends StatelessWidget {
               left: 64,
               child: Text(
                 data.category.title,
-                style: AppTextStyles.textStyleBold12,
+                style: AppTextStyles.textStyleBold12(context),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -51,7 +52,7 @@ class ProjectCard extends StatelessWidget {
               left: 64,
               child: Text(
                 data.title,
-                style: AppTextStyles.textStyle12,
+                style: AppTextStyles.textStyle12(context),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -68,7 +69,7 @@ class ProjectCard extends StatelessWidget {
                 progressColor: Color(data.category.colorValue),
                 center: Text(
                   context.read<HomeCubit>().progressValue(data),
-                  style: AppTextStyles.textStyleBold12,
+                  style: AppTextStyles.textStyleBold12(context),
                 ),
               ),
             ),

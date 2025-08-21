@@ -111,7 +111,9 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                           context.read<EditProjectCubit>().submitForm();
                         }
                       }),
-                  const CustomDropDownButton(),
+                  CustomDropDownButton(
+                    onSave: context.read<EditProjectCubit>(),
+                  ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
                     controller: _titleController,

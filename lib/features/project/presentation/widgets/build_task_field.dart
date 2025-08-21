@@ -26,32 +26,20 @@ class BuildTaskField extends StatelessWidget {
       },
       builder: (context, state) {
        
-        final isEnabled = index != null
-            ? context.watch<TaskCubit>().isTaskFieldEnabled(index!)
-            : true;
-
+      
         return CustomTextFormField(
           key: ValueKey(hashCode),
-          enableField: isEnabled,
           onSaved: (value) {
             context.read<AddProjectCubit>().tasksChange(TaskModel(
                   title: value ?? "",
                 ));
           },
-          onSecondPress: () {
-            if (index != null) {
-              context.read<TaskCubit>().toggleTaskFieldEnabled(index!);
-            }
-          },
+        
           icon: IconButton(
               style: IconButton.styleFrom(
                 padding: EdgeInsets.zero,
               ),
-              onLongPress: () {
-                if (index != null) {
-                  context.read<TaskCubit>().toggleTaskFieldEnabled(index!);
-                }
-              },
+           
               onPressed: () {},
               icon: Icon(FontAwesomeIcons.gripVertical)),
           maxLines: 1,

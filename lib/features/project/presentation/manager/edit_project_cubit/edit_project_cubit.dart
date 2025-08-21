@@ -6,6 +6,7 @@ import 'package:daily_activity/core/models/project_status.dart';
 import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/features/project/data/project_repository/project_repo.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -162,6 +163,49 @@ class EditProjectCubit extends Cubit<EditProjectState> {
       statusChange(TaskStatus.notStarted);
     }
     DebugLogger.log("emit new state with tasks: ${formState.tasks}",
+        tag: "EditProjectCubit");
+  }
+
+  void toggleTask(TaskModel task) {
+    DebugLogger.log(
+        "toggleTask called with task: ${task.title}, isCompleted: ${task.isCompleted}",
+        tag: "EditProjectCubit");
+
+    // Create a new list to avoid mutation issues
+    List<TaskModel> updatedTasks = List.from(_currentFormState.project.tasks);
+    int taskIndex = updatedTasks.indexWhere((i) => i.id == task.id);
+
+    if (taskIndex == -1) {
+      DebugLogger.logError("Task with id ${task.id} not found",
+          context: "EditProjectCubit");
+      return;
+    }
+
+    updatedTasks[taskIndex] = task;
+
+    final updateProject =
+        _currentFormState.project.copyWith(tasks: updatedTasks);
+    final formState = _currentFormState.copyWith(
+      project: updateProject,
+      isValid: _validForm(EditProjectFormState(project: updateProject)),
+    );
+
+    emit(formState);
+
+    // Update project status based on task completion
+    bool isCompleted = updatedTasks.every((i) => i.isCompleted == true);
+    bool inProgress = updatedTasks.any((i) => i.isCompleted == true);
+
+    if (isCompleted) {
+      statusChange(TaskStatus.completed);
+    } else if (inProgress) {
+      statusChange(TaskStatus.inProgress);
+    } else {
+      statusChange(TaskStatus.notStarted);
+    }
+
+    DebugLogger.log(
+        "Task toggled successfully: ${updatedTasks[taskIndex].isCompleted}",
         tag: "EditProjectCubit");
   }
 

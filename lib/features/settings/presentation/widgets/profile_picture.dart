@@ -1,4 +1,3 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -9,6 +8,8 @@ class ProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Badge(
       label: IconButton(
         onPressed: () {
@@ -16,17 +17,18 @@ class ProfilePicture extends StatelessWidget {
         },
         icon: Icon(
           Iconsax.edit,
-          color: AppColor.primary,
+          color: colorScheme.primary,
         ),
       ),
       backgroundColor: Colors.transparent,
       offset: Offset(-20, -20),
       alignment: Alignment.bottomRight,
-      child: const CircleAvatar(
+      child: CircleAvatar(
         backgroundImage: null, // user image
-        backgroundColor: AppColor.accentPink,
+        backgroundColor:
+            colorScheme.error, // Using error color instead of accentPink
         radius: 41,
-        child: Icon(
+        child: const Icon(
           Iconsax.user,
           size: 30,
         ),

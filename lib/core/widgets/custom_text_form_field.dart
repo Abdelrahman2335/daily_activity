@@ -55,6 +55,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: widget.onSecondPress,
       child: TextFormField(
@@ -80,7 +81,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           counterText: "", // Hides the character counter
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          fillColor: widget.backgroundColor ?? Colors.white,
+          fillColor: widget.backgroundColor ?? colorScheme.surface,
           filled: true,
           hintText: widget.hintText,
 

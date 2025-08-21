@@ -27,7 +27,7 @@ class InProgressTodo extends StatelessWidget {
                     Expanded(
                       child: Text(
                         data.title,
-                        style: AppTextStyles.textStyle12,
+                        style: AppTextStyles.textStyle12(context),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -43,7 +43,7 @@ class InProgressTodo extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 19, right: 19, bottom: 11),
                 child: Text(
                   data.description,
-                  style: AppTextStyles.textStyleBold12,
+                  style: AppTextStyles.textStyleBold12(context),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

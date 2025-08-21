@@ -25,14 +25,14 @@ class WelcomeViewBody extends StatelessWidget {
               ),
               Text("Task Management &\n To-Do List",
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.textStyle26),
+                  style: AppTextStyles.textStyle26(context)),
               SizedBox(
                 height: 24,
               ),
               Text(
                 Constants.appDescription,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.textStyle12,
+                style: AppTextStyles.textStyle12(context),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.09,
@@ -44,7 +44,7 @@ class WelcomeViewBody extends StatelessWidget {
                 },
                 buttonLabel: Text(
                   "Let's Start",
-                  style: AppTextStyles.textStyle19.copyWith(
+                  style: AppTextStyles.textStyle19(context).copyWith(
                     fontWeight: FontWeight.w500,
                     color: Colors.white, // White text color
                   ),

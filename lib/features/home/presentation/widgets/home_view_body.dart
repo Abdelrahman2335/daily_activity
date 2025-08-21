@@ -61,7 +61,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     ),
                     child: Text(
                       "In Progress",
-                      style: AppTextStyles.textStyle19,
+                      style: AppTextStyles.textStyle19(context),
                     ),
                   ),
                 ),
@@ -71,7 +71,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   padding: const EdgeInsets.only(left: 19, bottom: 11, top: 11),
                   child: Text(
                     "Projects",
-                    style: AppTextStyles.textStyle19,
+                    style: AppTextStyles.textStyle19(context),
                   ),
                 ),
               ),

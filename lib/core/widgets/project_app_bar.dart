@@ -1,4 +1,3 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,14 +28,13 @@ class ProjectAppBar extends StatelessWidget {
             icon: Icon(
               Iconsax.arrow_left_2,
               size: 24,
-              color: AppColor.textPrimary, // Add explicit color
             ),
           ),
           Expanded(
             child: Center(
               child: Text(
                 title,
-                style: AppTextStyles.textStyle19,
+                style: AppTextStyles.textStyle19(context),
               ),
             ),
           ),

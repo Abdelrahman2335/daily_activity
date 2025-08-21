@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 abstract class AppColor {
   static const primary = Color(0xFF5F33E1);
@@ -34,4 +34,40 @@ abstract class AppColor {
 
   static const accentLightPurple =
       Color(0xFFB9A7F9); // Light purple for time text
+
+  // Dark theme colors
+  static const darkBackground = Color(0xFF121212);
+  static const darkCard = Color(0xFF1E1E1E);
+  static const darkTextPrimary = Color(0xFFFFFFFF);
+  static const darkTextSecondary = Color(0xFFB3B3B3);
+
+  /// Method to check if the current theme is dark
+  static bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
+
+  /// Method to check system/platform brightness
+  static bool isSystemDarkMode(BuildContext context) {
+    return MediaQuery.of(context).platformBrightness == Brightness.dark;
+  }
+
+  /// Get background color based on theme
+  static Color getBackgroundColor(BuildContext context) {
+    return isDarkMode(context) ? darkBackground : background;
+  }
+
+  /// Get card color based on theme
+  static Color getCardColor(BuildContext context) {
+    return isDarkMode(context) ? darkCard : card;
+  }
+
+  /// Get primary text color based on theme
+  static Color getPrimaryTextColor(BuildContext context) {
+    return isDarkMode(context) ? darkTextPrimary : textPrimary;
+  }
+
+  /// Get secondary text color based on theme
+  static Color getSecondaryTextColor(BuildContext context) {
+    return isDarkMode(context) ? darkTextSecondary : textSecondary;
+  }
 }

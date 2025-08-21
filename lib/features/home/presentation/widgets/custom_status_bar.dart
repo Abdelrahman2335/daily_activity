@@ -12,6 +12,8 @@ class CustomStatusBar extends StatelessWidget {
   Widget build(BuildContext context) {
     int? selectedIndex;
     bool? isSelected;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return SliverToBoxAdapter(
@@ -28,6 +30,12 @@ class CustomStatusBar extends StatelessWidget {
                     selectedIndex = null;
                   },
                   text: "All Projects",
+                  textColor: isSelected ?? true
+                      ? colorScheme.surface
+                      : colorScheme.primary,
+                  backgroundColor: isSelected ?? true
+                      ? colorScheme.primary
+                      : colorScheme.surface,
                 ),
                 ...List.generate(TaskStatus.values.length, (index) {
                   isSelected = selectedIndex == index;
@@ -45,6 +53,12 @@ class CustomStatusBar extends StatelessWidget {
                       }
                     },
                     text: TaskStatus.values[index].displayName,
+                    textColor: isSelected ?? false
+                        ? colorScheme.surface
+                        : colorScheme.primary,
+                    backgroundColor: isSelected ?? false
+                        ? colorScheme.primary
+                        : colorScheme.surface,
                   );
                 })
               ],

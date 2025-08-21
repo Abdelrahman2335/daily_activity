@@ -1,39 +1,38 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
+import 'package:daily_activity/features/settings/presentation/theme_cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
-class DarkThemeToggle extends StatefulWidget {
+class DarkThemeToggle extends StatelessWidget {
   const DarkThemeToggle({
     super.key,
   });
 
   @override
-  State<DarkThemeToggle> createState() => _DarkThemeToggleState();
-}
-
-class _DarkThemeToggleState extends State<DarkThemeToggle> {
-  bool isDark = false;
-  @override
   Widget build(BuildContext context) {
-    return ListTile(
-      shape: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(19),
-      ),
-      leading: const Icon(
-        Iconsax.brush_4,
-        color: AppColor.primary,
-      ),
-      title: const Text(
-        "Dark Theme",
-      ),
-      trailing: Switch(
-          activeColor: AppColor.primary,
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return BlocBuilder<ThemeCubit, bool>(
+      builder: (context, isDark) {
+        return SwitchListTile(
+          shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(19),
+          ),
+          secondary: Icon(
+            Iconsax.brush_4,
+            color: colorScheme.primary,
+          ),
+          title: const Text(
+            "Dark Theme",
+          ),
           value: isDark,
-          onChanged: (value) {
-            setState(() {
-              isDark = !isDark;
-            });
-          }),
+          onChanged: (bool value) {
+            context.read<ThemeCubit>().toggleTheme();
+          },
+          activeThumbColor: colorScheme.primary,
+ 
+        );
+      },
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/features/home/presentation/widgets/custom_calender_list.dart';
 import 'package:daily_activity/features/home/presentation/widgets/custom_status_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/filtered_projects.dart';
@@ -21,7 +20,7 @@ class TodayTaskViewBody extends StatelessWidget {
           actionButton: Icon(
             Iconsax.notification,
             size: 24,
-            color: AppColor.textPrimary,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           onActionButtonPressed: () {},
         )),

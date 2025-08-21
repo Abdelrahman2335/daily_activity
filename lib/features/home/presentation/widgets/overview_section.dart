@@ -19,7 +19,7 @@ class OverviewSection extends StatelessWidget {
   Widget build(BuildContext context) {
     double percent =
         double.tryParse(context.read<HomeCubit>().overallProgress) ?? 0;
-
+    final themeColor = Theme.of(context).colorScheme;
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 19),
       sliver: SliverAppBar(
@@ -35,25 +35,28 @@ class OverviewSection extends StatelessWidget {
             top: Radius.circular(39),
           ),
           child: Container(
-            color: AppColor.primary,
+            color: themeColor.primary,
             child: Stack(children: [
               Positioned(
                 top: 26,
                 left: 19,
                 child: Text(
                   "Overall progress \nKeep it up!",
-                  style:
-                      AppTextStyles.textStyle14.copyWith(color: AppColor.card),
+                  style: AppTextStyles.textStyle14
+                      .copyWith(color: themeColor.surface),
                 ),
               ),
               Positioned(
                 bottom: 36,
                 left: 19,
                 child: PrimaryButton(
-                    text: "View Project",
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kTodayTasks);
-                    }),
+                  text: "View Project",
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kTodayTasks);
+                  },
+                  backgroundColor: themeColor.surface,
+                  textColor: themeColor.primary,
+                ),
               ),
               Positioned(
                   top: 59,
@@ -66,9 +69,9 @@ class OverviewSection extends StatelessWidget {
                     center: Text(
                       "$percent%",
                       style: AppTextStyles.textStyle14
-                          .copyWith(color: AppColor.card),
+                          .copyWith(color: themeColor.surface),
                     ),
-                    progressColor: AppColor.card,
+                    progressColor: themeColor.surface,
                     circularStrokeCap: CircularStrokeCap.round,
                     animation: true,
                     animationDuration: 1700,

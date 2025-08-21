@@ -56,27 +56,6 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
-  // Toggle enabled state for a specific task field
-  void toggleTaskFieldEnabled(int index) {
-    _enabledFields[index] = !(_enabledFields[index] ?? true);
-    emit(TaskSuccess(
-      tasks: currentTaskList,
-    ));
-  }
-
-  // Get enabled state for a specific task field
-  bool isTaskFieldEnabled(int index) {
-    return _enabledFields[index] ?? true; // Default to enabled
-  }
-
-  // Set enabled state for a specific task field
-  void setTaskFieldEnabled(int index, bool enabled) {
-    _enabledFields[index] = enabled;
-    emit(TaskSuccess(
-      tasks: currentTaskList,
-    ));
-  }
-
   // Initialize with one empty task for new project
   void initializeForNewProject() {
     try {

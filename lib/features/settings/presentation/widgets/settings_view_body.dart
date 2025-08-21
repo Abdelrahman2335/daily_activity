@@ -30,9 +30,9 @@ class SettingsViewBody extends StatelessWidget {
           ),
           const NotificationToggle(),
           const Spacer(),
-          const Text(
+          Text(
             Constants.appVersion,
-            style: AppTextStyles.textStyle12,
+            style: AppTextStyles.textStyle12(context),
           ),
           const SizedBox(height: 60),
         ],

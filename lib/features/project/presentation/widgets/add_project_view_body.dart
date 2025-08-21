@@ -86,7 +86,9 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                           context.read<AddProjectCubit>().submitForm();
                         }
                       }),
-                  const CustomDropDownButton(),
+                  CustomDropDownButton(
+                    onSave: context.read<AddProjectCubit>(),
+                  ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
                     onSaved: (value) {

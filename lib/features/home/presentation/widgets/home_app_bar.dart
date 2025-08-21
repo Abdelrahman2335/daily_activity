@@ -1,4 +1,3 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -9,6 +8,8 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SliverToBoxAdapter(
       child: SafeArea(
         child: Padding(
@@ -21,20 +22,21 @@ class HomeAppBar extends StatelessWidget {
                 child: CircleAvatar(
                   child: Icon(
                     PhosphorIcons.user(),
-                    color: AppColor.accentPink,
+                    color: colorScheme
+                        .error, // Using error color instead of accentPink
                   ),
                 ),
               ),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Hello!",
-                    style: AppTextStyles.textStyle12,
+                    style: AppTextStyles.textStyle12(context),
                   ),
                   Text(
                     "Abdelrahman",
-                    style: AppTextStyles.textStyleBold12,
+                    style: AppTextStyles.textStyleBold12(context),
                   ),
                 ],
               ),
@@ -46,7 +48,7 @@ class HomeAppBar extends StatelessWidget {
                 icon: Icon(
                   Iconsax.notification,
                   size: 24,
-                  color: AppColor.textPrimary, // Add explicit color
+                  color: colorScheme.onSurface, 
                 ),
               ),
             ],

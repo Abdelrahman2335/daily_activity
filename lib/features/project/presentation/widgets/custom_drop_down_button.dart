@@ -1,8 +1,6 @@
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/data/categories.dart';
-import 'package:daily_activity/features/project/presentation/manager/add_project_cubit/add_project_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../core/models/project_category.dart';
@@ -10,10 +8,13 @@ import '../../../../core/models/project_category.dart';
 class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton({
     super.key,
+    required this.onSave,
   });
 
+  final dynamic onSave;
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return DropdownButtonFormField(
       validator: (value) {
         if (value != null) {
@@ -27,11 +28,11 @@ class CustomDropDownButton extends StatelessWidget {
       menuMaxHeight: 400,
       onChanged: (value) {},
       onSaved: (value) {
-        context.read<AddProjectCubit>().categoryChange(value!);
+        onSave.categoryChange(value!);
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 19, horizontal: 19),
-        fillColor: Colors.white,
+        fillColor: colorScheme.surface,
         filled: true,
 
         hintText: 'Task Group',

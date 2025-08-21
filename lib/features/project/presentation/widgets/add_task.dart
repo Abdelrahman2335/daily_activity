@@ -26,7 +26,7 @@ class _AddTaskState extends State<AddTask> {
   @override
   Widget build(BuildContext context) {
     final taskList = context.watch<TaskCubit>().currentTaskList;
-
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         ...taskList.asMap().entries.map((entry) {
@@ -49,7 +49,7 @@ class _AddTaskState extends State<AddTask> {
               style: AppTextStyles.textStyle14.copyWith(
                 color: AppColor.accentOrange,
               )),
-          backgroundColor: AppColor.card,
+          backgroundColor: colorScheme.surface,
           textColor: AppColor.accentOrange,
           width: MediaQuery.of(context).size.width * 0.7,
           height: 50,

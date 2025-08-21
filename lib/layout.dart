@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/core/widgets/app_background.dart';
@@ -30,16 +29,17 @@ class _LayOutState extends State<LayOut> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final List<Widget> curvedIcons = [
       Icon(
         Iconsax.home,
         size: 26,
-        color: currentScreen == 0 ? Colors.white : AppColor.primary,
+        color: currentScreen == 0 ? colorScheme.surface : colorScheme.primary,
       ),
       Icon(
         Iconsax.user,
         size: 26,
-        color: currentScreen == 1 ? Colors.white : AppColor.primary,
+        color: currentScreen == 1 ? colorScheme.surface : colorScheme.primary,
       ),
     ];
     return BackgroundLayout(
@@ -49,17 +49,18 @@ class _LayOutState extends State<LayOut> {
         onPressed: () {
           GoRouter.of(context).push(AppRouter.kAddProject);
         },
-        backgroundColor: AppColor.primary,
-        child: const Icon(
+        backgroundColor: colorScheme.primary,
+        child: Icon(
           Iconsax.add,
-          color: Colors.white,
+          color: colorScheme.surface,
           size: 26,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CurvedNavigationBar(
+          color: colorScheme.surface,
           height: 64,
-          animationDuration: const Duration(milliseconds: 300),
+          animationDuration: const Duration(milliseconds: 400),
           onTap: (value) {
             setState(() {
               currentScreen = value;
@@ -67,7 +68,7 @@ class _LayOutState extends State<LayOut> {
             });
           },
           backgroundColor: Colors.transparent,
-          buttonBackgroundColor: AppColor.primary,
+          buttonBackgroundColor: colorScheme.primary,
           items: curvedIcons),
       children: [selectedScreen[widget.currentScreen ?? currentScreen]],
     );

@@ -17,11 +17,13 @@ class CustomTodayTaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme.surface;
+
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColor.card,
+        color: colorScheme,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -31,11 +33,12 @@ class CustomTodayTaskCard extends StatelessWidget {
             children: [
               Text(
                 taskModel[index].category.title,
-                style: AppTextStyles.textStyle12,
+                style: AppTextStyles.textStyle12(context),
               ),
               const Spacer(),
               CircleAvatar(
-                backgroundColor: Color(taskModel[index].category.colorValue).withAlpha(37),
+                backgroundColor:
+                    Color(taskModel[index].category.colorValue).withAlpha(37),
                 child: Icon(
                   taskModel[index].category.icon,
                   size: 24,
@@ -47,7 +50,7 @@ class CustomTodayTaskCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             taskModel[index].title,
-            style: AppTextStyles.textStyleBold12,
+            style: AppTextStyles.textStyleBold12(context),
           ),
           const SizedBox(height: 10),
           Row(
@@ -60,7 +63,7 @@ class CustomTodayTaskCard extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 "10:00 AM",
-                style: AppTextStyles.textStyle12.copyWith(
+                style: AppTextStyles.textStyle12(context).copyWith(
                   color: AppColor.accentLightPurple,
                 ),
               ),
@@ -72,7 +75,7 @@ class CustomTodayTaskCard extends StatelessWidget {
                 onPressed: null,
                 child: Text(
                   taskModel[index].status.displayName,
-                  style: AppTextStyles.textStyle12.copyWith(
+                  style: AppTextStyles.textStyle12(context).copyWith(
                     color: taskModel[index].status.color,
                   ),
                 ),

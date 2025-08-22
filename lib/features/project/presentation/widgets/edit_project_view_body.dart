@@ -7,7 +7,7 @@ import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
-import 'package:daily_activity/features/project/presentation/widgets/edit_task.dart';
+import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:daily_activity/core/widgets/project_app_bar.dart';
@@ -28,23 +28,6 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  late TextEditingController _titleController;
-  late TextEditingController _descriptionController;
-
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController();
-    _descriptionController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _descriptionController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -52,12 +35,31 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
         listener: (context, state) {
           if (state is ProjectSuccess) {
             GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Project updated successfully!')),
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  title: Text("Project Update"),
+                  content: Text("Project updated successfully!"),
+                );
+              },
             );
+            GoRouter.of(context).pop();
           } else if (state is ProjectError) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.errMessage)));
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  title: Text("Error"),
+                  content: Text(state.errMessage),
+                );
+              },
+            );
+            Future.delayed((Duration(seconds: 2)), () {
+              GoRouter.maybeOf(context)?.pop();
+            });
           }
         },
         builder: (context, state) {
@@ -77,13 +79,6 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                       tasks: [],
                       status: TaskStatus.notStarted));
 
-          // Update controllers with current form state values
-          if (_titleController.text != formState.project.title) {
-            _titleController.text = formState.project.title;
-          }
-          if (_descriptionController.text != formState.project.description) {
-            _descriptionController.text = formState.project.description;
-          }
           return Form(
             key: _formKey,
             autovalidateMode: autovalidateMode,
@@ -110,13 +105,13 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                         }
                       }),
                   CustomDropDownButton(
+                    initialValue: formState.category,
                     onSave: context.read<ProjectCubit>(),
                   ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
-                    controller: _titleController,
+                    initialValue: formState.title,
                     onSaved: (value) {
-                      DebugLogger.log("Title in the view is $value");
                       context.read<ProjectCubit>().titleChange(value ?? "");
                     },
                     maxLines: 1,
@@ -125,7 +120,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                   ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
-                    controller: _descriptionController,
+                    initialValue: formState.description,
                     onSaved: (value) {
                       context
                           .read<ProjectCubit>()
@@ -136,7 +131,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     hintText: 'Description',
                   ),
                   const SizedBox(height: 30),
-                  EditTask(initialTasks: formState.project.tasks),
+                  const ManageTask(),
                   const SizedBox(height: 30),
                   CustomDateTimeButton(
                     title: "Start Date",

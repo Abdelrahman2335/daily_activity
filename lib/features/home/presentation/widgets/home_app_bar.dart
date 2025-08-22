@@ -1,6 +1,8 @@
+import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
+import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -8,8 +10,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
+    final String currentName = context.read<SettingCubit>().currentName;
     return SliverToBoxAdapter(
       child: SafeArea(
         child: Padding(
@@ -22,34 +23,23 @@ class HomeAppBar extends StatelessWidget {
                 child: CircleAvatar(
                   child: Icon(
                     PhosphorIcons.user(),
-                    color: colorScheme
-                        .error, // Using error color instead of accentPink
+                    color: AppColor.accentPink,
                   ),
                 ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (currentName != "")
+                    Text(
+                      "Hello!",
+                      style: AppTextStyles.textStyle12(context),
+                    ),
                   Text(
-                    "Hello!",
-                    style: AppTextStyles.textStyle12(context),
-                  ),
-                  Text(
-                    "Abdelrahman",
+                    currentName == "" ? "Hello There!" : currentName,
                     style: AppTextStyles.textStyleBold12(context),
                   ),
                 ],
-              ),
-              Spacer(),
-              IconButton(
-                onPressed: () {
-                  // Add notification action here
-                },
-                icon: Icon(
-                  Iconsax.notification,
-                  size: 24,
-                  color: colorScheme.onSurface, 
-                ),
               ),
             ],
           ),

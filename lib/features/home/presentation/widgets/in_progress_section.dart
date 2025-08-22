@@ -27,7 +27,7 @@ class InProgressSection extends StatelessWidget {
             itemCount: projects.length,
             itemBuilder: (BuildContext context, int index) {
               return InProgressTodo(
-                data: projects[index],
+                project: projects[index],
               );
             }),
       ),

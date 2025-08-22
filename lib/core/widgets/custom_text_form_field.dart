@@ -13,6 +13,7 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon,
     this.enableField,
     this.onSaved,
+    this.initialValue,
   });
   final Widget? icon;
   final bool? enableField;
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLength;
   final String hintText;
   final TextEditingController? controller;
+  final String? initialValue;
   final Color? backgroundColor;
   final void Function(String?)? onSaved;
   @override
@@ -34,7 +36,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   void initState() {
     if (widget.controller == null) {
-      _controller = TextEditingController();
+      _controller = TextEditingController(text: widget.initialValue);
       _isInternalController = true;
     } else {
       _controller = widget.controller!;
@@ -71,6 +73,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         minLines: widget.minLines,
         maxLines: widget.maxLines,
         maxLength: widget.maxLength,
+        textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
           suffixIcon: widget.suffixIcon,
           icon: widget.icon,

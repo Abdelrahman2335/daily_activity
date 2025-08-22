@@ -3,21 +3,26 @@ import 'package:daily_activity/features/settings/data/repository/setting_repo.da
 import 'package:hive/hive.dart';
 
 class SettingRepoImpl implements SettingRepo {
+  final _box = Hive.box(Constants.kSettingsBox);
   @override
   bool loadTheme() {
-    final box = Hive.box(Constants.kSettingsBox);
-    final isDarkMode = box.get(Constants.themeKey, defaultValue: false);
+    final isDarkMode = _box.get(Constants.themeKey, defaultValue: false);
     return isDarkMode;
   }
 
   @override
-  void toggleTheme(bool value) {
-    final box = Hive.box(Constants.kSettingsBox);
-    box.put(Constants.themeKey, value);
+  void toggleTheme(bool value) async {
+    await _box.put(Constants.themeKey, value);
   }
 
   @override
-  void toggleNotification() {}
+  String getUserName() {
+    final userName = _box.get(Constants.userNameKey, defaultValue: "");
+    return userName;
+  }
+
   @override
-  void userImage() {}
+  void updateUserName(String name) async {
+    await _box.put(Constants.userNameKey, name);
+  }
 }

@@ -7,10 +7,10 @@ import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
-import 'package:daily_activity/features/project/presentation/widgets/add_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:daily_activity/core/widgets/project_app_bar.dart';
+import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,13 +34,32 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
       child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
           if (state is ProjectSuccess) {
-            GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Project added successfully!')),
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  title: Text("Project update"),
+                  content: Text("Project added successfully!"),
+                );
+              },
             );
+
+            Future.delayed((Duration(seconds: 2)), () {
+              GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
+            });
           } else if (state is ProjectError) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.errMessage)));
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  title: Text("Error"),
+                  content: Text(state.errMessage),
+                );
+              },
+            );
+            GoRouter.of(context).pop();
           }
         },
         builder: (context, state) {
@@ -109,7 +128,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     hintText: 'Description',
                   ),
                   const SizedBox(height: 30),
-                  const AddTask(),
+                  const ManageTask(),
                   const SizedBox(height: 30),
                   CustomDateTimeButton(
                     title: "Start Date",

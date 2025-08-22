@@ -11,7 +11,13 @@ class HomeRepoImpl implements HomeRepo {
       Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
 
   List<ProjectModel> _sortProjectsByDate(List<ProjectModel> projects) {
-    return List.from(projects)..sort((a, b) => b.startDate.compareTo(a.startDate));
+    return List.from(projects)
+      ..sort((a, b) => b.startDate.compareTo(a.startDate));
+  }
+
+  List<ProjectModel> _sortProjectsByLastModified(List<ProjectModel> projects) {
+    return List.from(projects)
+      ..sort((a, b) => b.lastModified.compareTo(a.lastModified));
   }
 
   Either<String, T> _handleError<T>(String operation, dynamic error) {
@@ -22,7 +28,7 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Either<String, List<ProjectModel>> getProjects() {
     try {
-      final sortedProjects = _sortProjectsByDate(_projects);
+      final sortedProjects = _sortProjectsByLastModified(_projects);
       return Right(sortedProjects);
     } catch (e) {
       return _handleError('get projects', e);
@@ -43,7 +49,7 @@ class HomeRepoImpl implements HomeRepo {
             isSameDate(project.startDate, currentDate) ||
             isSameDate(project.endDate, currentDate);
       }).toList();
-      
+
       final sortedProjects = _sortProjectsByDate(filteredProjects);
       return Right(sortedProjects);
     } catch (e) {
@@ -57,17 +63,18 @@ class HomeRepoImpl implements HomeRepo {
       if (_projects.isEmpty) return [];
 
       final sortedProjects = _sortProjectsByDate(_projects);
-      
+
       final startDate = sortedProjects
           .map((p) => p.startDate)
           .reduce((a, b) => a.isBefore(b) ? a : b);
-      
+
       final endDate = sortedProjects
           .map((p) => p.endDate)
           .reduce((a, b) => a.isAfter(b) ? a : b);
 
       final dateList = <DateTime>[];
-      DateTime currentDate = DateTime(startDate.year, startDate.month, startDate.day);
+      DateTime currentDate =
+          DateTime(startDate.year, startDate.month, startDate.day);
       final finalDate = DateTime(endDate.year, endDate.month, endDate.day);
 
       while (!currentDate.isAfter(finalDate)) {
@@ -86,9 +93,8 @@ class HomeRepoImpl implements HomeRepo {
   Either<String, List<ProjectModel>> statusFilter(TaskStatus status) {
     try {
       final sortedProjects = _sortProjectsByDate(_projects);
-      final filteredProjects = sortedProjects
-          .where((project) => project.status == status)
-          .toList();
+      final filteredProjects =
+          sortedProjects.where((project) => project.status == status).toList();
 
       return Right(filteredProjects);
     } catch (e) {
@@ -100,19 +106,21 @@ class HomeRepoImpl implements HomeRepo {
   String getOverallProgress() {
     try {
       final totalTasks = _projects.fold<int>(
-        0, 
+        0,
         (sum, project) => sum + project.tasks.length,
       );
-      
+
       if (totalTasks == 0) return '0';
 
       final completedTasks = _projects.fold<int>(
         0,
-        (sum, project) => sum + 
+        (sum, project) =>
+            sum +
             project.tasks.where((task) => task.isCompleted == true).length,
       );
-      
-      return _formatPercentage(completedTasks / totalTasks * 100, includePercent: false);
+
+      return _formatPercentage(completedTasks / totalTasks * 100,
+          includePercent: false);
     } catch (e) {
       DebugLogger.log("Error in HomeRepoImpl.getOverallProgress: $e");
       return "0";
@@ -126,7 +134,7 @@ class HomeRepoImpl implements HomeRepo {
         DebugLogger.log("Invalid progress value: ${project.progress}");
         return "0%";
       }
-      
+
       return _formatPercentage(project.progress * 100, includePercent: true);
     } catch (e) {
       DebugLogger.log("Error in HomeRepoImpl.progressValue: $e");
@@ -137,7 +145,7 @@ class HomeRepoImpl implements HomeRepo {
   /// Helper method to format percentage values consistently
   String _formatPercentage(double value, {required bool includePercent}) {
     final suffix = includePercent ? '%' : '';
-    
+
     if (value == 0) {
       return '0$suffix';
     } else if (value == value.roundToDouble()) {

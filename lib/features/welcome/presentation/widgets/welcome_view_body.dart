@@ -14,6 +14,7 @@ class WelcomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Center(
       child: SingleChildScrollView(
         child: Padding(
@@ -22,6 +23,12 @@ class WelcomeViewBody extends StatelessWidget {
             children: [
               Image.asset(
                 Assets.welcomePhoto,
+                width: mediaQuery.size.width * 0.8,
+                height: mediaQuery.size.height * 0.4,
+                fit: BoxFit.contain,
+                cacheWidth:
+                    (mediaQuery.size.width * 0.8 * mediaQuery.devicePixelRatio)
+                        .round(),
               ),
               Text("Task Management &\n To-Do List",
                   textAlign: TextAlign.center,
@@ -35,7 +42,7 @@ class WelcomeViewBody extends StatelessWidget {
                 style: AppTextStyles.textStyle12(context),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.09,
+                height: mediaQuery.size.height * 0.09,
               ),
               SecondaryButton(
                 height: 60,

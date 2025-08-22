@@ -33,7 +33,7 @@ class FilteredProjects extends StatelessWidget {
                   children: List.generate(
                     5,
                     (i) => CustomTodayTaskCard(
-                        taskModel: displayedProjects, index: 5),
+                        project: displayedProjects, index: 5),
                   ),
                 ),
               ),
@@ -44,7 +44,7 @@ class FilteredProjects extends StatelessWidget {
             itemCount: displayedProjects.length,
             itemBuilder: (context, index) {
               return CustomTodayTaskCard(
-                  taskModel: displayedProjects, index: index);
+                  project: displayedProjects, index: index);
             });
       },
     );

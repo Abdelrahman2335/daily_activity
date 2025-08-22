@@ -25,6 +25,12 @@ class ProjectRepositoryImpl implements ProjectRepository {
   Future<Either<String, void>> editProject(
       {required ProjectModel updatedProject}) async {
     try {
+      // Check if the project exists before updating
+      if (!box.containsKey(updatedProject.id)) {
+        return Left("Project not found for updating");
+      }
+
+      // Update the existing project
       await box.put(updatedProject.id, updatedProject);
       return Right(null);
     } catch (error) {

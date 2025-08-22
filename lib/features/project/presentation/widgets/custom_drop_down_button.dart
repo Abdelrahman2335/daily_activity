@@ -9,13 +9,23 @@ class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton({
     super.key,
     required this.onSave,
+    this.initialValue,
   });
 
   final dynamic onSave;
+  final ProjectCategoryModel? initialValue;
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    ProjectCategoryModel? currentProjectCategory;
+
+    if (initialValue != null) {
+      currentProjectCategory = categories.values
+          .firstWhere((category) => category.title == initialValue!.title);
+    }
+
     return DropdownButtonFormField(
+      initialValue: currentProjectCategory,
       validator: (value) {
         if (value != null) {
           return null;

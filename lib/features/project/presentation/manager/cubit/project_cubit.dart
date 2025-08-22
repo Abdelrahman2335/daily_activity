@@ -183,17 +183,41 @@ class ProjectCubit extends Cubit<ProjectState> {
     List<TaskModel> currentTasks = List.from(_currentFormState.project.tasks);
     DebugLogger.log("currentTasks called with length: ${currentTasks.length}",
         tag: "ProjectCubit");
+
+    // Validate index bounds
+    if (index < 0 || index >= currentTasks.length) {
+      emit(ProjectError("Invalid task index"));
+      return;
+    }
     if (currentTasks.length <= 1) {
       emit(ProjectError("At least one task is required"));
-    } else {
-      currentTasks.removeAt(index);
-      final updateProject =
-          _currentFormState.project.copyWith(tasks: currentTasks);
-      final formState = _currentFormState.copyWith(
-          project: updateProject,
-          isValid: _validForm(ProjectFormState(project: updateProject)));
-      emit(formState);
+      return;
     }
+    DebugLogger.log("We are removing the index $index after check");
+
+    currentTasks.removeAt(index);
+    final updateProject =
+        _currentFormState.project.copyWith(tasks: currentTasks);
+    final formState = _currentFormState.copyWith(
+        project: updateProject,
+        isValid: _validForm(ProjectFormState(project: updateProject)));
+    emit(formState);
+
+    // Update project status based on remaining tasks
+    bool isCompleted = currentTasks.every((i) => i.isCompleted == true);
+    bool inProgress = currentTasks.any((i) => i.isCompleted == true);
+
+    if (isCompleted) {
+      statusChange(TaskStatus.completed);
+    } else if (inProgress) {
+      statusChange(TaskStatus.inProgress);
+    } else {
+      statusChange(TaskStatus.notStarted);
+    }
+
+    DebugLogger.log(
+        "Task removed successfully. Remaining tasks: ${currentTasks.length}",
+        tag: "ProjectCubit");
   }
 
   void toggleTask(TaskModel task) {

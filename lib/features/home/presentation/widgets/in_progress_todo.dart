@@ -1,23 +1,27 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
+import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/models/project_model.dart';
 import '../../../../core/utils/app_text_styles.dart';
 
 class InProgressTodo extends StatelessWidget {
-  const InProgressTodo({super.key, required this.data});
+  const InProgressTodo({super.key, required this.project});
 
-  final ProjectModel data;
+  final ProjectModel project;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(39),
-          color: Color(data.category.colorValue).withAlpha(16),
-        ),
-        child: GestureDetector(
-          onTap: () {},
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.kEditProject, extra: project);
+      },
+      child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(39),
+            color: Color(project.category.colorValue).withAlpha(16),
+          ),
           child: Column(
             children: [
               Padding(
@@ -26,15 +30,15 @@ class InProgressTodo extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        data.title,
+                        project.title,
                         style: AppTextStyles.textStyle12(context),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Icon(
-                      data.category.icon,
-                      color: Color(data.category.colorValue),
+                      project.category.icon,
+                      color: Color(project.category.colorValue),
                     )
                   ],
                 ),
@@ -42,7 +46,7 @@ class InProgressTodo extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 19, right: 19, bottom: 11),
                 child: Text(
-                  data.description,
+                  project.description,
                   style: AppTextStyles.textStyleBold12(context),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -62,15 +66,15 @@ class InProgressTodo extends StatelessWidget {
                   // Adjust track thickness
                   thumbShape: SliderComponentShape.noThumb,
                   // Remove thumb if needed
-                  disabledActiveTrackColor: Color(data.category.colorValue),
+                  disabledActiveTrackColor: Color(project.category.colorValue),
                 ),
                 child: Slider(
-                  value: data.progress,
+                  value: project.progress,
                   onChanged: null,
                 ),
               ),
             ],
-          ),
-        ));
+          )),
+    );
   }
 }

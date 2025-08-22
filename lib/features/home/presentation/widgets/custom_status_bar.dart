@@ -14,7 +14,15 @@ class CustomStatusBar extends StatelessWidget {
     bool? isSelected;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is HomeFiltered) {
+          bool isFilterByDate = state.filterType == FilterType.date;
+          if (isFilterByDate) {
+            selectedIndex = null;
+          }
+        }
+      },
       builder: (context, state) {
         return SliverToBoxAdapter(
           child: SingleChildScrollView(

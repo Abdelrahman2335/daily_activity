@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:daily_activity/core/adapters/date_time_adapter.dart';
 import 'package:daily_activity/core/adapters/icon_adapter.dart';
 import 'package:daily_activity/core/models/project_category.dart';
@@ -11,7 +10,7 @@ import 'package:daily_activity/core/utils/constants.dart';
 import 'package:daily_activity/core/utils/theme_manager.dart';
 import 'package:daily_activity/features/home/data/repository/home_repo_impl.dart';
 import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
-import 'package:daily_activity/features/settings/presentation/theme_cubit/theme_cubit.dart';
+import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -30,7 +29,6 @@ void main() async {
 
   await Hive.openBox<ProjectModel>(Constants.kMainBox);
   await Hive.openBox(Constants.kSettingsBox);
-
   runApp(const MyApp());
 }
 
@@ -46,11 +44,12 @@ class MyApp extends StatelessWidget {
           create: (context) => HomeCubit(HomeRepoImpl()),
         ),
         BlocProvider(
-          create: (context) => ThemeCubit(),
+          create: (context) => SettingCubit(),
         ),
       ],
-      child: BlocBuilder<ThemeCubit, bool>(
-        builder: (context, isDarkMode) {
+      child: BlocBuilder<SettingCubit, SettingState>(
+        builder: (context, state) {
+          bool isDarkMode = context.watch<SettingCubit>().isDark;
           return MaterialApp.router(
             routerConfig: AppRouter.router,
             title: 'Daily Activity',

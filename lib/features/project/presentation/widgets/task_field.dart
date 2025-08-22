@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class EditTaskField extends StatelessWidget {
-  const EditTaskField({
+class TaskField extends StatelessWidget {
+  const TaskField({
     super.key,
     this.index,
     required this.initialValue,
@@ -22,8 +22,8 @@ class EditTaskField extends StatelessWidget {
 
     return BlocBuilder<ProjectCubit, ProjectState>(
       builder: (context, state) {
-        // Get the current task from the state
-        TaskModel currentTask = initialValue;
+        TaskModel? currentTask = initialValue;
+
         if (state is ProjectFormState) {
           final taskIndex = state.project.tasks
               .indexWhere((task) => task.id == initialValue.id);
@@ -33,11 +33,11 @@ class EditTaskField extends StatelessWidget {
         }
 
         return CustomTextFormField(
-          key: ValueKey('edit_task_$index'),
-          controller: TextEditingController(text: currentTask.title),
+          initialValue: currentTask.title,
+          key: ValueKey(index),
           onSaved: (value) {
             context.read<ProjectCubit>().tasksChange(TaskModel(
-                  id: currentTask.id,
+                  id: currentTask!.id,
                   title: value ?? "",
                   isCompleted: currentTask.isCompleted,
                 ));
@@ -51,7 +51,7 @@ class EditTaskField extends StatelessWidget {
                   : colorScheme.onSurfaceVariant,
               onPressed: () {
                 final task = TaskModel(
-                    title: currentTask.title,
+                    title: currentTask!.title,
                     id: currentTask.id,
                     isCompleted: !currentTask.isCompleted!);
                 context.read<ProjectCubit>().toggleTask(task);

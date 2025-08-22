@@ -6,9 +6,7 @@ import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/core/data/categories.dart';
-import 'package:daily_activity/features/project/data/task_repository/task_repo_impl.dart';
-import 'package:daily_activity/features/project/presentation/manager/add_project_cubit/add_project_cubit.dart';
-import 'package:daily_activity/features/project/presentation/manager/task_cubit/task_cubit.dart';
+import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/add_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
@@ -33,26 +31,26 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: BlocConsumer<AddProjectCubit, AddProjectState>(
+      child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
-          if (state is AddProjectSuccess) {
+          if (state is ProjectSuccess) {
             GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Project added successfully!')),
             );
-          } else if (state is AddProjectError) {
+          } else if (state is ProjectError) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.errMessage)));
           }
         },
         builder: (context, state) {
           DebugLogger.log("Start with state: $state");
-          if (state is AddProjectLoading) {
+          if (state is ProjectLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          final formState = state is AddProjectFormState
+          final formState = state is ProjectFormState
               ? state
-              : AddProjectFormState(
+              : ProjectFormState(
                   project: ProjectModel(
                       title: "",
                       description: "",
@@ -83,17 +81,17 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
 
                         if (form.validate()) {
                           form.save();
-                          context.read<AddProjectCubit>().submitForm();
+                          context.read<ProjectCubit>().submitForm();
                         }
                       }),
                   CustomDropDownButton(
-                    onSave: context.read<AddProjectCubit>(),
+                    onSave: context.read<ProjectCubit>(),
                   ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
                     onSaved: (value) {
                       DebugLogger.log("Title in the view is $value");
-                      context.read<AddProjectCubit>().titleChange(value ?? "");
+                      context.read<ProjectCubit>().titleChange(value ?? "");
                     },
                     maxLines: 1,
                     maxLength: 50,
@@ -103,7 +101,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                   CustomTextFormField(
                     onSaved: (value) {
                       context
-                          .read<AddProjectCubit>()
+                          .read<ProjectCubit>()
                           .descriptionChange(value ?? "");
                     },
                     minLines: 5,
@@ -111,10 +109,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     hintText: 'Description',
                   ),
                   const SizedBox(height: 30),
-                  BlocProvider(
-                    create: (context) => TaskCubit(TaskRepoImpl()),
-                    child: AddTask(),
-                  ),
+                  const AddTask(),
                   const SizedBox(height: 30),
                   CustomDateTimeButton(
                     title: "Start Date",
@@ -122,12 +117,12 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
+                        firstDate: DateTime(2010),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
                       if (pickedDate != null) {
                         context
-                            .read<AddProjectCubit>()
+                            .read<ProjectCubit>()
                             .startDateChange(pickedDate);
                       }
                     },
@@ -140,13 +135,11 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
+                        firstDate: DateTime(2010),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
                       if (pickedDate != null) {
-                        context
-                            .read<AddProjectCubit>()
-                            .endDateChange(pickedDate);
+                        context.read<ProjectCubit>().endDateChange(pickedDate);
                       }
                     },
                     selectedDate: formState.endDate,

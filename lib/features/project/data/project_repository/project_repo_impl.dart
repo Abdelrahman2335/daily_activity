@@ -26,7 +26,6 @@ class ProjectRepositoryImpl implements ProjectRepository {
       {required ProjectModel updatedProject}) async {
     try {
       await box.put(updatedProject.id, updatedProject);
-      updatedProject.save();
       return Right(null);
     } catch (error) {
       log("$error");

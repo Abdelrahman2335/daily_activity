@@ -1,8 +1,7 @@
 import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
-import 'package:daily_activity/features/project/presentation/manager/edit_project_cubit/edit_project_cubit.dart';
-import 'package:daily_activity/features/project/presentation/manager/task_cubit/task_cubit.dart';
+import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,11 +20,11 @@ class EditTaskField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return BlocBuilder<EditProjectCubit, EditProjectState>(
+    return BlocBuilder<ProjectCubit, ProjectState>(
       builder: (context, state) {
         // Get the current task from the state
         TaskModel currentTask = initialValue;
-        if (state is EditProjectFormState) {
+        if (state is ProjectFormState) {
           final taskIndex = state.project.tasks
               .indexWhere((task) => task.id == initialValue.id);
           if (taskIndex != -1) {
@@ -37,7 +36,7 @@ class EditTaskField extends StatelessWidget {
           key: ValueKey('edit_task_$index'),
           controller: TextEditingController(text: currentTask.title),
           onSaved: (value) {
-            context.read<EditProjectCubit>().tasksChange(TaskModel(
+            context.read<ProjectCubit>().tasksChange(TaskModel(
                   id: currentTask.id,
                   title: value ?? "",
                   isCompleted: currentTask.isCompleted,
@@ -55,7 +54,7 @@ class EditTaskField extends StatelessWidget {
                     title: currentTask.title,
                     id: currentTask.id,
                     isCompleted: !currentTask.isCompleted!);
-                context.read<EditProjectCubit>().toggleTask(task);
+                context.read<ProjectCubit>().toggleTask(task);
                 DebugLogger.log("Task marked as ${task.isCompleted}");
               },
               icon: Icon(FontAwesomeIcons.circleCheck)),
@@ -63,7 +62,7 @@ class EditTaskField extends StatelessWidget {
           hintText: 'Task Name',
           suffixIcon: IconButton(
             icon: Icon(Icons.close),
-            onPressed: () => context.read<TaskCubit>().removeTask(index!),
+            onPressed: () => context.read<ProjectCubit>().removeTask(index!),
           ),
         );
       },

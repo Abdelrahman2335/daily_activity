@@ -13,7 +13,6 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon,
     this.enableField,
     this.onSaved,
-    this.onSecondPress,
   });
   final Widget? icon;
   final bool? enableField;
@@ -25,8 +24,6 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final Color? backgroundColor;
   final void Function(String?)? onSaved;
-  final Function()? onSecondPress;
-
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -57,7 +54,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
-      onTap: widget.onSecondPress,
       child: TextFormField(
         onTapUpOutside: (event) {
           FocusScope.of(context).unfocus();

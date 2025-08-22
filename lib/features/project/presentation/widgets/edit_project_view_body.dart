@@ -6,9 +6,7 @@ import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
 import 'package:daily_activity/core/data/categories.dart';
-import 'package:daily_activity/features/project/data/task_repository/task_repo_impl.dart';
-import 'package:daily_activity/features/project/presentation/manager/edit_project_cubit/edit_project_cubit.dart';
-import 'package:daily_activity/features/project/presentation/manager/task_cubit/task_cubit.dart';
+import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/edit_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
@@ -50,26 +48,26 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: BlocConsumer<EditProjectCubit, EditProjectState>(
+      child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
-          if (state is EditProjectSuccess) {
+          if (state is ProjectSuccess) {
             GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Project updated successfully!')),
             );
-          } else if (state is EditProjectError) {
+          } else if (state is ProjectError) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.errMessage)));
           }
         },
         builder: (context, state) {
           DebugLogger.log("Start with state: $state");
-          if (state is EditProjectLoading) {
+          if (state is ProjectLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          final formState = state is EditProjectFormState
+          final formState = state is ProjectFormState
               ? state
-              : EditProjectFormState(
+              : ProjectFormState(
                   project: ProjectModel(
                       title: "",
                       description: "",
@@ -108,18 +106,18 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
 
                         if (form.validate()) {
                           form.save();
-                          context.read<EditProjectCubit>().submitForm();
+                          context.read<ProjectCubit>().submitForm();
                         }
                       }),
                   CustomDropDownButton(
-                    onSave: context.read<EditProjectCubit>(),
+                    onSave: context.read<ProjectCubit>(),
                   ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
                     controller: _titleController,
                     onSaved: (value) {
                       DebugLogger.log("Title in the view is $value");
-                      context.read<EditProjectCubit>().titleChange(value ?? "");
+                      context.read<ProjectCubit>().titleChange(value ?? "");
                     },
                     maxLines: 1,
                     maxLength: 50,
@@ -130,7 +128,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     controller: _descriptionController,
                     onSaved: (value) {
                       context
-                          .read<EditProjectCubit>()
+                          .read<ProjectCubit>()
                           .descriptionChange(value ?? "");
                     },
                     minLines: 5,
@@ -138,10 +136,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     hintText: 'Description',
                   ),
                   const SizedBox(height: 30),
-                  BlocProvider(
-                    create: (context) => TaskCubit(TaskRepoImpl()),
-                    child: EditTask(initialTasks: formState.project.tasks),
-                  ),
+                  EditTask(initialTasks: formState.project.tasks),
                   const SizedBox(height: 30),
                   CustomDateTimeButton(
                     title: "Start Date",
@@ -149,12 +144,12 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: formState.startDate,
-                        firstDate: DateTime.now(),
+                        firstDate: DateTime(2010),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
                       if (pickedDate != null) {
                         context
-                            .read<EditProjectCubit>()
+                            .read<ProjectCubit>()
                             .startDateChange(pickedDate);
                       }
                     },
@@ -167,13 +162,11 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: formState.endDate,
-                        firstDate: DateTime.now(),
+                        firstDate: DateTime(2010),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
                       if (pickedDate != null) {
-                        context
-                            .read<EditProjectCubit>()
-                            .endDateChange(pickedDate);
+                        context.read<ProjectCubit>().endDateChange(pickedDate);
                       }
                     },
                     selectedDate: formState.endDate,

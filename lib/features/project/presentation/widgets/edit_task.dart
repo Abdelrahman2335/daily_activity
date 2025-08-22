@@ -2,7 +2,7 @@ import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
-import 'package:daily_activity/features/project/presentation/manager/task_cubit/task_cubit.dart';
+import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/edit_task_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,16 +23,14 @@ class _EditTaskState extends State<EditTask> {
   @override
   void initState() {
     super.initState();
-    context.read<TaskCubit>().initializeForEditProject(widget.initialTasks);
   }
 
   @override
   Widget build(BuildContext context) {
-    final taskList = context.watch<TaskCubit>().currentTaskList;
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
-        ...taskList.asMap().entries.map((entry) {
+        ...widget.initialTasks.asMap().entries.map((entry) {
           int index = entry.key;
           TaskModel task = entry.value;
           return Padding(
@@ -47,7 +45,7 @@ class _EditTaskState extends State<EditTask> {
         const SizedBox(height: 20),
         SecondaryButton(
           onPressed: () {
-            context.read<TaskCubit>().addEmptyTask();
+            context.read<ProjectCubit>().tasksChange(TaskModel(title: ""));
           },
           buttonLabel: Text("Add Task",
               style: AppTextStyles.textStyle14.copyWith(

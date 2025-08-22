@@ -1,27 +1,27 @@
-part of 'edit_project_cubit.dart';
+part of 'project_cubit.dart';
 
 @immutable
-sealed class EditProjectState {}
+sealed class ProjectState {}
 
-final class EditProjectInitial extends EditProjectState {}
+final class ProjectInitial extends ProjectState {}
 
-final class EditProjectLoading extends EditProjectState {}
+final class ProjectLoading extends ProjectState {}
 
-final class EditProjectSuccess extends EditProjectState {}
+final class ProjectSuccess extends ProjectState {}
 
-final class EditProjectError extends EditProjectState {
-  EditProjectError(this.errMessage);
+final class ProjectError extends ProjectState {
+  ProjectError(this.errMessage);
   final String errMessage;
 }
 
-final class EditProjectFormState extends EditProjectState {
+final class ProjectFormState extends ProjectState {
   final ProjectModel project;
   final bool isValid;
 
-  EditProjectFormState({required this.project, this.isValid = false});
+  ProjectFormState({required this.project, this.isValid = false});
 
-  EditProjectFormState copyWith({ProjectModel? project, bool? isValid}) {
-    return EditProjectFormState(
+  ProjectFormState copyWith({ProjectModel? project, bool? isValid}) {
+    return ProjectFormState(
         project: project ?? this.project, isValid: isValid ?? this.isValid);
   }
 

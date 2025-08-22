@@ -69,7 +69,7 @@ class CustomTodayTaskCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  "10:00 AM",
+                  "${project[index].startDate.month}-${project[index].startDate.day}-${project[index].startDate.year}",
                   style: AppTextStyles.textStyle12(context).copyWith(
                     color: AppColor.accentLightPurple,
                   ),

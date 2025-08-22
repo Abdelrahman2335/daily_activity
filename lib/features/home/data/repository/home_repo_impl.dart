@@ -62,7 +62,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       if (_projects.isEmpty) return [];
 
-      final sortedProjects = _sortProjectsByDate(_projects);
+      final sortedProjects = _sortProjectsByLastModified(_projects);
 
       final startDate = sortedProjects
           .map((p) => p.startDate)
@@ -92,7 +92,7 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Either<String, List<ProjectModel>> statusFilter(TaskStatus status) {
     try {
-      final sortedProjects = _sortProjectsByDate(_projects);
+      final sortedProjects = _sortProjectsByLastModified(_projects);
       final filteredProjects =
           sortedProjects.where((project) => project.status == status).toList();
 

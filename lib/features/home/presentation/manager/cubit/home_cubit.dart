@@ -71,9 +71,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool get hasProjectsInProgress {
     final result = homeRepo.statusFilter(TaskStatus.inProgress);
-    var x = result.fold((_) => false, (projects) => projects.isNotEmpty);
-    DebugLogger.log("hasProjectsInProgress is: $x");
-    return x;
+    var hasProjects = result.fold((_) => false, (projects) => projects.isNotEmpty);
+    return hasProjects;
   }
 
   List<DateTime> get dateTimeList => homeRepo.dateTimeList();

@@ -11,6 +11,7 @@ import 'package:daily_activity/features/project/presentation/widgets/custom_date
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
+import 'package:daily_activity/test/test_add_project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -96,12 +97,15 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                         ),
                       ),
                       onActionButtonPressed: () {
-                        final form = _formKey.currentState!;
+                        final test = TestAddProject.generateRandomProject();
+                        context.read<ProjectCubit>().addProject(project: test);
 
-                        if (form.validate()) {
-                          form.save();
-                          context.read<ProjectCubit>().submitForm();
-                        }
+                        // final form = _formKey.currentState!;
+
+                        // if (form.validate()) {
+                        //   form.save();
+                        //   context.read<ProjectCubit>().submitForm();
+                        // }
                       }),
                   CustomDropDownButton(
                     onSave: context.read<ProjectCubit>(),

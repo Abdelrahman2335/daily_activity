@@ -1,4 +1,3 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/primary_button.dart';

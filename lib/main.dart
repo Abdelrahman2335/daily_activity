@@ -49,14 +49,19 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<SettingCubit, SettingState>(
         builder: (context, state) {
-          bool isDarkMode = context.watch<SettingCubit>().isDark;
-          return MaterialApp.router(
-            routerConfig: AppRouter.router,
-            title: 'Daily Activity',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeManager.lightTheme,
-            darkTheme: ThemeManager.darkTheme,
-            themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          bool isDarkMode = context.read<SettingCubit>().isDark;
+          return AnimatedTheme(
+            curve: Curves.bounceInOut,
+            duration: const Duration(microseconds: 700),
+            data: isDarkMode ? ThemeManager.darkTheme : ThemeManager.lightTheme,
+            child: MaterialApp.router(
+              routerConfig: AppRouter.router,
+              title: 'Daily Activity',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeManager.lightTheme,
+              darkTheme: ThemeManager.darkTheme,
+              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            ),
           );
         },
       ),

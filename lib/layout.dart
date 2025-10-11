@@ -3,8 +3,10 @@ import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/core/widgets/app_background.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_view_body.dart';
+import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'package:daily_activity/features/settings/presentation/widgets/settings_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -30,6 +32,7 @@ class _LayOutState extends State<LayOut> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    bool isDark = context.read<SettingCubit>().isDark;
     final List<Widget> curvedIcons = [
       Icon(
         Iconsax.home,
@@ -45,16 +48,15 @@ class _LayOutState extends State<LayOut> {
     return BackgroundLayout(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
+        heroTag: "addProject",
+        elevation: 9.0,
+        backgroundColor: isDark ? colorScheme.primary : colorScheme.surface,
+        foregroundColor: isDark ? colorScheme.onSurface : colorScheme.primary,
         shape: const CircleBorder(),
         onPressed: () {
           GoRouter.of(context).push(AppRouter.kAddProject);
         },
-        backgroundColor: colorScheme.primary,
-        child: Icon(
-          Iconsax.add,
-          color: colorScheme.surface,
-          size: 26,
-        ),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CurvedNavigationBar(

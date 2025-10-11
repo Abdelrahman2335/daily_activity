@@ -1,4 +1,4 @@
-import 'package:daily_activity/test/test_add_project.dart';
+import 'test_add_project.dart';
 import 'package:flutter/material.dart';
 
 /// Example usage of the random project generator

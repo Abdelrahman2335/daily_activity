@@ -11,7 +11,6 @@ import 'package:daily_activity/features/project/presentation/widgets/custom_date
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
-import 'package:daily_activity/test/test_add_project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,16 +34,12 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
       child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
           if (state is ProjectSuccess) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  title: Text("Project update"),
-                  content: Text("Project added successfully!"),
-                );
-              },
-            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+              duration: Duration(seconds: 2),
+              content: Text("Project added successfully!"),
+              backgroundColor: Theme.of(context).colorScheme.surface,
+            ));
 
             Future.delayed((Duration(seconds: 2)), () {
               GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
@@ -97,15 +92,15 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                         ),
                       ),
                       onActionButtonPressed: () {
-                        final test = TestAddProject.generateRandomProject();
-                        context.read<ProjectCubit>().addProject(project: test);
+                        // final test = TestAddProject.generateRandomProject();
+                        // context.read<ProjectCubit>().addProject(project: test);
 
-                        // final form = _formKey.currentState!;
+                        final form = _formKey.currentState!;
 
-                        // if (form.validate()) {
-                        //   form.save();
-                        //   context.read<ProjectCubit>().submitForm();
-                        // }
+                        if (form.validate()) {
+                          form.save();
+                          context.read<ProjectCubit>().submitForm();
+                        }
                       }),
                   CustomDropDownButton(
                     onSave: context.read<ProjectCubit>(),

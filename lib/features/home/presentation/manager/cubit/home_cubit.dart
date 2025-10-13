@@ -13,7 +13,6 @@ class HomeCubit extends Cubit<HomeState> {
   final HomeRepo homeRepo;
 
   List<ProjectModel> _allProjects = [];
-
   void loadProjects() {
     emit(HomeLoading());
     final result = homeRepo.getProjects();

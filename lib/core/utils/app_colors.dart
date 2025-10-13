@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColor {
-  static const primary = Color(0xFF5F33E1);
+  static const primary = Color(0xFF6c28e7);
 
   /// That nice purple (buttons, active tabs)
   static const secondary = Color(0xFFFFC542);

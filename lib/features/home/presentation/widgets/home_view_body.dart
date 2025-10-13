@@ -1,4 +1,5 @@
 import 'package:daily_activity/core/models/project_model.dart';
+import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/assets.dart';
 import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_app_bar.dart';
@@ -8,6 +9,7 @@ import 'package:daily_activity/features/home/presentation/widgets/project_sectio
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
@@ -80,7 +82,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   ),
                 ),
                 ProjectSection(
-                  projects: projects ?? [],
+                  projects: projects ?? const [],
                 ),
               ],
             ),
@@ -93,7 +95,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               shape: const CircleBorder(),
               heroTag: "geminiAi",
               onPressed: () {
-                // Your action here
+                GoRouter.of(context).push(AppRouter.kAiAssistant);
               },
               child: SvgPicture.asset(
                 Assets.geminiAi,

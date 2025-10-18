@@ -56,7 +56,7 @@ Daily Activity is a modern Flutter-based task management application designed to
    GEMINI_API_KEY=your_api_key_here
    ```
    
-   📖 See [Security Setup Guide](security/ENV_SETUP.md) for detailed instructions.
+   Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey).
 
 4. **Run the app**
    ```bash
@@ -64,13 +64,6 @@ Daily Activity is a modern Flutter-based task management application designed to
    ```
 
 ## 📚 Documentation
-
-### 🔐 Security
-
-- **[API Security Guide](security/API_SECURITY_GUIDE.md)** - Complete guide to securing your API keys
-- **[Environment Setup](security/ENV_SETUP.md)** - Quick setup for environment variables
-- **[Quick Start Security](security/QUICK_START_SECURITY.md)** - Fast security setup guide
-- **[Security Implementation Summary](security/SECURITY_IMPLEMENTATION_SUMMARY.txt)** - Visual security overview
 
 ### ✍️ Text Formatter
 
@@ -105,7 +98,6 @@ daily_activity/
 │   └── svg/
 ├── test/                         # Test files
 ├── readme/                       # Documentation
-│   ├── security/                # Security docs
 │   └── formatter/               # Formatter docs
 ├── .env                         # Environment variables (not in git)
 ├── .env.example                 # Environment template
@@ -176,7 +168,7 @@ This app implements best practices for API key security:
 - ✅ API key rotation guidelines
 - ✅ Secure initialization flow
 
-**Important:** Never commit your `.env` file! See the [Security Guide](security/API_SECURITY_GUIDE.md) for details.
+**Important:** Never commit your `.env` file! Keep your API keys secure and rotate them regularly.
 
 ## 🧪 Testing
 
@@ -264,6 +256,6 @@ For issues, questions, or suggestions:
 
 **Built with ❤️ using Flutter**
 
-[Documentation](readme/) • [Security Guide](readme/security/) • [Report Bug](../../issues)
+[Documentation](readme/) • [Report Bug](../../issues)
 
 </div>

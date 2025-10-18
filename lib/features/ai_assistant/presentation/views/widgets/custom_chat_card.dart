@@ -1,5 +1,6 @@
 import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
+import 'package:daily_activity/core/utils/text_formatter.dart';
 import 'package:flutter/material.dart';
 
 class CustomChatCard extends StatelessWidget {
@@ -14,6 +15,10 @@ class CustomChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
+
+    // Format the text if it's from the AI assistant (not user)
+    final displayText = isUser ? text : TextFormatter.format(text);
+
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -40,7 +45,7 @@ class CustomChatCard extends StatelessWidget {
                 ),
         ),
         child: Text(
-          text,
+          displayText,
           style: AppTextStyles.textStyle14.copyWith(
             color: isUser
                 ? colorScheme.onSurface

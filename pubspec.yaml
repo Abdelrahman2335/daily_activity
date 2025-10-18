@@ -32,9 +32,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   curved_navigation_bar: ^1.0.6
   dartz: ^0.10.1
+  dio: ^5.9.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.0
   flutter_svg: ^2.2.1
   font_awesome_flutter: ^10.8.0
   go_router: ^16.0.0
@@ -43,6 +45,7 @@ dependencies:
   hive_flutter: ^1.1.0
   iconsax: ^0.0.8
   intl: ^0.20.2
+  loading_animation_widget: ^1.3.0
   meta: ^1.16.0
   percent_indicator: ^4.2.5
   phosphor_flutter: ^2.1.0
@@ -70,6 +73,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - .env
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -29,12 +29,16 @@ class _AiAssistantViewBodyState extends State<AiAssistantViewBody> {
     super.dispose();
   }
 
-// To make things clean it's good to remove this and put it in the cubit.
-  void _scrollToBottom() {
+  // Scroll down by a specific amount (e.g., 200 pixels)
+  void _scrollDown({double pixels = 200.0}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!_controller.hasClients) return;
+      final currentPosition = _controller.position.pixels;
+      final maxScroll = _controller.position.maxScrollExtent;
+      final targetPosition = (currentPosition + pixels).clamp(0.0, maxScroll);
+
       _controller.animateTo(
-        _controller.position.maxScrollExtent,
+        targetPosition,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
       );
@@ -47,7 +51,8 @@ class _AiAssistantViewBodyState extends State<AiAssistantViewBody> {
       listener: (context, state) {
         // scroll when new message arrives (user or AI)
         if (state.messages.isNotEmpty) {
-          _scrollToBottom();
+          _scrollDown(); // Scroll down just a bit instead of all the way
+          // Or use: _scrollToBottom(); to scroll all the way to bottom
         }
       },
       builder: (context, state) {

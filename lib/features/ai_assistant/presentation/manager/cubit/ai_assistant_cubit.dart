@@ -19,7 +19,6 @@ class AiAssistantCubit extends Cubit<AiAssistantState> {
 
   // Deprecated: keeping for compatibility if referenced elsewhere.
   // With Option A, the UI should read from state.messages instead.
-  Stream<String> get geminiResponse => const Stream.empty();
   String get userMessage {
     // Return last user message if present
     final idx = state.messages.lastIndexWhere((m) => m.role == ChatRole.user);

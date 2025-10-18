@@ -2,6 +2,7 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/utils/text_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class CustomChatCard extends StatelessWidget {
   const CustomChatCard({
@@ -19,37 +20,53 @@ class CustomChatCard extends StatelessWidget {
     // Format the text if it's from the AI assistant (not user)
     final displayText = isUser ? text : TextFormatter.format(text);
 
-    return Align(
-      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        constraints: BoxConstraints(maxWidth: mediaQuery.width * 0.8),
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: isUser ? Radius.zero : Radius.circular(16),
-            topLeft: isUser ? Radius.circular(16) : Radius.zero,
-            bottomLeft: Radius.circular(16),
-            bottomRight: Radius.circular(16),
-          ),
-          color: colorScheme.surface,
-          gradient: isUser
-              ? null
-              : LinearGradient(
-                  begin: AlignmentGeometry.topLeft,
-                  end: AlignmentGeometry.bottomRight,
-                  colors: [
-                    AppColor.primary,
-                    AppColor.accentPurple,
-                  ],
-                ),
+    return Animate(
+      effects: [
+        FadeEffect(
+          duration: 1000.ms,
+          curve: Curves.easeOut,
+          begin: 0, // start fully transparent
+          end: 1, // end fully visible
         ),
-        child: Text(
-          displayText,
-          style: AppTextStyles.textStyle14.copyWith(
-            color: isUser
-                ? colorScheme.onSurface
-                : Colors.white, // or Theme.of(context).colorScheme.surface
+        SlideEffect(
+          begin: const Offset(0, 0.1), // slight upward motion
+          end: Offset.zero,
+          curve: Curves.easeOut,
+          duration: 1000.ms,
+        ),
+      ],
+      child: Align(
+        alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+        child: Container(
+          constraints: BoxConstraints(maxWidth: mediaQuery.width * 0.8),
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topRight: isUser ? Radius.zero : Radius.circular(16),
+              topLeft: isUser ? Radius.circular(16) : Radius.zero,
+              bottomLeft: Radius.circular(16),
+              bottomRight: Radius.circular(16),
+            ),
+            color: colorScheme.surface,
+            gradient: isUser
+                ? null
+                : LinearGradient(
+                    begin: AlignmentGeometry.topLeft,
+                    end: AlignmentGeometry.bottomRight,
+                    colors: [
+                      AppColor.primary,
+                      AppColor.accentPurple,
+                    ],
+                  ),
+          ),
+          child: Text(
+            displayText,
+            style: AppTextStyles.textStyle14.copyWith(
+              color: isUser
+                  ? colorScheme.onSurface
+                  : Colors.white, // or Theme.of(context).colorScheme.surface
+            ),
           ),
         ),
       ),

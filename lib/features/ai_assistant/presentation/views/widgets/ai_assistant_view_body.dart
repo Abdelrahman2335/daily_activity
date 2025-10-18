@@ -30,7 +30,7 @@ class _AiAssistantViewBodyState extends State<AiAssistantViewBody> {
   }
 
   // Scroll down by a specific amount (e.g., 200 pixels)
-  void _scrollDown({double pixels = 200.0}) {
+  void _scrollDown({double pixels = 300.0}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!_controller.hasClients) return;
       final currentPosition = _controller.position.pixels;

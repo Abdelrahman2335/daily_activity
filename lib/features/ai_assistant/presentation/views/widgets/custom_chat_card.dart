@@ -60,7 +60,8 @@ class CustomChatCard extends StatelessWidget {
                     ],
                   ),
           ),
-          child: Text(
+          child: SelectableText(
+            selectionColor: AppColor.textSecondary,
             displayText,
             style: AppTextStyles.textStyle14.copyWith(
               color: isUser

@@ -23,6 +23,7 @@ class AiAssistantRepoImpl implements AiAssistantRepo {
         ],
         "generationConfig": {
           "thinkingConfig": {"thinkingBudget": 0},
+          "maxOutputTokens": 300,
         },
       };
       final response = _geminiService.post(body: body);

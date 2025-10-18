@@ -11,12 +11,6 @@ readme/
 ├── README.md                          # 📖 Documentation index
 ├── FOLDER_STRUCTURE.txt               # 📋 This structure overview
 │
-├── security/                          # 🔐 Security documentation
-│   ├── API_SECURITY_GUIDE.md
-│   ├── ENV_SETUP.md
-│   ├── QUICK_START_SECURITY.md
-│   └── SECURITY_IMPLEMENTATION_SUMMARY.txt
-│
 ├── formatter/                         # ✍️ Text formatter docs
 │   ├── FORMATTER_IMPLEMENTATION_SUMMARY.md
 │   ├── FORMATTER_QUICK_REFERENCE.md
@@ -31,12 +25,10 @@ readme/
 - ✅ `README.md` (root) - Main project documentation
 - ✅ `readme/README.md` - Documentation index
 - ✅ `readme/FOLDER_STRUCTURE.txt` - Structure overview
-- ✅ `readme/security/` folder
 - ✅ `readme/formatter/` folder
 - ✅ `readme/getting-started/` folder
 
 ### Moved
-- ✅ Security docs → `readme/security/`
 - ✅ Formatter docs → `readme/formatter/`
 
 ## 🎯 Key Benefits
@@ -52,8 +44,8 @@ readme/
 ### For New Users
 Start here: `/README.md` → `readme/README.md`
 
-### For Security Setup
-Go to: `readme/security/ENV_SETUP.md`
+### For API Key Setup
+See: `/README.md#installation` (step 3)
 
 ### For Formatter Info
 Check: `readme/formatter/FORMATTER_QUICK_REFERENCE.md`
@@ -65,7 +57,6 @@ Use: `readme/README.md` (complete index)
 
 - **Main README**: [/README.md](../README.md)
 - **Documentation Index**: [readme/README.md](README.md)
-- **Security Docs**: [security/](security/)
 - **Formatter Docs**: [formatter/](formatter/)
 - **Structure Overview**: [FOLDER_STRUCTURE.txt](FOLDER_STRUCTURE.txt)
 

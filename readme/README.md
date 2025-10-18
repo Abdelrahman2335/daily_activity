@@ -8,18 +8,6 @@ Welcome to the Daily Activity app documentation! This folder contains comprehens
 - **[Main README](../README.md)** - Project overview and quick start
 - **[Installation Guide](../README.md#getting-started)** - Setup instructions
 
-### 🔐 Security Documentation
-Located in [`security/`](security/)
-
-| Document | Description |
-|----------|-------------|
-| [API Security Guide](security/API_SECURITY_GUIDE.md) | Complete guide to securing API keys |
-| [Environment Setup](security/ENV_SETUP.md) | Quick .env file setup |
-| [Quick Start Security](security/QUICK_START_SECURITY.md) | Fast security implementation |
-| [Security Summary](security/SECURITY_IMPLEMENTATION_SUMMARY.txt) | Visual overview of security setup |
-
-**📌 Start here if:** You need to set up your Gemini API key or secure sensitive data.
-
 ### ✍️ Text Formatter Documentation
 Located in [`formatter/`](formatter/)
 
@@ -44,13 +32,14 @@ Located in [`formatter/`](formatter/)
 
 1. **First Time Setup**
    - Read: [Main README](../README.md)
-   - Follow: [Environment Setup](security/ENV_SETUP.md)
+   - Create: `.env` file from `.env.example`
+   - Add: Your Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
    - Run: `flutter pub get` and `flutter run`
 
 2. **API Key Configuration**
-   - Read: [Quick Start Security](security/QUICK_START_SECURITY.md)
-   - Create: `.env` file from `.env.example`
-   - Add: Your Gemini API key
+   - Copy `.env.example` to `.env`
+   - Add your Gemini API key: `GEMINI_API_KEY=your_key_here`
+   - Never commit the `.env` file
 
 3. **Understanding the Codebase**
    - Check: [Project Structure](../README.md#project-structure)
@@ -70,7 +59,7 @@ Located in [`formatter/`](formatter/)
 
 3. **Security**
    - Never commit `.env` file
-   - Follow [API Security Guide](security/API_SECURITY_GUIDE.md)
+   - Keep API keys secure
    - Rotate keys regularly
 
 ## 📂 Folder Structure
@@ -78,11 +67,6 @@ Located in [`formatter/`](formatter/)
 ```
 readme/
 ├── README.md                          # This file (documentation index)
-├── security/                          # Security-related documentation
-│   ├── API_SECURITY_GUIDE.md         # Complete security guide
-│   ├── ENV_SETUP.md                  # Environment variables setup
-│   ├── QUICK_START_SECURITY.md       # Quick security setup
-│   └── SECURITY_IMPLEMENTATION_SUMMARY.txt  # Visual summary
 ├── formatter/                         # Text formatter documentation
 │   ├── FORMATTER_IMPLEMENTATION_SUMMARY.md  # Implementation details
 │   ├── FORMATTER_QUICK_REFERENCE.md         # Quick reference
@@ -93,11 +77,6 @@ readme/
 ## 🔍 Finding What You Need
 
 ### By Topic
-
-**Security & API Keys**
-- Setting up: [ENV_SETUP.md](security/ENV_SETUP.md)
-- Best practices: [API_SECURITY_GUIDE.md](security/API_SECURITY_GUIDE.md)
-- Emergency procedures: [API_SECURITY_GUIDE.md#emergency](security/API_SECURITY_GUIDE.md)
 
 **Text Formatting**
 - Quick usage: [FORMATTER_QUICK_REFERENCE.md](formatter/FORMATTER_QUICK_REFERENCE.md)
@@ -113,13 +92,13 @@ readme/
 
 **New Developer**
 1. [Main README](../README.md)
-2. [ENV_SETUP.md](security/ENV_SETUP.md)
-3. [Project Structure](../README.md#project-structure)
+2. [Project Structure](../README.md#project-structure)
+3. [Installation Guide](../README.md#getting-started)
 
 **Contributor**
 1. [Contributing Guidelines](../README.md#contributing)
-2. [API Security Guide](security/API_SECURITY_GUIDE.md)
-3. [Code Documentation](../lib/)
+2. [Code Documentation](../lib/)
+3. [Testing Guide](../README.md#testing)
 
 **User**
 1. [Main README](../README.md#about)
@@ -130,8 +109,7 @@ readme/
 
 | Issue | Solution |
 |-------|----------|
-| Can't find API key setup | See [ENV_SETUP.md](security/ENV_SETUP.md) |
-| Security questions | Check [API_SECURITY_GUIDE.md](security/API_SECURITY_GUIDE.md) |
+| Can't find API key setup | Copy `.env.example` to `.env` and add your key |
 | Formatter usage | Read [FORMATTER_QUICK_REFERENCE.md](formatter/FORMATTER_QUICK_REFERENCE.md) |
 | General issues | Check [Main README](../README.md) |
 
@@ -140,7 +118,6 @@ readme/
 When adding new documentation:
 
 1. **Location**
-   - Security docs → `security/`
    - Feature docs → `formatter/` or create new folder
    - Getting started → `getting-started/`
 

@@ -32,7 +32,7 @@ BEFORE (❌ INSECURE):
 final Dio _dio = Dio(
   BaseOptions(
     headers: {
-      "x-goog-api-key": "AIzaSyDppN-ev_2CeW-UuRKHEKDpIaLOj23hIMs",
+      "x-goog-api-key": "GEMINI_API_KEY",
     },
   ),
 );

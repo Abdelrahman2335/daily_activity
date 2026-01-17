@@ -35,10 +35,14 @@ class IconAdapter extends TypeAdapter<IconData> {
       matchTextDirection = false;
     }
 
-    return IconData(codePoint,
-        fontFamily: fontFamily.isEmpty ? null : fontFamily,
-        fontPackage: fontPackage.isEmpty ? null : fontPackage,
-        matchTextDirection: matchTextDirection);
+    // ignore: invalid_use_of_internal_member, non_constant_identifier_names
+    // This is necessary for Hive adapter deserialization
+    return IconData(
+      codePoint,
+      fontFamily: fontFamily.isEmpty ? null : fontFamily,
+      fontPackage: fontPackage.isEmpty ? null : fontPackage,
+      matchTextDirection: matchTextDirection,
+    );
   }
 
   @override

@@ -10,9 +10,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 // This is the top part of the Home Screen that shows the overview of today's tasks
 // It includes a progress indicator and a button to view tasks.
 class OverviewSection extends StatelessWidget {
-  const OverviewSection({
-    super.key,
-  });
+  const OverviewSection({super.key});
 
   @override
   Widget build(BuildContext context) {

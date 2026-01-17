@@ -15,7 +15,7 @@ class InProgressSection extends StatelessWidget {
     final projects = context.read<HomeCubit>().inProgressProjects;
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 170,
+        height: 170, // Hard code
         width: double.infinity,
         child: GridView.builder(
             scrollDirection: Axis.horizontal,

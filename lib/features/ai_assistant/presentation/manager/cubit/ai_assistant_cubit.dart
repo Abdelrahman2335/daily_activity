@@ -5,7 +5,7 @@ import 'package:daily_activity/core/error/failure.dart';
 import 'package:daily_activity/core/error/dio_failure.dart';
 import 'package:daily_activity/features/ai_assistant/data/repository/ai_assistant_repo.dart';
 import 'package:daily_activity/features/ai_assistant/data/repository/ai_assistant_repo_impl.dart';
-import 'package:daily_activity/features/ai_assistant/domain/models/chat_message.dart';
+import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
 import 'package:meta/meta.dart';
 
 part 'ai_assistant_state.dart';
@@ -31,14 +31,26 @@ class AiAssistantCubit extends Cubit<AiAssistantState> {
 
     // Build new messages list with user message and assistant placeholder
     final updated = List<ChatMessage>.from(state.messages)
-      ..add(ChatMessage(role: ChatRole.user, text: userMessage))
-      ..add(const ChatMessage(
-          role: ChatRole.assistant, text: '', isStreaming: true));
+      ..add(ChatMessage(
+          role: ChatRole.user,
+          text: userMessage,
+          timestamp: DateTime.now(),
+      ))
+      ..add(ChatMessage(
+          role: ChatRole.assistant,
+          text: '',
+          isStreaming: true,
+          timestamp: DateTime.now(),
+      ));
 
     emit(state.copyWith(messages: updated, isStreaming: true, error: null));
 
+    // Get conversation history (excluding the empty assistant placeholder we just added)
+    final conversationHistory = updated.sublist(0, updated.length - 1);
+
     final response = _aiAssistantRepo.sendMessage(
       userMessage: userMessage,
+      conversationHistory: conversationHistory,
       contextSummary: contextSummary,
     );
 
@@ -93,6 +105,18 @@ class AiAssistantCubit extends Cubit<AiAssistantState> {
         );
       },
     );
+  }
+
+  /// Clear all messages and start a new conversation
+  void clearMessages() {
+    _streamSub?.cancel();
+    emit(AiAssistantState.initial());
+  }
+
+  /// Reset the conversation (clears messages and any cached state)
+  Future<void> resetConversation() async {
+    await _aiAssistantRepo.resetConversation();
+    clearMessages();
   }
 
   @override

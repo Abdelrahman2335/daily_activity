@@ -18,7 +18,7 @@ class ProjectSection extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         childCount: projects.length,
         (ctx, index) => SizedBox(
-          height: 109,
+          height: 109, // Hard code
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 8),

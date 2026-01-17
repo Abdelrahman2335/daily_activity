@@ -428,7 +428,7 @@ Future<void> close() async {
 ## 📚 Related Documentation
 
 - [Text Formatter Guide](../formatter/FORMATTER_QUICK_REFERENCE.md)
-- [Chat Message Model](../../lib/features/ai_assistant/domain/models/chat_message.dart)
+- [Chat Message Model](../../lib/features/ai_assistant/data/model/chat_message.dart)
 - [AI Assistant Cubit](../../lib/features/ai_assistant/presentation/manager/cubit/ai_assistant_cubit.dart)
 
 ---

@@ -5,7 +5,7 @@ import 'package:daily_activity/features/ai_assistant/presentation/views/widgets/
 import 'package:daily_activity/features/ai_assistant/presentation/views/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:daily_activity/features/ai_assistant/domain/models/chat_message.dart';
+import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
 
 class AiAssistantViewBody extends StatefulWidget {
   const AiAssistantViewBody({super.key});

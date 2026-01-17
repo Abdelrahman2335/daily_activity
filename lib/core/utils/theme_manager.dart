@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class ThemeManager {
@@ -7,6 +6,7 @@ class ThemeManager {
   static ThemeData get lightTheme {
     return ThemeData(
       brightness: Brightness.light,
+      fontFamily: 'sans-serif',
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColor.primary,
         brightness: Brightness.light,
@@ -16,10 +16,10 @@ class ThemeManager {
       ),
       scaffoldBackgroundColor: AppColor.background,
       cardColor: AppColor.card,
-      textTheme: GoogleFonts.latoTextTheme().copyWith(
-        bodyLarge: GoogleFonts.lato(color: AppColor.textPrimary),
-        bodyMedium: GoogleFonts.lato(color: AppColor.textSecondary),
-        titleLarge: GoogleFonts.lato(color: AppColor.textPrimary),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: AppColor.textPrimary),
+        bodyMedium: TextStyle(color: AppColor.textSecondary),
+        titleLarge: TextStyle(color: AppColor.textPrimary),
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColor.background,
@@ -39,6 +39,7 @@ class ThemeManager {
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
+      fontFamily: 'sans-serif',
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColor.primary,
         brightness: Brightness.dark,
@@ -48,10 +49,10 @@ class ThemeManager {
       ),
       scaffoldBackgroundColor: AppColor.darkBackground,
       cardColor: AppColor.darkCard,
-      textTheme: GoogleFonts.latoTextTheme(ThemeData.dark().textTheme).copyWith(
-        bodyLarge: GoogleFonts.lato(color: AppColor.darkTextPrimary),
-        bodyMedium: GoogleFonts.lato(color: AppColor.darkTextSecondary),
-        titleLarge: GoogleFonts.lato(color: AppColor.darkTextPrimary),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: AppColor.darkTextPrimary),
+        bodyMedium: TextStyle(color: AppColor.darkTextSecondary),
+        titleLarge: TextStyle(color: AppColor.darkTextPrimary),
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColor.darkBackground,

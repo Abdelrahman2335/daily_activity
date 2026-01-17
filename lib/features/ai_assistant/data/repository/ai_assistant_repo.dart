@@ -1,15 +1,18 @@
 import 'package:daily_activity/core/error/failure.dart';
 import 'package:daily_activity/core/models/project_model.dart';
+import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AiAssistantRepo {
   /// Sends a message to the AI assistant and returns the assistant’s reply.
   ///
   /// [userMessage] - the user’s input text.
+  /// [conversationHistory] - list of previous messages to maintain context.
   /// [contextSummary] - optional summary of prior context (e.g., user goals or
   /// ongoing project details) to keep requests lightweight.
   Either<Failure, Stream<String>> sendMessage({
     required String userMessage,
+    List<ChatMessage> conversationHistory = const [],
     String? contextSummary,
   });
 

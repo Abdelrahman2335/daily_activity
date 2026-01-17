@@ -51,7 +51,7 @@ class _LayOutState extends State<LayOut> {
         heroTag: "addProject",
         elevation: 9.0,
         backgroundColor: isDark ? colorScheme.primary : colorScheme.surface,
-        foregroundColor: isDark ? colorScheme.onSurface : colorScheme.primary,
+        foregroundColor: isDark ? colorScheme.surface : colorScheme.primary,
         shape: const CircleBorder(),
         onPressed: () {
           GoRouter.of(context).push(AppRouter.kAddProject);

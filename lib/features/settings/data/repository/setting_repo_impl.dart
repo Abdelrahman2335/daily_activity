@@ -6,7 +6,7 @@ class SettingRepoImpl implements SettingRepo {
   final _box = Hive.box(Constants.kSettingsBox);
   @override
   bool loadTheme() {
-    final isDarkMode = _box.get(Constants.themeKey, defaultValue: false);
+    final isDarkMode = _box.get(Constants.themeKey, defaultValue: true);
     return isDarkMode;
   }
 

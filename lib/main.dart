@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           bool isDarkMode = context.read<SettingCubit>().isDark;
           return AnimatedTheme(
             curve: Curves.bounceInOut,
-            duration: const Duration(microseconds: 700),
+            duration: const Duration(milliseconds: 700),
             data: isDarkMode ? ThemeManager.darkTheme : ThemeManager.lightTheme,
             child: MaterialApp.router(
               routerConfig: AppRouter.router,

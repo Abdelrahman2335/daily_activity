@@ -5,6 +5,7 @@ import 'package:daily_activity/core/utils/constants.dart';
 import 'package:daily_activity/core/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 
 class WelcomeViewBody extends StatelessWidget {
@@ -46,8 +47,15 @@ class WelcomeViewBody extends StatelessWidget {
               ),
               SecondaryButton(
                 height: 60,
-                onPressed: () {
-                  GoRouter.of(context).go(AppRouter.kLayOut);
+                onPressed: () async {
+                  // Mark that the app has been launched
+                  final settingsBox = Hive.box(Constants.kSettingsBox);
+                  await settingsBox.put(Constants.isFirstLaunchKey, false);
+
+                  // Navigate to the main layout
+                  if (context.mounted) {
+                    GoRouter.of(context).go(AppRouter.kLayOut);
+                  }
                 },
                 buttonLabel: Text(
                   "Let's Start",

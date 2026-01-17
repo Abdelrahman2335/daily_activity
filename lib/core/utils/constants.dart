@@ -3,6 +3,7 @@ abstract class Constants {
   static const String kSettingsBox = "settings";
   static const String themeKey = 'isDarkMode';
   static const String userNameKey = 'userName';
+  static const String isFirstLaunchKey = 'isFirstLaunch';
 
   static const String appName = "Daily Activity";
   static const String appDescription =

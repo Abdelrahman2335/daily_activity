@@ -1,6 +1,4 @@
 import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/utils/app_router.dart';
-import 'package:daily_activity/core/utils/assets.dart';
 import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:daily_activity/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:daily_activity/features/home/presentation/widgets/in_progress_section.dart';
@@ -8,8 +6,6 @@ import 'package:daily_activity/features/home/presentation/widgets/overview_secti
 import 'package:daily_activity/features/home/presentation/widgets/project_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/utils/app_text_styles.dart';
@@ -87,23 +83,24 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               ],
             ),
           ),
-          Positioned(
-            bottom: 20, // Above the navigation bar
-            right: 16,
-            child: FloatingActionButton(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              shape: const CircleBorder(),
-              heroTag: "geminiAi",
-              onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAiAssistant);
-              },
-              child: SvgPicture.asset(
-                Assets.geminiAi,
-                width: 28,
-                height: 28,
-              ),
-            ),
-          ),
+          // Disable Ai chat
+          // Positioned(
+          //   bottom: 20, // Above the navigation bar
+          //   right: 16,
+          //   child: FloatingActionButton(
+          //     backgroundColor: Theme.of(context).colorScheme.surface,
+          //     shape: const CircleBorder(),
+          //     heroTag: "geminiAi",
+          //     onPressed: () {
+          //       GoRouter.of(context).push(AppRouter.kAiAssistant);
+          //     },
+          //     child: SvgPicture.asset(
+          //       Assets.geminiAi,
+          //       width: 28,
+          //       height: 28,
+          //     ),
+          //   ),
+          // ),
         ]);
       },
     );

@@ -26,25 +26,15 @@ class AddProjectViewBody extends StatefulWidget {
 
 class _AddProjectViewBodyState extends State<AddProjectViewBody> {
   final _formKey = GlobalKey<FormState>();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
-          if (state is ProjectSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-              duration: Duration(seconds: 2),
-              content: Text("Project added successfully!"),
-              backgroundColor: Theme.of(context).colorScheme.surface,
-            ));
 
-            Future.delayed((Duration(seconds: 2)), () {
-              GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
-            });
-          } else if (state is ProjectError) {
+          if (state is ProjectError) {
             showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -76,7 +66,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                       status: TaskStatus.notStarted));
           return Form(
             key: _formKey,
-            autovalidateMode: autovalidateMode,
+            autovalidateMode: autoValidateMode,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,

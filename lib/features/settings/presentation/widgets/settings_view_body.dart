@@ -25,12 +25,14 @@ class SettingsViewBody extends StatelessWidget {
           const SizedBox(
             height: 27,
           ),
+          // Terms & Conditions
+          // Privacy Policy
           const Spacer(),
           Text(
             Constants.appVersion,
             style: AppTextStyles.textStyle12(context),
           ),
-          const SizedBox(height: 60),
+          const SizedBox(height: 51),
         ],
       ),
     );

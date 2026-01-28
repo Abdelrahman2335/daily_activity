@@ -8,6 +8,7 @@ import 'package:hive/hive.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
   final Box box = Hive.box<ProjectModel>(Constants.kMainBox);
+
   @override
   Future<Either<String, void>> addProject(
       {required ProjectModel project}) async {
@@ -32,6 +33,19 @@ class ProjectRepositoryImpl implements ProjectRepository {
 
       // Update the existing project
       await box.put(updatedProject.id, updatedProject);
+      return Right(null);
+    } catch (error) {
+      log("$error");
+      return Left("An Error has occurs when updating the project");
+    }
+  }
+
+  @override
+  Future<Either<String, void>> deleteProject(
+      {required String projectId}) async {
+    try {
+      await box.delete(projectId);
+      log("Project $projectId deleted!");
       return Right(null);
     } catch (error) {
       log("$error");

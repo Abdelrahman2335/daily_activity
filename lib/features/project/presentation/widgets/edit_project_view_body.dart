@@ -1,3 +1,4 @@
+import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/core/models/project_category.dart';
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
@@ -5,12 +6,11 @@ import 'package:daily_activity/core/utils/app_colors.dart';
 import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
-import 'package:daily_activity/core/data/categories.dart';
+import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
-import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
-import 'package:daily_activity/core/widgets/project_app_bar.dart';
+import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +26,7 @@ class EditProjectViewBody extends StatefulWidget {
 
 class _EditProjectViewBodyState extends State<EditProjectViewBody> {
   final _formKey = GlobalKey<FormState>();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +81,13 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
 
           return Form(
             key: _formKey,
-            autovalidateMode: autovalidateMode,
+            autovalidateMode: autoValidateMode,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
               ),
               child: Column(
+                spacing: 30,
                 children: [
                   ProjectAppBar(
                       title: "Edit Project",
@@ -108,7 +109,6 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     initialValue: formState.category,
                     onSave: context.read<ProjectCubit>(),
                   ),
-                  const SizedBox(height: 30),
                   CustomTextFormField(
                     initialValue: formState.title,
                     onSaved: (value) {
@@ -116,9 +116,8 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     },
                     maxLines: 1,
                     maxLength: 50,
-                    hintText: 'Task Name',
+                    hintText: 'Project Name',
                   ),
-                  const SizedBox(height: 30),
                   CustomTextFormField(
                     initialValue: formState.description,
                     onSaved: (value) {
@@ -130,9 +129,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     maxLines: 6,
                     hintText: 'Description',
                   ),
-                  const SizedBox(height: 30),
                   const ManageTask(),
-                  const SizedBox(height: 30),
                   CustomDateTimeButton(
                     title: "Start Date",
                     onTap: () async {
@@ -150,7 +147,6 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     },
                     selectedDate: formState.startDate,
                   ),
-                  const SizedBox(height: 30),
                   CustomDateTimeButton(
                     title: "End Date",
                     onTap: () async {
@@ -166,7 +162,61 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     },
                     selectedDate: formState.endDate,
                   ),
-                  const SizedBox(height: 30),
+                  OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: AppColor.accentRed),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16))),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text(
+                                    'Are you sure you want to delete this project?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      GoRouter.of(context).pop();
+                                    },
+                                    child: Text("Cancel",
+                                        style: AppTextStyles.textStyle14
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface)),
+                                  ),
+                                  OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                            color: AppColor.accentRed),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16))),
+                                    onPressed: () {
+                                      context
+                                          .read<ProjectCubit>()
+                                          .deleteProject(
+                                              projectId: formState.project.id);
+                                    },
+                                    child: Text("Delete",
+                                        style: AppTextStyles.textStyle14
+                                            .copyWith(
+                                                color: AppColor.accentRed)),
+                                  )
+                                ],
+                              );
+                            });
+                        // context
+                        //     .read<ProjectCubit>()
+                        //     .deleteProject(projectId: formState.project.id);
+                      },
+                      child: Text(
+                        "Delete Project",
+                        style: AppTextStyles.textStyle14
+                            .copyWith(color: AppColor.accentRed),
+                      )),
+                  const SizedBox(),
                 ],
               ),
             ),

@@ -7,7 +7,6 @@ import 'package:daily_activity/core/models/task_model.dart';
 import 'package:daily_activity/core/utils/debug_logger.dart';
 import 'package:daily_activity/features/project/data/project_repository/project_repo.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:meta/meta.dart';
 
 part 'project_state.dart';
@@ -30,7 +29,9 @@ class ProjectCubit extends Cubit<ProjectState> {
         );
   final ProjectRepository projectRepo;
   final ProjectModel? initialProject;
+
   List<TaskModel> get currentTasks => _currentFormState.project.tasks;
+
   ProjectFormState get _currentFormState {
     final currentState = state;
     if (currentState is ProjectFormState) {
@@ -305,6 +306,13 @@ class ProjectCubit extends Cubit<ProjectState> {
 
   Future<void> addProject({required ProjectModel project}) async {
     var result = await projectRepo.addProject(project: project);
+
+    result.fold((errMessage) => emit(ProjectError(errMessage)),
+        (_) => emit(ProjectSuccess()));
+  }
+
+  Future<void> deleteProject({required String projectId}) async {
+    var result = await projectRepo.deleteProject(projectId: projectId);
 
     result.fold((errMessage) => emit(ProjectError(errMessage)),
         (_) => emit(ProjectSuccess()));

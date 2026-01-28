@@ -1,5 +1,5 @@
-import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/data/categories.dart';
+import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -14,6 +14,7 @@ class CustomDropDownButton extends StatelessWidget {
 
   final dynamic onSave;
   final ProjectCategoryModel? initialValue;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -45,7 +46,7 @@ class CustomDropDownButton extends StatelessWidget {
         fillColor: colorScheme.surface,
         filled: true,
 
-        hintText: 'Task Group',
+        hintText: 'Project Group',
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(19),
           borderSide: BorderSide.none, // No visible border

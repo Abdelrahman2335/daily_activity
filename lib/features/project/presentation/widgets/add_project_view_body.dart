@@ -1,21 +1,21 @@
+import 'package:daily_activity/core/data/categories.dart';
 import 'package:daily_activity/core/models/project_category.dart';
 import 'package:daily_activity/core/models/project_model.dart';
 import 'package:daily_activity/core/models/project_status.dart';
 import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/core/utils/app_router.dart';
 import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
-import 'package:daily_activity/core/data/categories.dart';
+import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:daily_activity/features/project/presentation/widgets/custom_drop_down_button.dart';
-import 'package:daily_activity/core/widgets/project_app_bar.dart';
 import 'package:daily_activity/features/project/presentation/widgets/manage_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/debug_logger.dart';
+import '../../../home/presentation/manager/cubit/home_cubit.dart';
 
 class AddProjectViewBody extends StatefulWidget {
   const AddProjectViewBody({super.key});
@@ -33,7 +33,6 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
     return SingleChildScrollView(
       child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
-
           if (state is ProjectError) {
             showDialog(
               context: context,
@@ -90,6 +89,8 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                         if (form.validate()) {
                           form.save();
                           context.read<ProjectCubit>().submitForm();
+                          context.read<HomeCubit>().loadProjects();
+                          GoRouter.of(context).pop();
                         }
                       }),
                   CustomDropDownButton(
@@ -103,7 +104,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     },
                     maxLines: 1,
                     maxLength: 50,
-                    hintText: 'Task Name',
+                    hintText: 'Project Name',
                   ),
                   const SizedBox(height: 30),
                   CustomTextFormField(

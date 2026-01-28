@@ -2,6 +2,7 @@ import 'package:daily_activity/core/utils/app_text_styles.dart';
 import 'package:daily_activity/core/utils/constants.dart';
 import 'package:daily_activity/features/settings/presentation/widgets/dark_theme_toggle.dart';
 import 'package:daily_activity/features/settings/presentation/widgets/name_editor.dart';
+import 'package:daily_activity/features/settings/presentation/widgets/terms_button.dart';
 import 'package:flutter/material.dart';
 
 class SettingsViewBody extends StatelessWidget {
@@ -25,6 +26,7 @@ class SettingsViewBody extends StatelessWidget {
           const SizedBox(
             height: 27,
           ),
+          const TermsButton(),
           // Terms & Conditions
           // Privacy Policy
           const Spacer(),

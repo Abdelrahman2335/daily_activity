@@ -36,7 +36,7 @@ class ProjectAppBar extends StatelessWidget {
             child: Center(
               child: Text(
                 title,
-                style: AppTextStyles.textStyle19(context),
+                style: AppTextStyles.textStyle16,
                 textAlign: TextAlign.center,
               ),
             ),

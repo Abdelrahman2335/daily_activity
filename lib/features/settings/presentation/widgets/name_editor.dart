@@ -31,18 +31,25 @@ class _NameEditorState extends State<NameEditor> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme.surface;
+    final theme = Theme.of(context).colorScheme.onSurface;
     return TextField(
       onChanged: (value) {
         context.read<SettingCubit>().updateUserName(value);
       },
       controller: _controller,
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme),
+          borderRadius: BorderRadius.circular(19),
+        ),
         fillColor: theme,
         focusColor: theme,
-        prefixIcon: Icon(
-          Iconsax.user,
-          color: AppColor.accentTeal,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 19, right: 9),
+          child: Icon(
+            Iconsax.user,
+            color: AppColor.accentTeal,
+          ),
         ),
         hintText: "Name",
         border: OutlineInputBorder(

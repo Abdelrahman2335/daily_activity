@@ -15,22 +15,28 @@ class DarkThemeToggle extends StatelessWidget {
 
     return BlocBuilder<SettingCubit, SettingState>(
       builder: (context, state) {
-        return SwitchListTile(
-          shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(19),
+        return SizedBox(
+          child: SwitchListTile(
+            shape: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: colorScheme.onSurface,
+              ),
+              borderRadius: BorderRadius.circular(19),
+            ),
+            secondary: Icon(
+              Iconsax.brush_4,
+              color: colorScheme.primary,
+            ),
+            title: Text(
+              "Dark Theme",
+              style: TextStyle(color: colorScheme.onSurface),
+            ),
+            value: isDarkMode,
+            onChanged: (bool value) {
+              context.read<SettingCubit>().toggleTheme();
+            },
+            activeThumbColor: colorScheme.primary,
           ),
-          secondary: Icon(
-            Iconsax.brush_4,
-            color: colorScheme.primary,
-          ),
-          title: const Text(
-            "Dark Theme",
-          ),
-          value: isDarkMode,
-          onChanged: (bool value) {
-            context.read<SettingCubit>().toggleTheme();
-          },
-          activeThumbColor: colorScheme.primary,
         );
       },
     );

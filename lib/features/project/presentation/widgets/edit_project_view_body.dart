@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/debug_logger.dart';
+import 'alert_dialog.dart';
 
 class EditProjectViewBody extends StatefulWidget {
   const EditProjectViewBody({super.key});
@@ -171,41 +172,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                         showDialog(
                             context: context,
                             builder: (_) {
-                              return AlertDialog(
-                                content: Text(
-                                    'Are you sure you want to delete this project?'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      GoRouter.of(context).pop();
-                                    },
-                                    child: Text("Cancel",
-                                        style: AppTextStyles.textStyle14
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSurface)),
-                                  ),
-                                  OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                        side: BorderSide(
-                                            color: AppColor.accentRed),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16))),
-                                    onPressed: () {
-                                      context
-                                          .read<ProjectCubit>()
-                                          .deleteProject(
-                                              projectId: formState.project.id);
-                                    },
-                                    child: Text("Delete",
-                                        style: AppTextStyles.textStyle14
-                                            .copyWith(
-                                                color: AppColor.accentRed)),
-                                  )
-                                ],
-                              );
+                              return AlertWidget(formState: formState);
                             });
                         // context
                         //     .read<ProjectCubit>()

@@ -1,5 +1,5 @@
-import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
-import 'package:daily_activity/features/home/presentation/widgets/custom_calender_card.dart';
+import 'package:flowi/features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:flowi/features/home/presentation/widgets/custom_calender_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

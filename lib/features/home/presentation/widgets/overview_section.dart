@@ -1,7 +1,7 @@
-import 'package:daily_activity/core/utils/app_router.dart';
-import 'package:daily_activity/core/utils/app_text_styles.dart';
-import 'package:daily_activity/core/widgets/primary_button.dart';
-import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:flowi/core/utils/app_router.dart';
+import 'package:flowi/core/utils/app_text_styles.dart';
+import 'package:flowi/core/widgets/primary_button.dart';
+import 'package:flowi/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

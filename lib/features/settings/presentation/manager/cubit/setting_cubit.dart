@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:daily_activity/core/utils/debug_logger.dart';
-import 'package:daily_activity/features/settings/data/repository/setting_repo.dart';
-import 'package:daily_activity/features/settings/data/repository/setting_repo_impl.dart';
+import 'package:flowi/core/utils/debug_logger.dart';
+import 'package:flowi/features/settings/data/repository/setting_repo.dart';
+import 'package:flowi/features/settings/data/repository/setting_repo_impl.dart';
 import 'package:meta/meta.dart';
 
 part 'setting_state.dart';
@@ -53,6 +53,7 @@ class SettingCubit extends Cubit<SettingState> {
       DebugLogger.log("Unexpected Error in the toggleTheme, Error: $error");
     }
   }
+
   void updateUserName(String newName) {
     emit(SettingLoading());
 
@@ -65,5 +66,4 @@ class SettingCubit extends Cubit<SettingState> {
       DebugLogger.log("Unexpected Error in updateUserName, Error: $error");
     }
   }
-
 }

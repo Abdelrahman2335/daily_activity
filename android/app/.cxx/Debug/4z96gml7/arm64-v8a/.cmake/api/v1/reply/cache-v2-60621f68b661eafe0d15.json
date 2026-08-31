@@ -151,7 +151,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Mohamed Moustafa/StudioProjects/daily_activity/android/app/.cxx/Debug/4z96gml7/arm64-v8a"
+			"value" : "c:/Users/Mohamed Moustafa/StudioProjects/flowi/android/app/.cxx/Debug/4z96gml7/arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Users\\Mohamed Moustafa\\StudioProjects\\daily_activity\\build\\app\\intermediates\\cxx\\Debug\\4z96gml7\\obj\\arm64-v8a"
+			"value" : "C:\\Users\\Mohamed Moustafa\\StudioProjects\\flowi\\build\\app\\intermediates\\cxx\\Debug\\4z96gml7\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1023,7 +1023,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Users\\Mohamed Moustafa\\StudioProjects\\daily_activity\\build\\app\\intermediates\\cxx\\Debug\\4z96gml7\\obj\\arm64-v8a"
+			"value" : "C:\\Users\\Mohamed Moustafa\\StudioProjects\\flowi\\build\\app\\intermediates\\cxx\\Debug\\4z96gml7\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Mohamed Moustafa/StudioProjects/daily_activity/android/app/.cxx/Debug/4z96gml7/arm64-v8a"
+			"value" : "C:/Users/Mohamed Moustafa/StudioProjects/flowi/android/app/.cxx/Debug/4z96gml7/arm64-v8a"
 		},
 		{
 			"name" : "Project_IS_TOP_LEVEL",

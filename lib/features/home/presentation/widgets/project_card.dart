@@ -1,4 +1,4 @@
-import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:flowi/features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -42,7 +42,11 @@ class ProjectCard extends StatelessWidget {
               left: 64,
               child: Text(
                 data.category.title,
-                style: AppTextStyles.textStyleBold12(context),
+                style: AppTextStyles.textStyle14.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -69,7 +73,9 @@ class ProjectCard extends StatelessWidget {
                 progressColor: Color(data.category.colorValue),
                 center: Text(
                   context.read<HomeCubit>().progressValue(data),
-                  style: AppTextStyles.textStyleBold12(context),
+                  style: AppTextStyles.textStyle12(context).copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               ),
             ),

@@ -19,18 +19,18 @@
             "flutterMode": "release"
         },
         {
-            "name": "daily_activity",
+            "name": "flowi",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "daily_activity (profile mode)",
+            "name": "flowi (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "daily_activity (release mode)",
+            "name": "flowi (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

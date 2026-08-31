@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:daily_activity/core/error/failure.dart';
-import 'package:daily_activity/core/error/dio_failure.dart';
-import 'package:daily_activity/features/ai_assistant/data/repository/ai_assistant_repo.dart';
-import 'package:daily_activity/features/ai_assistant/data/repository/ai_assistant_repo_impl.dart';
-import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
+import 'package:flowi/core/error/failure.dart';
+import 'package:flowi/core/error/dio_failure.dart';
+import 'package:flowi/features/ai_assistant/data/repository/ai_assistant_repo.dart';
+import 'package:flowi/features/ai_assistant/data/repository/ai_assistant_repo_impl.dart';
+import 'package:flowi/features/ai_assistant/data/model/chat_message.dart';
 import 'package:meta/meta.dart';
 
 part 'ai_assistant_state.dart';
@@ -32,15 +32,15 @@ class AiAssistantCubit extends Cubit<AiAssistantState> {
     // Build new messages list with user message and assistant placeholder
     final updated = List<ChatMessage>.from(state.messages)
       ..add(ChatMessage(
-          role: ChatRole.user,
-          text: userMessage,
-          timestamp: DateTime.now(),
+        role: ChatRole.user,
+        text: userMessage,
+        timestamp: DateTime.now(),
       ))
       ..add(ChatMessage(
-          role: ChatRole.assistant,
-          text: '',
-          isStreaming: true,
-          timestamp: DateTime.now(),
+        role: ChatRole.assistant,
+        text: '',
+        isStreaming: true,
+        timestamp: DateTime.now(),
       ));
 
     emit(state.copyWith(messages: updated, isStreaming: true, error: null));
@@ -100,7 +100,6 @@ class AiAssistantCubit extends Cubit<AiAssistantState> {
             }
             emit(state.copyWith(messages: msgs, isStreaming: false));
           },
-          
           cancelOnError: true,
         );
       },

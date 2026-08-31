@@ -1,6 +1,6 @@
-import 'package:daily_activity/core/error/failure.dart';
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
+import 'package:flowi/core/error/failure.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/features/ai_assistant/data/model/chat_message.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AiAssistantRepo {

@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/utils/constants.dart';
-import 'package:daily_activity/features/project/data/project_repository/project_repo.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/utils/constants.dart';
+import 'package:flowi/features/project/data/project_repository/project_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 

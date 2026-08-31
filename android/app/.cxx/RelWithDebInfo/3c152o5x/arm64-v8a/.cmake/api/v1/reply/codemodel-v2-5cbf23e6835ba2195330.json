@@ -32,7 +32,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Repository/daily_activity/android/app/.cxx/RelWithDebInfo/3c152o5x/arm64-v8a",
+		"build" : "D:/Repository/flowi/android/app/.cxx/RelWithDebInfo/3c152o5x/arm64-v8a",
 		"source" : "D:/DoDo/flutter_windows_3.22.3-stable/flutter/packages/flutter_tools/gradle/src/main/groovy"
 	},
 	"version" : 

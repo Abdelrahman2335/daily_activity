@@ -151,7 +151,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/Repository/daily_activity/android/app/.cxx/RelWithDebInfo/3c152o5x/arm64-v8a"
+			"value" : "d:/Repository/flowi/android/app/.cxx/RelWithDebInfo/3c152o5x/arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "D:\\Repository\\daily_activity\\build\\app\\intermediates\\cxx\\RelWithDebInfo\\3c152o5x\\obj\\arm64-v8a"
+			"value" : "D:\\Repository\\flowi\\build\\app\\intermediates\\cxx\\RelWithDebInfo\\3c152o5x\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1023,7 +1023,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "D:\\Repository\\daily_activity\\build\\app\\intermediates\\cxx\\RelWithDebInfo\\3c152o5x\\obj\\arm64-v8a"
+			"value" : "D:\\Repository\\flowi\\build\\app\\intermediates\\cxx\\RelWithDebInfo\\3c152o5x\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Repository/daily_activity/android/app/.cxx/RelWithDebInfo/3c152o5x/arm64-v8a"
+			"value" : "D:/Repository/flowi/android/app/.cxx/RelWithDebInfo/3c152o5x/arm64-v8a"
 		},
 		{
 			"name" : "Project_IS_TOP_LEVEL",

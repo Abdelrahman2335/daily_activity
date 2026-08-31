@@ -1,5 +1,5 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
+import 'package:flowi/core/utils/app_colors.dart';
+import 'package:flowi/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

@@ -1,4 +1,4 @@
-import 'package:daily_activity/core/utils/text_formatter.dart';
+import 'package:flowi/core/utils/text_formatter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -27,7 +27,7 @@ void main() {
       expect(result, isNot(contains('*')));
     });
 
-    test('formats complex markdown example', () {
+    test('formats complex markdown abdelrahman', () {
       const input = '''## Core AI Enhancements and Features:
 
 **1. Smart Prioritization & Scheduling:**
@@ -150,7 +150,7 @@ void main() {
   });
 
   group('Full Example Tests', () {
-    test('formats complete example from requirements', () {
+    test('formats complete abdelrahman from requirements', () {
       const input = '''## Core AI Enhancements and Features:
 
 **1. Smart Prioritization & Scheduling:**

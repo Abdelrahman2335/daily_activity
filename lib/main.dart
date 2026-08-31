@@ -1,31 +1,28 @@
-import 'package:daily_activity/core/adapters/date_time_adapter.dart';
-import 'package:daily_activity/core/adapters/icon_adapter.dart';
-import 'package:daily_activity/core/models/project_category.dart';
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/models/project_status.dart';
-import 'package:daily_activity/core/models/task_model.dart';
-import 'package:daily_activity/core/services/gemini_service.dart';
-import 'package:daily_activity/core/utils/app_router.dart';
-import 'package:daily_activity/core/utils/bloc_observer.dart';
-import 'package:daily_activity/core/utils/constants.dart';
-import 'package:daily_activity/core/utils/theme_manager.dart';
-import 'package:daily_activity/features/ai_assistant/presentation/manager/cubit/ai_assistant_cubit.dart';
-import 'package:daily_activity/features/home/data/repository/home_repo_impl.dart';
-import 'package:daily_activity/features/home/presentation/manager/cubit/home_cubit.dart';
-import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
+import 'package:flowi/core/adapters/date_time_adapter.dart';
+import 'package:flowi/core/adapters/icon_adapter.dart';
+import 'package:flowi/core/models/project_category.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/models/project_status.dart';
+import 'package:flowi/core/models/task_model.dart';
+import 'package:flowi/core/utils/app_router.dart';
+import 'package:flowi/core/utils/bloc_observer.dart';
+import 'package:flowi/core/utils/constants.dart';
+import 'package:flowi/core/utils/theme_manager.dart';
+import 'package:flowi/features/home/data/repository/home_repo_impl.dart';
+import 'package:flowi/features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:flowi/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Load environment variables
-  await dotenv.load(fileName: ".env");
-
-  // Initialize Gemini Service with API key from .env
-  GeminiService().initialize();
+  // await dotenv.load(fileName: ".env");
+  //
+  // // Initialize Gemini Service with API key from .env
+  // GeminiService().initialize();
 
   await Hive.initFlutter();
   Bloc.observer = AppBlocObserver();
@@ -53,7 +50,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeCubit(HomeRepoImpl()),
         ),
-        BlocProvider(create: (context) => AiAssistantCubit()),
+        // BlocProvider(create: (context) => AiAssistantCubit()),
         BlocProvider(
           create: (context) => SettingCubit(),
         ),
@@ -67,7 +64,7 @@ class MyApp extends StatelessWidget {
             data: isDarkMode ? ThemeManager.darkTheme : ThemeManager.lightTheme,
             child: MaterialApp.router(
               routerConfig: AppRouter.router,
-              title: 'Daily Activity',
+              title: Constants.appName,
               debugShowCheckedModeBanner: false,
               theme: ThemeManager.lightTheme,
               darkTheme: ThemeManager.darkTheme,

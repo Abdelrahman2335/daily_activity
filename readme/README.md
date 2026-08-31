@@ -1,6 +1,6 @@
 # 📚 Documentation Index
 
-Welcome to the Daily Activity app documentation! This folder contains comprehensive guides for developers, contributors, and users.
+Welcome to the Flowi app documentation! This folder contains comprehensive guides for developers, contributors, and users.
 
 ## 📖 Quick Navigation
 
@@ -19,9 +19,6 @@ Located in [`formatter/`](formatter/)
 | [Streaming System Guide](formatter/STREAMING_SYSTEM_GUIDE.md) | 🆕 Complete streaming response system |
 | [Streaming Checklist](formatter/STREAMING_IMPLEMENTATION_CHECKLIST.md) | 🆕 Implementation checklist |
 | [Streaming Summary](formatter/STREAMING_IMPLEMENTATION_SUMMARY.txt) | 🆕 Visual integration guide |
-| [API Docs](../lib/core/utils/TEXT_FORMATTER_README.md) | In-code documentation |
-
-**📌 Start here if:** You're working with Gemini API responses or need to format markdown text.
 | [API Docs](../lib/core/utils/TEXT_FORMATTER_README.md) | In-code documentation |
 
 **📌 Start here if:** You're working with Gemini API responses or need to format markdown text.
@@ -150,7 +147,7 @@ When adding new documentation:
 
 - 📖 Check this index first
 - 🔍 Search the documentation
-- 🐛 [Open an issue](https://github.com/Abdelrahman2335/daily_activity/issues)
+- 🐛 [Open an issue](https://github.com/Abdelrahman2335/flowi/issues)
 - 💬 Contact the maintainer
 
 ---

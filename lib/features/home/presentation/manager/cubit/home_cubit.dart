@@ -1,15 +1,17 @@
 import 'package:bloc/bloc.dart';
-import 'package:daily_activity/core/models/data_time_model.dart';
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/models/project_status.dart';
-import 'package:daily_activity/core/utils/debug_logger.dart';
-import 'package:daily_activity/features/home/data/repository/home_repo.dart';
+import 'package:flowi/core/models/data_time_model.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/models/project_status.dart';
+import 'package:flowi/core/utils/debug_logger.dart';
+import 'package:flowi/features/home/data/repository/home_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.homeRepo) : super(HomeInitial());
+  HomeCubit(this.homeRepo) : super(HomeInitial()) {
+    loadProjects();
+  }
   final HomeRepo homeRepo;
 
   List<ProjectModel> _allProjects = [];
@@ -70,7 +72,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool get hasProjectsInProgress {
     final result = homeRepo.statusFilter(TaskStatus.inProgress);
-    var hasProjects = result.fold((_) => false, (projects) => projects.isNotEmpty);
+    var hasProjects =
+        result.fold((_) => false, (projects) => projects.isNotEmpty);
     return hasProjects;
   }
 

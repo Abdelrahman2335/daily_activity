@@ -1,8 +1,8 @@
 import 'dart:math';
-import 'package:daily_activity/core/data/categories.dart';
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/models/project_status.dart';
-import 'package:daily_activity/core/models/task_model.dart';
+import 'package:flowi/core/data/categories.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/models/project_status.dart';
+import 'package:flowi/core/models/task_model.dart';
 
 class TestAddProject {
   static final Random _random = Random();

@@ -1,4 +1,4 @@
-import 'package:daily_activity/core/error/failure.dart';
+import 'package:flowi/core/error/failure.dart';
 import 'package:dio/dio.dart';
 
 class ServerFailure extends Failure {

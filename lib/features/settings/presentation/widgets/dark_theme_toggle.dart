@@ -1,4 +1,4 @@
-import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
+import 'package:flowi/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

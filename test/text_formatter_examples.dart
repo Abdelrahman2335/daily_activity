@@ -1,4 +1,4 @@
-import 'package:daily_activity/core/utils/text_formatter.dart';
+import 'package:flowi/core/utils/text_formatter.dart';
 
 /// Example demonstrations of TextFormatter usage
 void main() {

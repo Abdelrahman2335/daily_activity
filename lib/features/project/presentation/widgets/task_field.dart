@@ -1,7 +1,7 @@
-import 'package:daily_activity/core/models/task_model.dart';
-import 'package:daily_activity/core/utils/debug_logger.dart';
-import 'package:daily_activity/core/widgets/custom_text_form_field.dart';
-import 'package:daily_activity/features/project/presentation/manager/cubit/project_cubit.dart';
+import 'package:flowi/core/models/task_model.dart';
+import 'package:flowi/core/utils/debug_logger.dart';
+import 'package:flowi/core/widgets/custom_text_form_field.dart';
+import 'package:flowi/features/project/presentation/manager/cubit/project_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

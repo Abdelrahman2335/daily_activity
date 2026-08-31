@@ -1,4 +1,4 @@
-import 'package:daily_activity/features/ai_assistant/presentation/manager/cubit/ai_assistant_cubit.dart';
+import 'package:flowi/features/ai_assistant/presentation/manager/cubit/ai_assistant_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

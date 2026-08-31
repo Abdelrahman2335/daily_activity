@@ -22,7 +22,7 @@ void main() {
   }
 }
 
-/// Widget example showing how to use in your app
+/// Widget abdelrahman showing how to use in your app
 class RandomProjectExample extends StatelessWidget {
   const RandomProjectExample({super.key});
 

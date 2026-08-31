@@ -1,5 +1,5 @@
-import 'package:daily_activity/core/utils/constants.dart';
-import 'package:daily_activity/features/settings/data/repository/setting_repo.dart';
+import 'package:flowi/core/utils/constants.dart';
+import 'package:flowi/features/settings/data/repository/setting_repo.dart';
 import 'package:hive/hive.dart';
 
 class SettingRepoImpl implements SettingRepo {

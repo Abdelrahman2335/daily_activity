@@ -37,7 +37,7 @@ class IconAdapter extends TypeAdapter<IconData> {
 
     // ignore: invalid_use_of_internal_member, non_constant_identifier_names
     // This is necessary for Hive adapter deserialization
-    return IconData(
+    return _HiveIconData(
       codePoint,
       fontFamily: fontFamily.isEmpty ? null : fontFamily,
       fontPackage: fontPackage.isEmpty ? null : fontPackage,
@@ -53,4 +53,17 @@ class IconAdapter extends TypeAdapter<IconData> {
         obj.fontPackage ?? ''); // Persist package for package icons
     writer.writeBool(obj.matchTextDirection);
   }
+}
+
+/// A custom IconData class that bypasses Flutter's icon tree shaking.
+/// This is necessary because Hive deserializes IconData at runtime,
+/// which conflicts with Flutter's requirement that all IconData instances
+/// be compile-time constants for tree shaking.
+class _HiveIconData extends IconData {
+  const _HiveIconData(
+    super.codePoint, {
+    super.fontFamily,
+    super.fontPackage,
+    super.matchTextDirection,
+  });
 }

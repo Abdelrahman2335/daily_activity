@@ -1,11 +1,11 @@
-import 'package:daily_activity/core/utils/app_text_styles.dart';
-import 'package:daily_activity/features/ai_assistant/presentation/manager/cubit/ai_assistant_cubit.dart';
-import 'package:daily_activity/features/ai_assistant/presentation/views/widgets/chat_input_field.dart';
-import 'package:daily_activity/features/ai_assistant/presentation/views/widgets/custom_chat_card.dart';
-import 'package:daily_activity/features/ai_assistant/presentation/views/widgets/loading_indicator.dart';
+import 'package:flowi/core/utils/app_text_styles.dart';
+import 'package:flowi/features/ai_assistant/presentation/manager/cubit/ai_assistant_cubit.dart';
+import 'package:flowi/features/ai_assistant/presentation/views/widgets/chat_input_field.dart';
+import 'package:flowi/features/ai_assistant/presentation/views/widgets/custom_chat_card.dart';
+import 'package:flowi/features/ai_assistant/presentation/views/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
+import 'package:flowi/features/ai_assistant/data/model/chat_message.dart';
 
 class AiAssistantViewBody extends StatefulWidget {
   const AiAssistantViewBody({super.key});

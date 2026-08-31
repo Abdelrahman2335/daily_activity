@@ -1,5 +1,5 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/core/utils/app_router.dart';
+import 'package:flowi/core/utils/app_colors.dart';
+import 'package:flowi/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +47,9 @@ class InProgressTodo extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 19, right: 19, bottom: 11),
                 child: Text(
                   project.description,
-                  style: AppTextStyles.textStyleBold12(context),
+                  style: AppTextStyles.textStyle14.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

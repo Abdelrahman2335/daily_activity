@@ -1,11 +1,11 @@
 import 'dart:developer';
 
-import 'package:daily_activity/core/error/dio_failure.dart';
-import 'package:daily_activity/core/error/failure.dart';
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/services/gemini_service.dart';
-import 'package:daily_activity/features/ai_assistant/data/model/chat_message.dart';
-import 'package:daily_activity/features/ai_assistant/data/repository/ai_assistant_repo.dart';
+import 'package:flowi/core/error/dio_failure.dart';
+import 'package:flowi/core/error/failure.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/services/gemini_service.dart';
+import 'package:flowi/features/ai_assistant/data/model/chat_message.dart';
+import 'package:flowi/features/ai_assistant/data/repository/ai_assistant_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 

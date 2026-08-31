@@ -6,24 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.daily_activity"
+    namespace = "com.abdelrahman.flowi"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     flavorDimensions += "version"
-
-    productFlavors {
-        create("dev") {
-            dimension = "version"
-            applicationIdSuffix = ".dev"
-            versionNameSuffix = "-dev"
-            resValue("string", "app_name", "Daily Activity (Dev)")
-        }
-        create("prod") {
-            dimension = "version"
-            resValue("string", "app_name", "Daily Activity")
-        }
-    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -35,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.daily_activity"
+        applicationId = "com.abdelrahman.flowi"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

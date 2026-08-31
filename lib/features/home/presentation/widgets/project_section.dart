@@ -1,6 +1,6 @@
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/utils/app_router.dart';
-import 'package:daily_activity/features/home/presentation/widgets/project_card.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/utils/app_router.dart';
+import 'package:flowi/features/home/presentation/widgets/project_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +11,6 @@ class ProjectSection extends StatelessWidget {
   });
 
   final List<ProjectModel> projects;
-  @override
   @override
   Widget build(BuildContext context) {
     return SliverList(

@@ -1,4 +1,4 @@
-import 'package:daily_activity/core/models/task_model.dart';
+import 'package:flowi/core/models/task_model.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';

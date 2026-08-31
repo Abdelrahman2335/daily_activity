@@ -1,6 +1,6 @@
-import 'package:daily_activity/core/utils/app_colors.dart';
-import 'package:daily_activity/core/utils/app_text_styles.dart';
-import 'package:daily_activity/core/utils/text_formatter.dart';
+import 'package:flowi/core/utils/app_colors.dart';
+import 'package:flowi/core/utils/app_text_styles.dart';
+import 'package:flowi/core/utils/text_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 

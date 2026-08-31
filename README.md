@@ -1,4 +1,4 @@
-# Daily Activity - Task Management & To-Do App
+# Flowi - Task Management & To-Do App
 
 <div align="center">
 
@@ -32,7 +32,7 @@ A beautiful and intuitive task management application built with Flutter, featur
 
 ## 📱 About
 
-Daily Activity is a modern Flutter-based task management application designed to help users organize their daily activities, projects, and tasks efficiently. The app features a clean, intuitive UI and integrates advanced AI capabilities powered by Google's Gemini 2.5 Flash API to provide intelligent, context-aware conversational assistance with full conversation history support.
+Flowi is a modern Flutter-based task management application designed to help users organize their daily activities, projects, and tasks efficiently. The app features a clean, intuitive UI and integrates advanced AI capabilities powered by Google's Gemini 2.5 Flash API to provide intelligent, context-aware conversational assistance with full conversation history support.
 
 ### ✨ Key Features
 
@@ -62,8 +62,8 @@ Daily Activity is a modern Flutter-based task management application designed to
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Abdelrahman2335/daily_activity.git
-   cd daily_activity
+   git clone https://github.com/Abdelrahman2335/flowi.git
+   cd flowi
    ```
 
 2. **Install dependencies**
@@ -76,10 +76,10 @@ Daily Activity is a modern Flutter-based task management application designed to
    Create a `.env` file in the project root:
    ```bash
    # Windows PowerShell
-   Copy-Item .env.example .env
+   Copy-Item .env.abdelrahman .env
    
    # Linux/macOS
-   cp .env.example .env
+   cp .env.abdelrahman .env
    ```
    
    Then edit `.env` and add your Gemini API key:
@@ -177,7 +177,7 @@ On first launch:
 ## 🏗️ Project Structure
 
 ```
-daily_activity/
+flowi/
 ├── lib/
 │   ├── main.dart                 # App entry point
 │   ├── layout.dart               # Main layout structure
@@ -470,7 +470,7 @@ flutter build web --release
 
 ### Getting Help
 
-- Check [Issues](https://github.com/Abdelrahman2335/daily_activity/issues) for similar problems
+- Check [Issues](https://github.com/Abdelrahman2335/flowi/issues) for similar problems
 - Review documentation in `readme/` folder
 - Create a new issue with:
   - Flutter version (`flutter --version`)
@@ -514,7 +514,7 @@ This is a private project for learning purposes. If you'd like to contribute:
 
 ~~AI Assistant conversation context not working~~ ✅ **FIXED!** - Full conversation context now implemented.
 
-See the [Issues](https://github.com/Abdelrahman2335/daily_activity/issues) section for current bugs and feature requests.
+See the [Issues](https://github.com/Abdelrahman2335/flowi/issues) section for current bugs and feature requests.
 
 ### Reporting Issues
 
@@ -556,9 +556,9 @@ This project uses many open-source packages. Special thanks to all contributors 
 ### Getting Help
 
 - 📖 **Documentation**: Check the `readme/` folder for comprehensive guides
-- 🐛 **Bug Reports**: [Open an issue](https://github.com/Abdelrahman2335/daily_activity/issues/new) on GitHub
-- 💡 **Feature Requests**: [Submit a feature request](https://github.com/Abdelrahman2335/daily_activity/issues/new)
-- ❓ **Questions**: Review existing [issues](https://github.com/Abdelrahman2335/daily_activity/issues) or open a new one
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/Abdelrahman2335/flowi/issues/new) on GitHub
+- 💡 **Feature Requests**: [Submit a feature request](https://github.com/Abdelrahman2335/flowi/issues/new)
+- ❓ **Questions**: Review existing [issues](https://github.com/Abdelrahman2335/flowi/issues) or open a new one
 
 ### Useful Resources
 

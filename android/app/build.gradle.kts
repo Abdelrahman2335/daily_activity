@@ -6,9 +6,24 @@ plugins {
 }
 
 android {
-    namespace = "com.example.daily_activity"
+    namespace = "com.abdelrahman.flowi"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("dev") {
+            dimension = "version"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "Flowi (Dev)")
+        }
+        create("prod") {
+            dimension = "version"
+            resValue("string", "app_name", "Flowi")
+        }
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -21,7 +36,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.daily_activity"
+        applicationId = "com.abdelrahman.flowi"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

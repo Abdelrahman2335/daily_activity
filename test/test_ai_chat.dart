@@ -1,6 +1,6 @@
-import 'package:daily_activity/core/error/dio_failure.dart';
-import 'package:daily_activity/core/error/failure.dart';
-import 'package:daily_activity/core/services/gemini_service.dart';
+import 'package:flowi/core/error/dio_failure.dart';
+import 'package:flowi/core/error/failure.dart';
+import 'package:flowi/core/services/gemini_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 

@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:daily_activity/core/utils/app_router.dart';
-import 'package:daily_activity/core/utils/debug_logger.dart';
-import 'package:daily_activity/core/widgets/app_background.dart';
-import 'package:daily_activity/features/home/presentation/widgets/home_view_body.dart';
-import 'package:daily_activity/features/settings/presentation/manager/cubit/setting_cubit.dart';
-import 'package:daily_activity/features/settings/presentation/widgets/settings_view_body.dart';
+import 'package:flowi/core/utils/app_router.dart';
+import 'package:flowi/core/utils/debug_logger.dart';
+import 'package:flowi/core/widgets/app_background.dart';
+import 'package:flowi/features/home/presentation/widgets/home_view_body.dart';
+import 'package:flowi/features/settings/presentation/manager/cubit/setting_cubit.dart';
+import 'package:flowi/features/settings/presentation/widgets/settings_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

@@ -1,13 +1,13 @@
-import 'package:daily_activity/core/models/project_model.dart';
-import 'package:daily_activity/core/utils/constants.dart';
-import 'package:daily_activity/features/ai_assistant/presentation/views/screens/ai_assistant_view.dart';
-import 'package:daily_activity/features/home/presentation/views/home_view.dart';
-import 'package:daily_activity/features/home/presentation/views/today_task_view.dart';
-import 'package:daily_activity/features/project/presentation/views/project_view.dart';
-import 'package:daily_activity/features/settings/presentation/views/settings_view.dart';
-import 'package:daily_activity/features/settings/presentation/views/terms_view.dart';
-import 'package:daily_activity/features/welcome/presentation/views/welcome_view.dart';
-import 'package:daily_activity/layout.dart';
+import 'package:flowi/core/models/project_model.dart';
+import 'package:flowi/core/utils/constants.dart';
+import 'package:flowi/features/ai_assistant/presentation/views/screens/ai_assistant_view.dart';
+import 'package:flowi/features/home/presentation/views/home_view.dart';
+import 'package:flowi/features/home/presentation/views/today_task_view.dart';
+import 'package:flowi/features/project/presentation/views/project_view.dart';
+import 'package:flowi/features/settings/presentation/views/settings_view.dart';
+import 'package:flowi/features/settings/presentation/views/terms_view.dart';
+import 'package:flowi/features/welcome/presentation/views/welcome_view.dart';
+import 'package:flowi/layout.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

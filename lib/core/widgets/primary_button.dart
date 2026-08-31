@@ -1,4 +1,4 @@
-import 'package:daily_activity/core/utils/app_text_styles.dart';
+import 'package:flowi/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -29,7 +29,8 @@ class PrimaryButton extends StatelessWidget {
       child: Text(
         text,
         style: AppTextStyles.textStyle14
-            .copyWith(color: textColor, fontWeight: FontWeight.bold),
+            .copyWith(color: textColor,
+        ),
       ),
     );
   }

@@ -1,1 +1,1 @@
-C:\Users\Mohamed Moustafa\StudioProjects\daily_activity\build\app\intermediates\cxx\Debug\4z96gml7\obj\arm64-v8a
+C:\Users\Mohamed Moustafa\StudioProjects\flowi\build\app\intermediates\cxx\Debug\4z96gml7\obj\arm64-v8a

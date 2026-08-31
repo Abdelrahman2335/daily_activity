@@ -1,5 +1,5 @@
-import 'package:daily_activity/core/models/data_time_model.dart';
-import 'package:daily_activity/core/utils/app_text_styles.dart';
+import 'package:flowi/core/models/data_time_model.dart';
+import 'package:flowi/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomCalenderCard extends StatelessWidget {
@@ -18,12 +18,11 @@ class CustomCalenderCard extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     Color backgroundColor = colorScheme.surface;
-    Color textColor = colorScheme.onSurface; 
+    Color textColor = colorScheme.onSurface;
 
     if (isSelected) {
-      backgroundColor = colorScheme.primary; 
-      textColor =
-          colorScheme.onPrimary;
+      backgroundColor = colorScheme.primary;
+      textColor = colorScheme.onPrimary;
     }
 
     return GestureDetector(

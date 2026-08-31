@@ -9,10 +9,10 @@ import '../manager/cubit/project_cubit.dart';
 class AlertWidget extends StatelessWidget {
   const AlertWidget({
     super.key,
-    required this.formState,
+    required this.onDelete,
   });
 
-  final ProjectFormState formState;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,7 @@ class AlertWidget extends StatelessWidget {
               side: BorderSide(color: AppColor.accentRed),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16))),
-          onPressed: () {
-            context
-                .read<ProjectCubit>()
-                .deleteProject(projectId: formState.project.id);
-          },
+          onPressed: onDelete,
           child: Text("Delete",
               style: AppTextStyles.textStyle14
                   .copyWith(color: AppColor.accentRed)),

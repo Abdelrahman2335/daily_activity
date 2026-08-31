@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/debug_logger.dart';
+import '../../../home/presentation/manager/cubit/home_cubit.dart';
 import 'alert_dialog.dart';
 
 class EditProjectViewBody extends StatefulWidget {
@@ -35,18 +36,8 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
       child: BlocConsumer<ProjectCubit, ProjectState>(
         listener: (context, state) {
           if (state is ProjectSuccess) {
+            context.read<HomeCubit>().loadProjects();
             GoRouter.of(context).pushReplacement(AppRouter.kLayOut);
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  title: Text("Project Update"),
-                  content: Text("Project updated successfully!"),
-                );
-              },
-            );
-            GoRouter.of(context).pop();
           } else if (state is ProjectError) {
             showDialog(
               context: context,
@@ -59,7 +50,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
               },
             );
             Future.delayed((Duration(seconds: 2)), () {
-              GoRouter.maybeOf(context)?.pop();
+              if (mounted) GoRouter.maybeOf(context)?.pop();
             });
           }
         },
@@ -157,7 +148,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                         firstDate: DateTime(2010),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
-                      if (pickedDate != null) {
+                      if (pickedDate != null && mounted) {
                         context.read<ProjectCubit>().endDateChange(pickedDate);
                       }
                     },
@@ -170,13 +161,16 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                               borderRadius: BorderRadius.circular(16))),
                       onPressed: () {
                         showDialog(
-                            context: context,
-                            builder: (_) {
-                              return AlertWidget(formState: formState);
-                            });
-                        // context
-                        //     .read<ProjectCubit>()
-                        //     .deleteProject(projectId: formState.project.id);
+                          context: context,
+                          builder: (_) {
+                            return AlertWidget(
+                              onDelete: () {
+                                context.read<ProjectCubit>().deleteProject(
+                                    projectId: formState.project.id);
+                              },
+                            );
+                          },
+                        );
                       },
                       child: Text(
                         "Delete Project",

@@ -73,7 +73,7 @@ abstract class AppRouter {
           path: kAddProject,
           builder: (context, state) {
             return ProjectView(
-              isEditMood: false,
+              isEditMode: false,
             );
           },
         ),
@@ -82,7 +82,7 @@ abstract class AppRouter {
           builder: (context, state) {
             final project = state.extra as ProjectModel?;
             return ProjectView(
-              isEditMood: true,
+              isEditMode: true,
               project: project,
             );
           },

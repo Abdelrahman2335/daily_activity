@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  animated_text_kit: ^4.3.0
   bloc: ^9.0.0
   cupertino_icons: ^1.0.8
   curved_navigation_bar: ^1.0.6
@@ -55,11 +54,18 @@ dependencies:
   uuid: ^4.5.1
 
 dev_dependencies:
+  bloc_test: ^10.0.0
   build_runner: ^2.4.6
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  hive_generator: ^2.0.1
+  mocktail: ^1.0.4
+  # NOTE: hive_generator ^2.0.1 cannot coexist with bloc_test on this Flutter SDK
+  # (hive_generator pins analyzer <7, while the test/test_api versions pinned by
+  # flutter_test require analyzer >=8). The generated Hive adapters (*.g.dart) are
+  # committed, so the app and tests do not need the generator at build time.
+  # To regenerate adapters: temporarily swap bloc_test/mocktail out, run
+  # `dart run build_runner build --delete-conflicting-outputs`, then restore this file.
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

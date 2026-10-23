@@ -75,7 +75,6 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
           ),
-
           // Disable Ai chat
           // Positioned(
           //   bottom: 20, // Above the navigation bar

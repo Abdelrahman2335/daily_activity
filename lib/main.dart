@@ -4,6 +4,7 @@ import 'package:flowi/core/models/project_category.dart';
 import 'package:flowi/core/models/project_model.dart';
 import 'package:flowi/core/models/project_status.dart';
 import 'package:flowi/core/models/task_model.dart';
+import 'package:flowi/core/persistence/project_store.dart';
 import 'package:flowi/core/utils/app_router.dart';
 import 'package:flowi/core/utils/bloc_observer.dart';
 import 'package:flowi/core/utils/constants.dart';
@@ -20,8 +21,8 @@ void main() async {
 
   // Load environment variables
   // await dotenv.load(fileName: ".env");
-  //
-  // // Initialize Gemini Service with API key from .env
+
+  // Initialize Gemini Service with API key from .env
   // GeminiService().initialize();
 
   await Hive.initFlutter();
@@ -34,8 +35,7 @@ void main() async {
   Hive.registerAdapter(DateTimeAdapter());
   Hive.registerAdapter(IconAdapter());
 
-  await Hive.openBox<ProjectModel>(Constants.kMainBox);
-  await Hive.openBox(Constants.kSettingsBox);
+  await ProjectStore.open();
   runApp(const MyApp());
 }
 

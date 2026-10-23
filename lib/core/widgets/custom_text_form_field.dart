@@ -14,6 +14,7 @@ class CustomTextFormField extends StatefulWidget {
     this.enableField,
     this.onSaved,
     this.initialValue,
+    this.validator,
   });
   final Widget? icon;
   final bool? enableField;
@@ -26,6 +27,9 @@ class CustomTextFormField extends StatefulWidget {
   final String? initialValue;
   final Color? backgroundColor;
   final void Function(String?)? onSaved;
+
+  /// Optional override for the built-in "field is required" validation.
+  final String? Function(String?)? validator;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -52,6 +56,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     super.dispose();
   }
 
+  /// Default validation used when the caller does not pass [CustomTextFormField.validator].
+  static String? _requiredValidator(String? value) {
+    if (value != null && value.isNotEmpty) {
+      return null;
+    }
+    return "Field is required";
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -60,13 +72,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         onTapUpOutside: (event) {
           FocusScope.of(context).unfocus();
         },
-        validator: (value) {
-          if (value != null && value.isNotEmpty) {
-            return null;
-          }
-          AutovalidateMode.always;
-          return "Field is required";
-        },
+        validator: widget.validator ?? _requiredValidator,
         onSaved: widget.onSaved,
         enabled: widget.enableField,
         controller: _controller,

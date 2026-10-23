@@ -1,14 +1,12 @@
 import 'package:flowi/core/models/project_model.dart';
 import 'package:flowi/core/models/project_status.dart';
-import 'package:flowi/core/utils/constants.dart';
+import 'package:flowi/core/persistence/project_store.dart';
 import 'package:flowi/core/utils/debug_logger.dart';
 import 'package:flowi/features/home/data/repository/home_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:hive/hive.dart';
 
 class HomeRepoImpl implements HomeRepo {
-  List<ProjectModel> get _projects =>
-      Hive.box<ProjectModel>(Constants.kMainBox).values.toList();
+  List<ProjectModel> get _projects => ProjectStore.readAll();
 
   List<ProjectModel> _sortProjectsByDate(List<ProjectModel> projects) {
     return List.from(projects)

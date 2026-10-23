@@ -1,19 +1,24 @@
 import 'dart:developer';
 
 import 'package:flowi/core/models/project_model.dart';
-import 'package:flowi/core/utils/constants.dart';
+import 'package:flowi/core/persistence/project_store.dart';
 import 'package:flowi/features/project/data/project_repository/project_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
-  final Box box = Hive.box<ProjectModel>(Constants.kMainBox);
+  /// Resolved on every access so a closed/reopened box is never used stale.
+  Box<ProjectModel> get _box => ProjectStore.box;
 
   @override
   Future<Either<String, void>> addProject(
       {required ProjectModel project}) async {
     try {
-      await box.put(project.id, project);
+      if (_box.containsKey(project.id)) {
+        return Left("A project with id ${project.id} already exists");
+      }
+
+      await _box.put(project.id, project);
       return Right(null);
     } catch (error) {
       log("$error");
@@ -27,12 +32,12 @@ class ProjectRepositoryImpl implements ProjectRepository {
       {required ProjectModel updatedProject}) async {
     try {
       // Check if the project exists before updating
-      if (!box.containsKey(updatedProject.id)) {
+      if (!_box.containsKey(updatedProject.id)) {
         return Left("Project not found for updating");
       }
 
       // Update the existing project
-      await box.put(updatedProject.id, updatedProject);
+      await _box.put(updatedProject.id, updatedProject);
       return Right(null);
     } catch (error) {
       log("$error");
@@ -44,12 +49,16 @@ class ProjectRepositoryImpl implements ProjectRepository {
   Future<Either<String, void>> deleteProject(
       {required String projectId}) async {
     try {
-      await box.delete(projectId);
+      if (!_box.containsKey(projectId)) {
+        return Left("Project not found for deleting");
+      }
+
+      await _box.delete(projectId);
       log("Project $projectId deleted!");
       return Right(null);
     } catch (error) {
       log("$error");
-      return Left("An Error has occurs when updating the project");
+      return Left("An Error has occurs when deleting the project");
     }
   }
 }

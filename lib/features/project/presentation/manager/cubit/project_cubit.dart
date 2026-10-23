@@ -6,6 +6,7 @@ import 'package:flowi/core/models/project_status.dart';
 import 'package:flowi/core/models/task_model.dart';
 import 'package:flowi/core/utils/debug_logger.dart';
 import 'package:flowi/features/project/data/project_repository/project_repo.dart';
+import 'package:flowi/features/project/presentation/manager/cubit/project_validators.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
@@ -13,22 +14,29 @@ part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit(this.projectRepo, {this.initialProject})
-      : super(
-          ProjectFormState(
-              project: initialProject ??
-                  ProjectModel(
-                    title: "",
-                    description: "",
-                    category: categories[ProjectCategory.dailyStudy]!,
-                    startDate: DateTime.now(),
-                    endDate: DateTime.now(),
-                    tasks: [TaskModel(title: "")],
-                    status: TaskStatus.notStarted,
-                  ),
-              isValid: true),
-        );
+      : super(_initialState(initialProject));
+
   final ProjectRepository projectRepo;
   final ProjectModel? initialProject;
+
+  static ProjectFormState _initialState(ProjectModel? project) {
+    final initial = project ?? emptyDraft();
+    return ProjectFormState(
+      project: initial,
+      isValid: ProjectValidators.isFormValid(initial),
+    );
+  }
+
+  /// Blank project used when creating a new one.
+  static ProjectModel emptyDraft() => ProjectModel(
+        title: "",
+        description: "",
+        category: categories[ProjectCategory.dailyStudy]!,
+        startDate: DateTime.now(),
+        endDate: DateTime.now(),
+        tasks: [TaskModel(title: "")],
+        status: TaskStatus.notStarted,
+      );
 
   List<TaskModel> get currentTasks => _currentFormState.project.tasks;
 
@@ -37,107 +45,75 @@ class ProjectCubit extends Cubit<ProjectState> {
     if (currentState is ProjectFormState) {
       return currentState;
     }
-    return ProjectFormState(
-        project: ProjectModel(
-          title: "",
-          description: "",
-          category: categories[ProjectCategory.dailyStudy]!,
-          startDate: DateTime.now(),
-          endDate: DateTime.now(),
-          tasks: [TaskModel(title: "")],
-          status: TaskStatus.notStarted,
-        ),
-        isValid: false);
+    return ProjectFormState(project: emptyDraft(), isValid: false);
   }
 
-  bool _validForm(ProjectFormState state) {
-    bool isValid = state.description.isNotEmpty &&
-        state.title.isNotEmpty &&
-        state.tasks.isNotEmpty;
-    DebugLogger.log("validForm is: $isValid");
+  /// Emits a form state whose validity is derived from [project], so the
+  /// cubit's notion of "valid" always matches the UI validators.
+  void _emitForm(ProjectModel project, {String? logMessage}) {
+    emit(ProjectFormState(
+      project: project,
+      isValid: ProjectValidators.isFormValid(project),
+    ));
+    if (logMessage != null) {
+      DebugLogger.log("emit new state with $logMessage", tag: "ProjectCubit");
+    }
+  }
 
-    return isValid;
+  void _emitUpdated(
+      ProjectModel Function(ProjectModel current) update,
+      String logMessage) {
+    _emitForm(
+      update(_currentFormState.project),
+      logMessage: logMessage,
+    );
   }
 
   void titleChange(String title) {
     DebugLogger.log("titleChange called with Title: $title",
         tag: "ProjectCubit");
 
-    final updateProject = _currentFormState.project.copyWith(title: title);
-    final formState = ProjectFormState(
-      project: updateProject,
-      isValid: _validForm(
-        ProjectFormState(project: updateProject),
-      ),
-    );
-    emit(formState);
-    DebugLogger.log("emit new state with title: ${formState.title}",
-        tag: "ProjectCubit");
+    _emitUpdated((project) => project.copyWith(title: title), "title: $title");
   }
 
   void descriptionChange(String description) {
     DebugLogger.log("descriptionChange called with description: $description",
         tag: "ProjectCubit");
 
-    final updateProject =
-        _currentFormState.project.copyWith(description: description);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(ProjectFormState(project: updateProject)),
+    _emitUpdated(
+      (project) => project.copyWith(description: description),
+      "description: $description",
     );
-    emit(formState);
-    DebugLogger.log("emit new state with description: ${formState.description}",
-        tag: "ProjectCubit");
   }
 
   void categoryChange(ProjectCategoryModel category) {
     DebugLogger.log("categoryChange called with category: $category",
         tag: "ProjectCubit");
-    final updateProject =
-        _currentFormState.project.copyWith(category: category);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(
-        ProjectFormState(project: updateProject),
-      ),
-    );
 
-    emit(formState);
-    DebugLogger.log("emit new state with category: ${formState.category.title}",
-        tag: "ProjectCubit");
+    _emitUpdated(
+      (project) => project.copyWith(category: category),
+      "category: ${category.title}",
+    );
   }
 
   void startDateChange(DateTime startDate) {
     DebugLogger.log("startDateChange called with startDate: $startDate",
         tag: "ProjectCubit");
-    final updateProject =
-        _currentFormState.project.copyWith(startDate: startDate);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(
-        ProjectFormState(project: updateProject),
-      ),
-    );
 
-    emit(formState);
-    DebugLogger.log("emit new state with startDate: ${formState.startDate}",
-        tag: "ProjectCubit");
+    _emitUpdated(
+      (project) => project.copyWith(startDate: startDate),
+      "startDate: $startDate",
+    );
   }
 
   void endDateChange(DateTime endDate) {
     DebugLogger.log("endDateChange called with endDate: $endDate",
         tag: "ProjectCubit");
-    final updateProject = _currentFormState.project.copyWith(endDate: endDate);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(
-        ProjectFormState(project: updateProject),
-      ),
-    );
 
-    emit(formState);
-    DebugLogger.log("emit new state with endDate: ${formState.endDate}",
-        tag: "ProjectCubit");
+    _emitUpdated(
+      (project) => project.copyWith(endDate: endDate),
+      "endDate: $endDate",
+    );
   }
 
   void tasksChange(TaskModel task) {
@@ -153,29 +129,11 @@ class ProjectCubit extends Cubit<ProjectState> {
       updatedTasks.add(task);
     }
 
-    final updateProject =
-        _currentFormState.project.copyWith(tasks: updatedTasks);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(
-        ProjectFormState(project: updateProject),
-      ),
+    _emitForm(
+      _currentFormState.project.copyWith(tasks: updatedTasks),
+      logMessage: "tasks: $updatedTasks",
     );
-
-    emit(formState);
-
-    bool isCompleted = updatedTasks.every((i) => i.isCompleted == true);
-    bool inProgress = updatedTasks.any((i) => i.isCompleted == true);
-
-    if (isCompleted) {
-      statusChange(TaskStatus.completed);
-    } else if (inProgress) {
-      statusChange(TaskStatus.inProgress);
-    } else {
-      statusChange(TaskStatus.notStarted);
-    }
-    DebugLogger.log("emit new state with tasks: ${formState.tasks}",
-        tag: "ProjectCubit");
+    _syncStatusWithTasks(updatedTasks);
   }
 
   void removeTask(int index) {
@@ -197,24 +155,8 @@ class ProjectCubit extends Cubit<ProjectState> {
     DebugLogger.log("We are removing the index $index after check");
 
     currentTasks.removeAt(index);
-    final updateProject =
-        _currentFormState.project.copyWith(tasks: currentTasks);
-    final formState = _currentFormState.copyWith(
-        project: updateProject,
-        isValid: _validForm(ProjectFormState(project: updateProject)));
-    emit(formState);
-
-    // Update project status based on remaining tasks
-    bool isCompleted = currentTasks.every((i) => i.isCompleted == true);
-    bool inProgress = currentTasks.any((i) => i.isCompleted == true);
-
-    if (isCompleted) {
-      statusChange(TaskStatus.completed);
-    } else if (inProgress) {
-      statusChange(TaskStatus.inProgress);
-    } else {
-      statusChange(TaskStatus.notStarted);
-    }
+    _emitForm(_currentFormState.project.copyWith(tasks: currentTasks));
+    _syncStatusWithTasks(currentTasks);
 
     DebugLogger.log(
         "Task removed successfully. Remaining tasks: ${currentTasks.length}",
@@ -237,26 +179,8 @@ class ProjectCubit extends Cubit<ProjectState> {
 
     updatedTasks[taskIndex] = task;
 
-    final updateProject =
-        _currentFormState.project.copyWith(tasks: updatedTasks);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(ProjectFormState(project: updateProject)),
-    );
-
-    emit(formState);
-
-    // Update project status based on task completion
-    bool isCompleted = updatedTasks.every((i) => i.isCompleted == true);
-    bool inProgress = updatedTasks.any((i) => i.isCompleted == true);
-
-    if (isCompleted) {
-      statusChange(TaskStatus.completed);
-    } else if (inProgress) {
-      statusChange(TaskStatus.inProgress);
-    } else {
-      statusChange(TaskStatus.notStarted);
-    }
+    _emitForm(_currentFormState.project.copyWith(tasks: updatedTasks));
+    _syncStatusWithTasks(updatedTasks);
 
     DebugLogger.log(
         "Task toggled successfully: ${updatedTasks[taskIndex].isCompleted}",
@@ -266,20 +190,34 @@ class ProjectCubit extends Cubit<ProjectState> {
   void statusChange(TaskStatus status) {
     DebugLogger.log("statusChange called with status: $status",
         tag: "ProjectCubit");
-    final updateProject = _currentFormState.project.copyWith(status: status);
-    final formState = _currentFormState.copyWith(
-      project: updateProject,
-      isValid: _validForm(
-        ProjectFormState(project: updateProject),
-      ),
-    );
 
-    emit(formState);
-    DebugLogger.log("emit new state with status: ${formState.status}",
-        tag: "ProjectCubit");
+    _emitUpdated(
+      (project) => project.copyWith(status: status),
+      "status: $status",
+    );
   }
 
-  void submitForm() {
+  /// Derives the project status from its tasks.
+  void _syncStatusWithTasks(List<TaskModel> tasks) {
+    bool isCompleted = tasks.every((i) => i.isCompleted == true);
+    bool inProgress = tasks.any((i) => i.isCompleted == true);
+
+    if (isCompleted) {
+      statusChange(TaskStatus.completed);
+    } else if (inProgress) {
+      statusChange(TaskStatus.inProgress);
+    } else {
+      statusChange(TaskStatus.notStarted);
+    }
+  }
+
+  /// Saves the current form.
+  ///
+  /// Returns `true` when the project was persisted, `false` when the form is
+  /// invalid (nothing is emitted in that case) or when the repository failed
+  /// (a [ProjectError] is emitted). Callers should only navigate away on
+  /// `true`.
+  Future<bool> submitForm() async {
     DebugLogger.log('submitForm called', tag: 'ProjectCubit');
 
     final formState = _currentFormState;
@@ -287,34 +225,49 @@ class ProjectCubit extends Cubit<ProjectState> {
     if (!formState.isValid) {
       DebugLogger.logError("Form is not valid, cannot submit",
           context: "ProjectCubit");
-      return;
+      return false;
     }
 
     final project = formState.project;
 
-    initialProject == null
+    return initialProject == null
         ? addProject(project: project)
         : editProject(project: project);
   }
 
-  Future<void> editProject({required ProjectModel project}) async {
+  Future<bool> editProject({required ProjectModel project}) async {
     var result = await projectRepo.editProject(updatedProject: project);
 
-    result.fold((errMessage) => emit(ProjectError(errMessage)),
-        (_) => emit(ProjectSuccess()));
+    return result.fold((errMessage) {
+      emit(ProjectError(errMessage));
+      return false;
+    }, (_) {
+      emit(ProjectSuccess());
+      return true;
+    });
   }
 
-  Future<void> addProject({required ProjectModel project}) async {
+  Future<bool> addProject({required ProjectModel project}) async {
     var result = await projectRepo.addProject(project: project);
 
-    result.fold((errMessage) => emit(ProjectError(errMessage)),
-        (_) => emit(ProjectSuccess()));
+    return result.fold((errMessage) {
+      emit(ProjectError(errMessage));
+      return false;
+    }, (_) {
+      emit(ProjectSuccess());
+      return true;
+    });
   }
 
-  Future<void> deleteProject({required String projectId}) async {
+  Future<bool> deleteProject({required String projectId}) async {
     var result = await projectRepo.deleteProject(projectId: projectId);
 
-    result.fold((errMessage) => emit(ProjectError(errMessage)),
-        (_) => emit(ProjectSuccess()));
+    return result.fold((errMessage) {
+      emit(ProjectError(errMessage));
+      return false;
+    }, (_) {
+      emit(ProjectSuccess());
+      return true;
+    });
   }
 }

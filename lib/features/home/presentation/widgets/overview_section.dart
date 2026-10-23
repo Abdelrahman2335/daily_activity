@@ -43,18 +43,19 @@ class OverviewSection extends StatelessWidget {
                       .copyWith(color: themeColor.surface),
                 ),
               ),
-              Positioned(
-                bottom: 36,
-                left: 19,
-                child: PrimaryButton(
-                  text: "View Project",
-                  onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kTodayTasks);
-                  },
-                  backgroundColor: themeColor.surface,
-                  textColor: themeColor.primary,
+              if (percent != 0)
+                Positioned(
+                  bottom: 36,
+                  left: 19,
+                  child: PrimaryButton(
+                    text: "View Project",
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.kTodayTasks);
+                    },
+                    backgroundColor: themeColor.surface,
+                    textColor: themeColor.primary,
+                  ),
                 ),
-              ),
               Positioned(
                   top: 59,
                   right: 66,

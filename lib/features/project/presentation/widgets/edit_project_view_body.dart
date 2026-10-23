@@ -8,6 +8,7 @@ import 'package:flowi/core/utils/app_text_styles.dart';
 import 'package:flowi/core/widgets/custom_text_form_field.dart';
 import 'package:flowi/core/widgets/project_app_bar.dart';
 import 'package:flowi/features/project/presentation/manager/cubit/project_cubit.dart';
+import 'package:flowi/features/project/presentation/manager/cubit/project_validators.dart';
 import 'package:flowi/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:flowi/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:flowi/features/project/presentation/widgets/manage_task.dart';
@@ -89,13 +90,13 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                           color: AppColor.primary,
                         ),
                       ),
-                      onActionButtonPressed: () {
+                      onActionButtonPressed: () async {
                         final form = _formKey.currentState!;
 
-                        if (form.validate()) {
-                          form.save();
-                          context.read<ProjectCubit>().submitForm();
-                        }
+                        if (!form.validate()) return;
+
+                        form.save();
+                        await context.read<ProjectCubit>().submitForm();
                       }),
                   CustomDropDownButton(
                     initialValue: formState.category,
@@ -109,6 +110,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     maxLines: 1,
                     maxLength: 50,
                     hintText: 'Project Name',
+                    validator: ProjectValidators.requiredField,
                   ),
                   CustomTextFormField(
                     initialValue: formState.description,
@@ -120,6 +122,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     minLines: 5,
                     maxLines: 6,
                     hintText: 'Description',
+                    validator: ProjectValidators.requiredField,
                   ),
                   const ManageTask(),
                   CustomDateTimeButton(

@@ -2,6 +2,7 @@ import 'package:flowi/core/models/task_model.dart';
 import 'package:flowi/core/utils/debug_logger.dart';
 import 'package:flowi/core/widgets/custom_text_form_field.dart';
 import 'package:flowi/features/project/presentation/manager/cubit/project_cubit.dart';
+import 'package:flowi/features/project/presentation/manager/cubit/project_validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -60,6 +61,7 @@ class TaskField extends StatelessWidget {
               icon: Icon(FontAwesomeIcons.circleCheck)),
           maxLines: 1,
           hintText: 'Task Name',
+          validator: ProjectValidators.requiredField,
           suffixIcon: IconButton(
             icon: Icon(Icons.close),
             onPressed: () => context.read<ProjectCubit>().removeTask(index!),

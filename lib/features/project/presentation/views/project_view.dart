@@ -9,18 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProjectView extends StatelessWidget {
-  const ProjectView({super.key, required this.isEditMood, this.project});
+  const ProjectView({super.key, required this.isEditMode, this.project});
 
-  final bool isEditMood;
+  final bool isEditMode;
   final ProjectModel? project;
 
   @override
   Widget build(BuildContext context) {
-    DebugLogger.log("isEditMood is: $isEditMood");
+    DebugLogger.log("isEditMode is: $isEditMode");
     DebugLogger.log("project is: ${project != null}");
     return BackgroundLayout(
       children: [
-        if (isEditMood && project != null)
+        if (isEditMode && project != null)
           BlocProvider<ProjectCubit>(
             create: (context) =>
                 ProjectCubit(ProjectRepositoryImpl(), initialProject: project!),

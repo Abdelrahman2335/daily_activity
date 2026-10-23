@@ -7,6 +7,7 @@ import 'package:flowi/core/utils/app_text_styles.dart';
 import 'package:flowi/core/widgets/custom_text_form_field.dart';
 import 'package:flowi/core/widgets/project_app_bar.dart';
 import 'package:flowi/features/project/presentation/manager/cubit/project_cubit.dart';
+import 'package:flowi/features/project/presentation/manager/cubit/project_validators.dart';
 import 'package:flowi/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:flowi/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:flowi/features/project/presentation/widgets/manage_task.dart';
@@ -80,18 +81,19 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                           color: AppColor.primary,
                         ),
                       ),
-                      onActionButtonPressed: () {
-                        // final test = TestAddProject.generateRandomProject();
-                        // context.read<ProjectCubit>().addProject(project: test);
-
+                      onActionButtonPressed: () async {
                         final form = _formKey.currentState!;
 
-                        if (form.validate()) {
-                          form.save();
-                          context.read<ProjectCubit>().submitForm();
-                          context.read<HomeCubit>().loadProjects();
-                          GoRouter.of(context).pop();
-                        }
+                        if (!form.validate()) return;
+
+                        form.save();
+
+                        final saved =
+                            await context.read<ProjectCubit>().submitForm();
+                        if (!saved || !context.mounted) return;
+
+                        context.read<HomeCubit>().loadProjects();
+                        GoRouter.of(context).pop();
                       }),
                   CustomDropDownButton(
                     onSave: context.read<ProjectCubit>(),
@@ -105,6 +107,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     maxLines: 1,
                     maxLength: 50,
                     hintText: 'Project Name',
+                    validator: ProjectValidators.requiredField,
                   ),
                   const SizedBox(height: 30),
                   CustomTextFormField(
@@ -116,6 +119,7 @@ class _AddProjectViewBodyState extends State<AddProjectViewBody> {
                     minLines: 5,
                     maxLines: 6,
                     hintText: 'Description',
+                    validator: ProjectValidators.requiredField,
                   ),
                   const SizedBox(height: 30),
                   const ManageTask(),

@@ -4,6 +4,7 @@ abstract class Constants {
   static const String themeKey = 'isDarkMode';
   static const String userNameKey = 'userName';
   static const String isFirstLaunchKey = 'isFirstLaunch';
+  static const String kSchemaVersionKey = 'schemaVersion';
 
   static const String appName = "Flowi";
   static const String appDescription =

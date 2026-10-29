@@ -31,6 +31,21 @@ class ProjectModel extends HiveObject {
   @HiveField(8)
   final DateTime lastModified;
 
+  /// Check-in reminder mode: 'default' (follows global), 'custom' (project
+  /// specific), or 'off' (never remind). Null behaves like 'default'.
+  @HiveField(9)
+  final String? reminderMode;
+
+  /// Daily reminder times as 'HH:mm' strings, max 3. Only used when
+  /// [reminderMode] == 'custom' and [customWeekdays] is null.
+  @HiveField(10)
+  final List<String>? customSlots;
+
+  /// ISO weekdays (1=Mon .. 7=Sun) for a weekly cadence. Non-null means
+  /// weekly; null means daily. Only used when [reminderMode] == 'custom'.
+  @HiveField(11)
+  final List<int>? customWeekdays;
+
   ProjectModel({
     required this.title,
     required this.description,
@@ -41,6 +56,9 @@ class ProjectModel extends HiveObject {
     String? id,
     required this.status,
     DateTime? lastModified,
+    this.reminderMode,
+    this.customSlots,
+    this.customWeekdays,
   })  : id = id ?? _uid.v4(),
         lastModified = lastModified ?? DateTime.now();
 
@@ -62,6 +80,9 @@ class ProjectModel extends HiveObject {
     DateTime? endDate,
     TaskStatus? status,
     List<TaskModel>? tasks,
+    String? reminderMode,
+    List<String>? customSlots,
+    List<int>? customWeekdays,
   }) {
     // IMPORTANT: we must pass the existing id so we don't generate a new one.
     // Otherwise every call to copyWith() creates a new ProjectModel with a new id
@@ -77,6 +98,11 @@ class ProjectModel extends HiveObject {
       tasks: tasks ?? this.tasks,
       status: status ?? this.status,
       lastModified: DateTime.now(), // bump modification timestamp
+      // Reminder fields MUST be carried over: dropping them here silently
+      // reset every project edit back to 'default' mode.
+      reminderMode: reminderMode ?? this.reminderMode,
+      customSlots: customSlots ?? this.customSlots,
+      customWeekdays: customWeekdays ?? this.customWeekdays,
     );
   }
 }

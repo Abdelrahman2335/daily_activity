@@ -12,6 +12,7 @@ import 'package:flowi/features/project/presentation/manager/cubit/project_valida
 import 'package:flowi/features/project/presentation/widgets/custom_date_time_button.dart';
 import 'package:flowi/features/project/presentation/widgets/custom_drop_down_button.dart';
 import 'package:flowi/features/project/presentation/widgets/manage_task.dart';
+import 'package:flowi/features/project/presentation/widgets/project_reminder_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -157,6 +158,7 @@ class _EditProjectViewBodyState extends State<EditProjectViewBody> {
                     },
                     selectedDate: formState.endDate,
                   ),
+                  ProjectReminderSection(formState: formState),
                   OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           side: BorderSide(color: AppColor.accentRed),

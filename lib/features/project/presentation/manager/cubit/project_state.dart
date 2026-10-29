@@ -18,11 +18,50 @@ final class ProjectFormState extends ProjectState {
   final ProjectModel project;
   final bool isValid;
 
-  ProjectFormState({required this.project, this.isValid = false});
+  // Reminder form fields. Kept separate from [project] because the Hive
+  // model uses `null` for "daily" and [copyWith] cannot write nulls; the
+  // cubit normalizes them into the model on submit.
+  final String reminderMode;
 
-  ProjectFormState copyWith({ProjectModel? project, bool? isValid}) {
+  /// Cadence while reminderMode == 'custom'.
+  final ReminderCadence reminderCadence;
+
+  /// Daily 'HH:mm' times (0..3) while custom + daily.
+  final List<String> customSlots;
+
+  /// ISO weekdays while custom + weekly (1=Mon..7=Sun).
+  final List<int> customWeekdays;
+
+  /// Weekly 'HH:mm' time.
+  final String weeklyTime;
+
+  ProjectFormState({
+    required this.project,
+    this.isValid = false,
+    this.reminderMode = 'default',
+    this.reminderCadence = ReminderCadence.daily,
+    this.customSlots = const [],
+    this.customWeekdays = const [],
+    this.weeklyTime = '09:00',
+  });
+
+  ProjectFormState copyWith({
+    ProjectModel? project,
+    bool? isValid,
+    String? reminderMode,
+    ReminderCadence? reminderCadence,
+    List<String>? customSlots,
+    List<int>? customWeekdays,
+    String? weeklyTime,
+  }) {
     return ProjectFormState(
-        project: project ?? this.project, isValid: isValid ?? this.isValid);
+        project: project ?? this.project,
+        isValid: isValid ?? this.isValid,
+        reminderMode: reminderMode ?? this.reminderMode,
+        reminderCadence: reminderCadence ?? this.reminderCadence,
+        customSlots: customSlots ?? this.customSlots,
+        customWeekdays: customWeekdays ?? this.customWeekdays,
+        weeklyTime: weeklyTime ?? this.weeklyTime);
   }
 
   String get title => project.title;

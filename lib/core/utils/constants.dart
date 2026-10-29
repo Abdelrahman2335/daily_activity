@@ -5,6 +5,7 @@ abstract class Constants {
   static const String userNameKey = 'userName';
   static const String isFirstLaunchKey = 'isFirstLaunch';
   static const String kSchemaVersionKey = 'schemaVersion';
+  static const String kGlobalReminderKey = 'globalReminderConfig';
 
   static const String appName = "Flowi";
   static const String appDescription =

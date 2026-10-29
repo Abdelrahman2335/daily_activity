@@ -26,13 +26,20 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       id: fields[0] as String?,
       status: fields[6] as TaskStatus,
       lastModified: fields[8] as DateTime?,
+      // Fields 9-11 are nullable; old records that were written before this
+      // schema extension simply lack them and read back as null.
+      reminderMode: fields[9] as String?,
+      customSlots:
+          (fields[10] as List?)?.cast<String>(),
+      customWeekdays:
+          (fields[11] as List?)?.cast<int>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, ProjectModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +57,13 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       ..writeByte(7)
       ..write(obj.tasks)
       ..writeByte(8)
-      ..write(obj.lastModified);
+      ..write(obj.lastModified)
+      ..writeByte(9)
+      ..write(obj.reminderMode)
+      ..writeByte(10)
+      ..write(obj.customSlots)
+      ..writeByte(11)
+      ..write(obj.customWeekdays);
   }
 
   @override

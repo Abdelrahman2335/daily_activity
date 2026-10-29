@@ -119,12 +119,18 @@ void main() {
         for (var i = 0; i < fieldCount; i++) reader.readByte(): reader.read(),
       };
 
-      expect(fields.keys, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      expect(fields.keys, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
       expect(fields[0], 'schema'); // id
       expect(fields[1], 'title'); // title
       expect(fields[6], TaskStatus.inProgress); // status
       expect((fields[7] as List).single, isA<TaskModel>()); // tasks
       expect(fields[8], DateTime(2026, 3, 5)); // lastModified
+      // Reminder fields are an append-only extension (fields 9-11). Old
+      // records written before them simply lack the entries and read back
+      // as null; new writes always include them.
+      expect(fields[9], isNull); // reminderMode
+      expect(fields[10], isNull); // customSlots
+      expect(fields[11], isNull); // customWeekdays
     });
 
     test('on-disk field layout of TaskModel is unchanged', () {

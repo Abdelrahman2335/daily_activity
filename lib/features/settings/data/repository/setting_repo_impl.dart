@@ -1,3 +1,4 @@
+import 'package:flowi/core/models/reminder_config.dart';
 import 'package:flowi/core/utils/constants.dart';
 import 'package:flowi/features/settings/data/repository/setting_repo.dart';
 import 'package:hive/hive.dart';
@@ -24,5 +25,15 @@ class SettingRepoImpl implements SettingRepo {
   @override
   void updateUserName(String name) async {
     await _box.put(Constants.userNameKey, name);
+  }
+
+  @override
+  GlobalReminderConfig loadReminderConfig() {
+    return GlobalReminderConfig.load();
+  }
+
+  @override
+  void saveReminderConfig(GlobalReminderConfig config) async {
+    await config.save();
   }
 }

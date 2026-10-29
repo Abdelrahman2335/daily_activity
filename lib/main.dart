@@ -5,6 +5,7 @@ import 'package:flowi/core/models/project_model.dart';
 import 'package:flowi/core/models/project_status.dart';
 import 'package:flowi/core/models/task_model.dart';
 import 'package:flowi/core/persistence/project_store.dart';
+import 'package:flowi/core/services/notification_service.dart';
 import 'package:flowi/core/utils/app_router.dart';
 import 'package:flowi/core/utils/bloc_observer.dart';
 import 'package:flowi/core/utils/constants.dart';
@@ -36,6 +37,7 @@ void main() async {
   Hive.registerAdapter(IconAdapter());
 
   await ProjectStore.open();
+  await NotificationService.instance.initAndSync();
   runApp(const MyApp());
 }
 

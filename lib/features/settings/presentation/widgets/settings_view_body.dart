@@ -2,6 +2,7 @@ import 'package:flowi/core/utils/app_text_styles.dart';
 import 'package:flowi/core/utils/constants.dart';
 import 'package:flowi/features/settings/presentation/widgets/dark_theme_toggle.dart';
 import 'package:flowi/features/settings/presentation/widgets/name_editor.dart';
+import 'package:flowi/features/settings/presentation/widgets/notification_settings_tile.dart';
 import 'package:flowi/features/settings/presentation/widgets/terms_button.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,10 @@ class SettingsViewBody extends StatelessWidget {
             height: 27,
           ),
           const DarkThemeToggle(),
+          const SizedBox(
+            height: 27,
+          ),
+          const NotificationSettingsTile(),
           const SizedBox(
             height: 27,
           ),
